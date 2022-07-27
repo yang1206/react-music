@@ -27,7 +27,7 @@
             padding: 0 20px;
             color: #ccc;
           }
-          
+
           &:last-of-type {
             position: relative;
             ::after {
@@ -41,12 +41,13 @@
               right: -15px;
             }
           }
-          & a:hover   {
+          & a:hover,
+          .active {
             color: #fff;
             text-decoration: none;
             background-color: #000;
           }
-          .icon & .active {
+           .active .icon {
             position: absolute;
             display: inline-block;
             width: 12px;

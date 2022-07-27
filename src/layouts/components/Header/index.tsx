@@ -6,14 +6,15 @@ export default function Header() {
   const showSelectItem = (item: any, index: number): JSX.Element => {
     if (index < 3) {
       return (
-        <NavLink to={item.link}>{item.title}</NavLink>
+        <NavLink to={item.link}>
+          {item.title}
+          <i className='sprite_01 icon'></i>
+        </NavLink>
       )
     } else {
       return <a href={item.link}>{item.title}</a>
     }
   }
-
-
   return (
     <div className='HeaderWrapper'>
       <div className="content">
@@ -25,8 +26,7 @@ export default function Header() {
               headerLinks.map((item, index) => {
                 return (
                   <div className='select-item' key={item.title}>
-                    <i className='sprite_01 icon'></i>
-                    {showSelectItem(item,index)}
+                    {showSelectItem(item, index)}
                   </div>
                 )
               })
