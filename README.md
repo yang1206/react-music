@@ -1,7 +1,7 @@
 # React Music
 
 ### 介绍
-🚀🚀🚀 React Music，基于 React18、React-Router v6、React-Hooks、Redux、Redux Toolkit、TypeScript、Vite3、Ant-Design 开源音乐APP，仅供学习。
+🚀🚀🚀 React Music，基于 React18、React-Router v6、React-Hooks、Redux、Redux Toolkit、TypeScript、Vite3、Ant-Design 的开源音乐APP，仅供学习。
 
 ## Project setup
 ```

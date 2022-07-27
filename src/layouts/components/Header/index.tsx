@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { headerLinks } from '@/common/localData'
-
+import { Input } from 'antd'
 import './index.scss'
 export default function Header() {
   const showSelectItem = (item: any, index: number): JSX.Element => {
@@ -34,15 +34,13 @@ export default function Header() {
           </div>
         </div>
         <div className="HeaderRight">
-
+          <Input></Input>
         </div>
       </div>
       <div className="divider">
 
       </div>
-      {/* <NavLink to="/discover">发现音乐</NavLink>
-      <NavLink to="/mine">我的音乐</NavLink>
-      <NavLink to="/friend">我的好友</NavLink> */}
+
     </div>
   )
 }
