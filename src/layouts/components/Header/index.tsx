@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { headerLinks } from '@/common/localData'
 import { Input } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
 import './index.less'
 export default function Header() {
   const showSelectItem = (item: any, index: number): JSX.Element => {
@@ -31,7 +32,9 @@ export default function Header() {
           </div>
         </div>
         <div className="HeaderRight">
-          <Input></Input>
+          <Input className="search" placeholder="音乐/视频/电台/用户" prefix={<SearchOutlined />} />
+          <div className="center">创作者中心</div>
+          <div className="">登录</div>
         </div>
       </div>
       <div className="divider"></div>

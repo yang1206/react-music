@@ -4,7 +4,7 @@
   .content {
     display: flex;
     justify-content: space-between;
-    width: 60%;
+    width: 80%;
     height: 70px;
     margin: 0 auto;
     .HeaderLeft {
@@ -56,6 +56,31 @@
             transform: translate(-50%, 0);
           }
         }
+      }
+    }
+    .HeaderRight {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: #cccccc;
+      .search {
+        width: 158px;
+        height: 32px;
+        border-radius: 16px;
+        input {
+          &::placeholder {
+            font-size: 12px;
+          }
+        }
+      }
+      .center {
+        width: 90px;
+        height: 32px;
+        margin: 0 16px;
+        line-height: 32px;
+        text-align: center;
+        border: 1px solid #666666;
+        border-radius: 16px;
       }
     }
   }
