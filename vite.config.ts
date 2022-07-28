@@ -17,7 +17,7 @@ export default defineConfig({
   ],
   css: {
     preprocessorOptions: {
-      sass: {
+      less: {
         javascriptEnabled: true,
         modifyVars: {
           '@primary-color': '#4377FE',//设置antd主题色

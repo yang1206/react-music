@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { headerLinks } from '@/common/localData'
 import { Input } from 'antd'
-import './index.scss'
+import './index.less'
 export default function Header() {
   const showSelectItem = (item: any, index: number): JSX.Element => {
     if (index < 3) {
