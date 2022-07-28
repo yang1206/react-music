@@ -1,7 +1,5 @@
-import React from "react"
+import React from 'react'
 const discover: React.FC = () => {
-  return (
-    <div>discover</div>
-  )
+  return <div>discover</div>
 }
 export default discover

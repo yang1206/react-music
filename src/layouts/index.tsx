@@ -1,7 +1,7 @@
-import { HashRouter } from 'react-router-dom';
-import Router from '@/routers';
-import Header from "@/layouts/components/Header"
-import Footer from "@/layouts/components/Footer"
+import { HashRouter } from 'react-router-dom'
+import Router from '@/routers'
+import Header from '@/layouts/components/Header'
+import Footer from '@/layouts/components/Footer'
 const Layout = () => {
   return (
     <HashRouter>
