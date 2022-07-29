@@ -1,10 +1,11 @@
 .HeaderWrapper {
+  width: 100vw;
   height: 75px;
   background-color: #242424;
   .content {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 60%;
     height: 70px;
     margin: 0 auto;
     .HeaderLeft {
@@ -19,6 +20,7 @@
         display: flex;
         font-size: 14px;
         line-height: 70px;
+        text-align: center;
         .select-item {
           position: relative;
           a {
@@ -87,5 +89,34 @@
   .divider {
     height: 5px;
     background-color: #c20c0c;
+  }
+}
+@media screen and (max-width: 1716px) {
+  .content {
+    width: 75% !important;
+  }
+}
+@media screen and (max-width: 1255px) {
+  .HeaderRight {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 900px) {
+  .select-item:nth-of-type(5) {
+    display: none !important;
+  }
+  .select-item:nth-of-type(6) {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 633px) {
+  .select-item:nth-of-type(4) {
+    display: none !important;
+  }
+  .select-item:nth-of-type(5) {
+    display: none !important;
+  }
+  .select-item:nth-of-type(6) {
+    display: none !important;
   }
 }
