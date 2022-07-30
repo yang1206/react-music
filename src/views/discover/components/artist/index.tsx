@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Friend: React.FC = () => {
+const Artist: React.FC = () => {
   return <div>Friend</div>
 }
-export default Friend
+export default Artist

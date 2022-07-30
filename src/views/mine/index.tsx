@@ -1,5 +1,5 @@
 import React from 'react'
-
-export default function Mine() {
-  return <div>Mine</div>
+const Mine: React.FC = () => {
+  return <div>Friend</div>
 }
+export default Mine

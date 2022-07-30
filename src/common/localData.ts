@@ -71,7 +71,7 @@ export const footerImages = [
 ]
 
 // discover中的数据
-export const dicoverMenu = [
+export const discoverMenu = [
   {
     title: '推荐',
     link: '/discover/recommend'
@@ -84,14 +84,14 @@ export const dicoverMenu = [
     title: '歌单',
     link: '/discover/songs'
   },
-  // {
-  //   title: '主播电台',
-  //   link: '/discover/djradio',
-  // },
-  // {
-  //   title: '歌手',
-  //   link: '/discover/artist',
-  // },
+  {
+    title: '主播电台',
+    link: '/discover/djradio'
+  },
+  {
+    title: '歌手',
+    link: '/discover/artist'
+  },
   {
     title: '每日推荐',
     link: '/discover/album'
