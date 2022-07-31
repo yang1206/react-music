@@ -2,13 +2,6 @@ import type { AxiosRequestConfig, AxiosError } from 'axios'
 import axios, { AxiosResponse } from 'axios'
 import type { ResponseBody } from '@/api/type'
 import { message } from 'antd'
-
-// 这里是用于设定请求后端时，所用的 Token KEY
-// 可以根据自己的需要修改，常见的如 Access-Token，Authorization
-// 需要注意的是，请尽量保证使用中横线`-` 来作为分隔符，
-// 避免被 nginx 等负载均衡器丢弃了自定义的请求头
-export const REQUEST_TOKEN_KEY = 'Access-Token'
-console.log(import.meta.env)
 // 创建 axios 实例
 const request = axios.create({
   // API 请求的默认前缀
