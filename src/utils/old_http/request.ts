@@ -1,6 +1,6 @@
 import type { AxiosRequestConfig, AxiosError } from 'axios'
 import axios, { AxiosResponse } from 'axios'
-import type { ResponseBody } from '@/api/type'
+import type { ResponseBody } from '@/utils/old_http/type'
 import { message } from 'antd'
 // 创建 axios 实例
 const request = axios.create({

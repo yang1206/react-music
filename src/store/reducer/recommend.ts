@@ -14,8 +14,9 @@ const initialState: InitialState = {
 }
 //请求轮播图
 const getBannerData = async () => {
-  const { data } = await getBannerList()
-  return data
+  return getBannerList().then(res => {
+    return res
+  })
 }
 //异步Action
 export const getBanner = createAsyncThunk('getBanner', async () => {

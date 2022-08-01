@@ -5,7 +5,7 @@ export interface IHeaderLinks {
 export const headerLinks: IHeaderLinks[] = [
   {
     title: '发现音乐',
-    link: '/discover'
+    link: '/discover/recommend'
   },
   {
     title: '我的音乐',
