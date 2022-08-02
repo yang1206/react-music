@@ -3,6 +3,10 @@ import { RouteObject } from '@/routers/interface'
 import lazyLoad from '@/routers/utils/lazyLoad'
 const HomeRouter: Array<RouteObject> = [
   {
+    path: '/discover',
+    element: lazyLoad(lazy(() => import('@/views/discover/components/recommend')))
+  },
+  {
     path: '/discover/songs',
     element: lazyLoad(lazy(() => import('@/views/discover/components/songs')))
   },
@@ -17,10 +21,6 @@ const HomeRouter: Array<RouteObject> = [
   {
     path: '/discover/ranking',
     element: lazyLoad(lazy(() => import('@/views/discover/components/ranking')))
-  },
-  {
-    path: '/discover/recommend',
-    element: lazyLoad(lazy(() => import('@/views/discover/components/recommend')))
   },
   {
     path: '/discover/artist',

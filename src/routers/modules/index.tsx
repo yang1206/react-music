@@ -6,10 +6,9 @@ import DiscoverRouter from '@/routers/modules/discover'
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Navigate to="/discover/recommend" />
+    element: <Navigate to="/discover" />
   },
   {
-    path: 'discover',
     element: lazyLoad(lazy(() => import('@/views/discover'))),
     children: [...DiscoverRouter]
   },
