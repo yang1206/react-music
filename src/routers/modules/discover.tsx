@@ -1,10 +1,11 @@
 import { lazy } from 'react'
 import { RouteObject } from '@/routers/interface'
 import lazyLoad from '@/routers/utils/lazyLoad'
+import Recommend from '@/views/discover/components/recommend'
 const HomeRouter: Array<RouteObject> = [
   {
     path: '/discover',
-    element: lazyLoad(lazy(() => import('@/views/discover/components/recommend')))
+    element: <Recommend />
   },
   {
     path: '/discover/songs',

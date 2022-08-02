@@ -16,18 +16,23 @@
   }
 }
 .ant-carousel .slick-prev,
-.ant-carousel .slick-prev:hover,
-.ant-carousel .slick-prev:focus {
-  left: 10px;
-  z-index: 2;
-  font-size: 2em;
-  color: #ffffff;
-}
 .ant-carousel .slick-next,
+.ant-carousel .slick-prev:hover,
 .ant-carousel .slick-next:hover,
+.ant-carousel .slick-prev:focus,
 .ant-carousel .slick-next:focus {
-  right: 10px;
-  z-index: 2;
-  font-size: 2em;
-  color: #ffffff;
+  font-size: inherit;
+  color: currentcolor !important;
+}
+.ant-carousel .slick-prev::before {
+  color: currentcolor !important;
+}
+.slick-arrow.slick-prev {
+  font-size: 20px !important;
+}
+.ant-carousel .slick-next::before {
+  color: currentcolor !important;
+}
+.slick-arrow.slick-next {
+  font-size: 20px !important;
 }

@@ -4,6 +4,7 @@ import { selectRecommend, getBanner } from '@/store/reducer/recommend'
 import './index.less'
 import { Carousel } from 'antd'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+
 const Banner: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   //从store取出banners

@@ -1,14 +1,17 @@
-import { HashRouter } from 'react-router-dom'
-import Router from '@/routers'
+import { Layout } from 'antd'
+import { Outlet } from 'react-router-dom'
 import Header from '@/layouts/components/Header'
 import Footer from '@/layouts/components/Footer'
-const Layout = () => {
+const { Content } = Layout
+const LayoutIndex = () => {
   return (
-    <HashRouter>
-      <Header></Header>
-      <Router />
-      <Footer></Footer>
-    </HashRouter>
+    <Layout>
+      <Header />
+      <Content>
+        <Outlet />
+      </Content>
+      <Footer />
+    </Layout>
   )
 }
-export default Layout
+export default LayoutIndex
