@@ -4,7 +4,7 @@ import './index.less'
 type Headers = {
   title: string
   keywords: Array<any>
-  moreLink?: any
+  moreLink: string
   keywordClick: (item: string) => void
 }
 const RcmHeader: React.FC<Headers> = props => {

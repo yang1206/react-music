@@ -8,7 +8,6 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 const Banner: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   //从store取出banners
-  //TODO把数据请求从redux拿出来，使用Hook写
   const topBanner = useAppSelector(selectRecommend)
   const dispatch = useAppDispatch()
   useEffect(() => {

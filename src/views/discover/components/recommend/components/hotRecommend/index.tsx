@@ -1,25 +1,40 @@
-import React, { useEffect, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import RcmHeader from '@/components/RcmHeader'
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { getPersonalized, selectPersonalized } from '@/store/reducer/recommend'
+import SongsCover from '@/components/SongsCover'
+import { getPersonalizedList } from '@/api/recommend'
+import { Recommend } from '@/api/interface'
+// import { useNavigate } from 'react-router-dom'
+import './index.less'
 const HotRecommend: React.FC = () => {
-  const keywordClick = () => {}
+  // const navigate = useNavigate()
   const props = {
     title: '热门推荐',
     keywords: ['华语', '流行', '民谣', '摇滚', '电子'],
-    keywordClick: keywordClick
+    moreLink: '/discover/songs',
+    keywordClick: () => {
+      // navigate('/discover/songs')
+    }
   }
-  const perSonalized = useAppSelector(selectPersonalized)
-  console.log(perSonalized)
-  const dispatch = useAppDispatch()
+  const [PersonalizedData, setPersonalized] = useState([] as any)
+  console.log(PersonalizedData)
+  //获取热门歌单
+  const getPersonalizedData = async () => {
+    return getPersonalizedList({ limit: 12 }).then(res => {
+      //放到state里
+      setPersonalized(res.result)
+    })
+  }
   useEffect(() => {
-    //请求数据
-    //TODO把数据请求从redux拿出来，使用Hook写
-    dispatch(getPersonalized())
-  }, [dispatch])
+    getPersonalizedData()
+  }, [])
   return (
-    <div>
+    <div className="HotRecommendWrapper">
       <RcmHeader {...props} />
+      <div className="recommend-list">
+        {PersonalizedData.map((item: Recommend.perSonalizeder) => {
+          return <SongsCover key={item.id} info={item} />
+        })}
+      </div>
     </div>
   )
 }
