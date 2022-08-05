@@ -1,8 +1,12 @@
 import React, { memo } from 'react'
 import { getSizeImage, getCount } from '@/utils/format'
+import { Recommend } from '@/api/interface'
 import './index.less'
-
-const SongCover = (props: any) => {
+interface Props {
+  info: Recommend.perSonalizeder
+  key: number
+}
+const SongCover: React.FC<Props> = (props: any) => {
   const { info, right } = props
   const margin = `20px ${right} 20px 0`
   return (

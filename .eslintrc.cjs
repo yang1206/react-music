@@ -3,7 +3,7 @@
 module.exports = {
 	settings: {
 		react: {
-			version: "detect"
+			version: 'detect'
 		}
 	},
 	root: true,
