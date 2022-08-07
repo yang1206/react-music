@@ -1,5 +1,6 @@
 .BannerWrapper {
   .banner {
+    position: relative;
     display: flex;
     justify-content: center;
 
@@ -15,6 +16,40 @@
         }
       }
     }
+  }
+}
+
+.BannerControl {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  transform: translateY(-31.5px);
+
+  .btn {
+    position: absolute;
+    width: 37px;
+    height: 63px;
+    cursor: pointer;
+    background-color: transparent;
+
+    &:hover {
+      background-color: rgb(0 0 0 / 10%);
+    }
+  }
+
+  .left,
+  .right {
+    line-height: 63px;
+    text-align: center;
+  }
+
+  .left {
+    left: -68px;
+  }
+
+  .right {
+    right: -68px;
   }
 }
 

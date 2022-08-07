@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { getSizeImage, getCount } from '@/utils/format'
-import { Recommend } from '@/api/interface'
+import { Recommend } from '@/store/interface/recommend'
 import './index.less'
 interface Props {
   info: Recommend.perSonalizeder
@@ -23,7 +23,7 @@ const SongCover: React.FC<Props> = (props: any) => {
           </div>
         </div>
       </div>
-      <div className="cover-bottom text-nowrap">{info.name}</div>
+      <div className="cover-bottom">{info.name}</div>
       {/* <div className="cover-source">by {info.copywriter || info.creator.name}</div> */}
     </div>
   )

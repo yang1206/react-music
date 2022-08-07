@@ -3,6 +3,7 @@ import Banner from './components/banner'
 import HotRecommend from './components/hotRecommend'
 import NewAlbum from './components/newAlbum'
 import Ranking from './components/ranking'
+import './index.less'
 const Recommend: React.FC = () => {
   return (
     <div className="RecommendWarper">
@@ -13,7 +14,6 @@ const Recommend: React.FC = () => {
           <NewAlbum />
           <Ranking />
         </div>
-        <div className="RecommendRight"></div>
       </div>
     </div>
   )

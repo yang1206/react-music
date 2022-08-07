@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './index.less'
 type Headers = {
   title: string
@@ -8,7 +8,7 @@ type Headers = {
   keywordClick: (item: string) => void
 }
 const RcmHeader: React.FC<Headers> = props => {
-  const { title, keywords, keywordClick } = props
+  const { title, keywords, keywordClick, moreLink } = props
   return (
     <div className="RcmHeaderWrapper sprite_02">
       <div className="left">
@@ -27,7 +27,7 @@ const RcmHeader: React.FC<Headers> = props => {
         </div>
       </div>
       <div className="right">
-        {/* <Link to={moreLink}>更多</Link> */}
+        {moreLink ? <Link to={moreLink}>更多</Link> : null}
         <i className="icon sprite_02"></i>
       </div>
     </div>

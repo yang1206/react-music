@@ -13,6 +13,7 @@ const routes: RouteObject[] = [
         element: <Navigate to="/discover" />
       },
       {
+        path: '/discover',
         element: lazyLoad(lazy(() => import('@/views/discover'))),
         children: [...DiscoverRouter]
       },

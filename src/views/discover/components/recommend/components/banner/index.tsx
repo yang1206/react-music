@@ -1,19 +1,20 @@
-import React, { useEffect, useCallback, useState, memo } from 'react'
+import React, { useEffect, useCallback, useRef, useState, memo } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectRecommend, getBanner } from '@/store/reducer/recommend'
-import './index.less'
+import { selectBanners, getBanner } from '@/store/slice/recommend'
 import { Carousel } from 'antd'
+import type { CarouselRef } from 'antd/lib/carousel'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import './index.less'
 
 const Banner: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   //从store取出banners
-  const topBanner = useAppSelector(selectRecommend)
+  const topBanner = useAppSelector(selectBanners)
   const dispatch = useAppDispatch()
   useEffect(() => {
     //请求数据
     dispatch(getBanner())
-  }, [dispatch])
+  }, [])
   //走马灯轮播之前回调
   const bannerChange = useCallback((from: React.SetStateAction<number>, to: any) => {
     setTimeout(() => {
@@ -22,21 +23,15 @@ const Banner: React.FC = () => {
       from > to ? setCurrentIndex(from) : setCurrentIndex(to)
     }, 0)
   }, [])
+  const bannerRef = useRef<CarouselRef>(null)
   //定义背景高斯模糊图
-  const bgImage = topBanner.Banners[currentIndex] && topBanner.Banners[currentIndex].imageUrl + '?imageView&blur=40x20'
+  const bgImage = topBanner.data[currentIndex] && topBanner.data[currentIndex].imageUrl + '?imageView&blur=40x20'
   return (
     <div className="BannerWrapper" style={{ background: 'url(' + bgImage + ') center center/ 6000px' }}>
       <div className="banner wrap-v2">
         <div className="BannerContent">
-          <Carousel
-            arrows={true}
-            prevArrow={<LeftOutlined />}
-            nextArrow={<RightOutlined />}
-            autoplay
-            effect="fade"
-            beforeChange={bannerChange}
-          >
-            {topBanner.Banners.map(item => {
+          <Carousel ref={bannerRef} autoplay effect="fade" beforeChange={bannerChange}>
+            {topBanner.data.map(item => {
               return (
                 <div className="banner-item" key={item.imageUrl}>
                   <img className="image" src={item.imageUrl} alt={item.typeTitle} />
@@ -44,6 +39,14 @@ const Banner: React.FC = () => {
               )
             })}
           </Carousel>
+        </div>
+        <div className="BannerControl control">
+          <div className="btn left" onClick={() => bannerRef.current?.prev()}>
+            <LeftOutlined />
+          </div>
+          <div className="btn right" onClick={() => bannerRef.current?.next()}>
+            <RightOutlined />
+          </div>
         </div>
       </div>
     </div>

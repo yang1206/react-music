@@ -1,0 +1,35 @@
+.AlbumWrapper {
+  .album-image {
+    position: relative;
+    overflow: hidden;
+
+    img {
+      object-fit: contain;
+    }
+
+    .cover {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      text-indent: -9999px;
+    }
+  }
+
+  .album-info {
+    font-size: 12px;
+    text-align: center;
+
+    .name {
+      overflow: hidden;
+      color: #000000;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .artist {
+      color: #666666;
+    }
+  }
+}

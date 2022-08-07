@@ -3,11 +3,11 @@ import { configureStore } from '@reduxjs/toolkit'
 import logger from 'redux-logger'
 //添加redux扩展功能 redux-batch 批处理
 import { reduxBatch } from '@manaflair/redux-batch'
-import counterSlice from './reducer/demo'
-import recommendSlice from './reducer/recommend'
+// import counterSlice from './slice/demo'
+import recommendSlice from './slice/recommend'
 export const store = configureStore({
   reducer: {
-    counter: counterSlice,
+    // counter: counterSlice,
     recommend: recommendSlice
   },
   //使用redux-logger中间件

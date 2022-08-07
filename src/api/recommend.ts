@@ -14,3 +14,49 @@ export const getPersonalizedList = (data?: Recommend.SongListParams) => {
     data
   })
 }
+//新碟上架
+export const getTopAlbums = (data?: Recommend.TopAlbums) => {
+  return request({
+    url: '/top/album',
+    method: 'GET',
+    data
+  })
+}
+//全部新碟
+export const getNewAlbums = (data?: Recommend.NewAlbums) => {
+  return request({
+    url: '/album/new',
+    method: 'GET',
+    data
+  })
+}
+//首页热门新碟
+export const getNewestAlbums = (data?: Recommend.NewAlbums) => {
+  return request({
+    url: '/album/newest',
+    method: 'GET',
+    data
+  })
+}
+export const getTopList = (data?: Recommend.TopList) => {
+  return request({
+    url: '/top/list',
+    method: 'GET',
+    data
+  })
+}
+//获取歌单详情，同时也是获取排行榜的接口
+export const getPlaylist = (data: Recommend.Playlist) => {
+  return request({
+    url: '/playlist/detail',
+    method: 'GET',
+    data
+  })
+}
+//获取全部榜单
+export const getAllTopList = () => {
+  return request({
+    url: '/toplist',
+    method: 'GET'
+  })
+}

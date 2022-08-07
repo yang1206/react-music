@@ -74,7 +74,7 @@ export const footerImages = [
 export const discoverMenu = [
   {
     title: '推荐',
-    link: '/discover'
+    link: '/discover/recommend'
   },
   {
     title: '排行榜',
@@ -93,7 +93,7 @@ export const discoverMenu = [
     link: '/discover/artist'
   },
   {
-    title: '每日推荐',
+    title: '新碟上架',
     link: '/discover/album'
   }
 ]
