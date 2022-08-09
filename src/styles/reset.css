@@ -68,6 +68,11 @@ img {
 
 /* 全局样式 */
 
+html,body {
+  word-break: break-word;
+  word-wrap:break-word;
+}
+
 body,
 textarea,
 select,
@@ -91,7 +96,7 @@ button {
 }
 
 .wrap-v2 {
-  width: 80vw;
+  width: 980px;
   margin: 0 auto;
 }
 
@@ -131,7 +136,7 @@ button {
   background: url("@/assets/img/sprite_table.png") no-repeat 0 9999px;
 }
 
-.sprite_playbar {
+.sprite_playBar {
   background: url("@/assets/img/playbar_sprite.png") no-repeat 0 9999px;
 }
 

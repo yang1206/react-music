@@ -1,0 +1,153 @@
+.PlayerBarWrapper {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  height: 52px;
+  background-repeat: repeat;
+  background-position: 0 0;
+
+  .content {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 47px;
+    transform: translateX(-50%);
+
+    .Control {
+      display: flex;
+      align-items: center;
+
+      .prev,
+      .next {
+        width: 28px;
+        height: 28px;
+      }
+
+      .prev {
+        background-position: 0 -130px;
+      }
+
+      .play {
+        width: 36px;
+        height: 36px;
+        margin: 0 8px;
+      }
+
+      .next {
+        background-position: -80px -130px;
+      }
+    }
+
+    .PlayInfo {
+      display: flex;
+      align-items: center;
+      width: 642px;
+
+      .image {
+        width: 34px;
+        height: 34px;
+        border-radius: 5px;
+      }
+
+      .info {
+        flex: 1;
+        margin-left: 10px;
+        color: #a1a1a1;
+
+        .song {
+          position: relative;
+          top: 8px;
+          left: 8px;
+          color: #e1e1e1;
+
+          .singer-name {
+            margin-left: 10px;
+            color: #a1a1a1;
+          }
+        }
+
+        .progress {
+          display: flex;
+          align-items: center;
+
+          .ant-slider {
+            width: 493px;
+            margin-right: 10px;
+
+            .ant-slider-rail {
+              height: 9px;
+              background: url('@/assets/img/progress_bar.png') right 0;
+            }
+
+            .ant-slider-track {
+              height: 9px;
+              background: url('@/assets/img/progress_bar.png') left -66px;
+            }
+
+            .ant-slider-handle {
+              width: 22px;
+              height: 24px;
+              margin-top: -7px;
+              background: url('@/assets/img/sprite_icon.png') 0 -250px;
+              border: none;
+            }
+          }
+
+          .time {
+            .now-time {
+              color: #e1e1e1;
+            }
+
+            .divider {
+              margin: 0 3px;
+            }
+          }
+        }
+      }
+    }
+
+    .Operator {
+      position: relative;
+      top: 5px;
+      display: flex;
+
+      .btn {
+        width: 25px;
+        height: 25px;
+      }
+
+      .favor {
+        background-position: -88px -163px;
+      }
+
+      .share {
+        background-position: -114px -163px;
+      }
+
+      .right {
+        display: flex;
+        align-items: center;
+        width: 126px;
+        padding-left: 13px;
+        background-position: -147px -248px;
+
+        .volume {
+          background-position: -2px -248px;
+        }
+
+        .playlist {
+          width: 59px;
+          padding-left: 18px;
+          color: #cccccc;
+          text-align: center;
+          background-position: -42px -68px;
+        }
+      }
+    }
+  }
+}
