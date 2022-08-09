@@ -7,8 +7,11 @@ const PlayBar: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false)
   setIsPlaying
   const playStyle = isPlaying ? '-165px' : '-204px'
+  let intViewportWidth = window.innerWidth
+  console.log(intViewportWidth)
+
   return (
-    <div className="sprite_playBar PlayerBarWrapper">
+    <div className="PlayerBarWrapper">
       <div className="content wrap-v2">
         <div className="Control">
           <button className="sprite_playBar btn prev"></button>

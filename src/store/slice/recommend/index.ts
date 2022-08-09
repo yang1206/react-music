@@ -16,8 +16,7 @@ const initialState: InitialState = {
   topListData: {
     newList: {},
     riseList: {},
-    originalList: {},
-    hotList: {}
+    originalList: {}
   }
 }
 
@@ -47,9 +46,6 @@ export const recommendSlice = createSlice({
           break
         case 2884035:
           state.topListData.originalList = action.payload.playlist
-          break
-        case 3778678:
-          state.topListData.hotList = action.payload.playlist
           break
       }
     })

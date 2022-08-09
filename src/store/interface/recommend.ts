@@ -25,6 +25,5 @@ export namespace Recommend {
     newList: topItem
     riseList: topItem
     originalList: topItem
-    hotList: topItem
   }
 }

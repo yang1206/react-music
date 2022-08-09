@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback, useRef, useState, memo } from 'react'
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectBanners, getBanner } from '@/store/slice/recommend'
 import { Carousel } from 'antd'
 import type { CarouselRef } from 'antd/lib/carousel'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
+import { selectBanners, getBanner } from '@/store/slice/recommend'
 import './index.less'
 
 const Banner: React.FC = () => {
