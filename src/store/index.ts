@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 //中间件插件示例：添加redux-logger中间件
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
 // import counterSlice from './slice/demo'
 import recommendSlice from './slice/recommend'
 import playerSlice from './slice/Player'
@@ -11,7 +11,7 @@ export const store = configureStore({
     player: playerSlice
   },
   //使用redux-logger中间件
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
+  // middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
   //生产环境关闭devTools // 安装dev工具  chrome应用商店 安装 React Developer Tools
   devTools: process.env.NODE_ENV !== 'production'
 })
