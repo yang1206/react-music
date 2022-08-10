@@ -22,13 +22,13 @@ const NewAlbum: React.FC = () => {
     size: '100px',
     bgp: '-570px'
   }
-  //从store取出banners
-  const newAlbums = useAppSelector(selectNewAlbums)
-  console.log(newAlbums)
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(getNewAlbums())
   }, [])
+  //从store取出banners
+  const newAlbums = useAppSelector(selectNewAlbums)
+  console.log(newAlbums)
   const pageRef = useRef<CarouselRef>(null)
   return (
     <div className="AlbumWrapper">
@@ -40,7 +40,7 @@ const NewAlbum: React.FC = () => {
             {[0, 1].map(item => {
               return (
                 <div key={item} className="page">
-                  {newAlbums.data.slice(item * 5, (item + 1) * 5).map(info => {
+                  {newAlbums?.data.slice(item * 5, (item + 1) * 5).map(info => {
                     return <AlbumCover key={info.id} info={info} {...CoverProps} />
                   })}
                 </div>

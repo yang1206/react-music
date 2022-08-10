@@ -7,18 +7,17 @@ interface Props {
 }
 const TopRanking: React.FC<Props> = props => {
   const { info } = props
-  const { tracks = [] } = info
   return (
     <div className="TopRankingWrapper">
       <div className="header">
         <div className="image">
-          <img src={getSizeImage(info.coverImgUrl)} alt="" />
+          <img src={getSizeImage(info?.coverImgUrl)} alt="" />
           <a href="/todo" className="image_cover">
             ranking
           </a>
         </div>
         <div className="info">
-          <a href="/todo">{info.name}</a>
+          <a href="/todo">{info?.name}</a>
           <div>
             <button className="btn play sprite_02"></button>
             <button className="btn favor sprite_02"></button>
@@ -26,7 +25,7 @@ const TopRanking: React.FC<Props> = props => {
         </div>
       </div>
       <div className="list">
-        {tracks.slice(0, 10).map((item: any, index: number) => {
+        {info.tracks?.slice(0, 10).map((item: any, index: number) => {
           return (
             <div key={item.id} className="list-item">
               <div className="rank">{index + 1}</div>

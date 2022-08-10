@@ -8,13 +8,13 @@ import './index.less'
 
 const Banner: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
-  //从store取出banners
-  const topBanner = useAppSelector(selectBanners)
   const dispatch = useAppDispatch()
   useEffect(() => {
     //请求数据
     dispatch(getBanner())
   }, [])
+  //从store取出banners
+  const topBanner = useAppSelector(selectBanners)
   //走马灯轮播之前回调
   const bannerChange = useCallback((from: React.SetStateAction<number>, to: any) => {
     setTimeout(() => {
@@ -25,7 +25,7 @@ const Banner: React.FC = () => {
   }, [])
   const bannerRef = useRef<CarouselRef>(null)
   //定义背景高斯模糊图
-  const bgImage = topBanner.data[currentIndex] && topBanner.data[currentIndex].imageUrl + '?imageView&blur=40x20'
+  const bgImage = topBanner?.data[currentIndex] && topBanner.data[currentIndex].imageUrl + '?imageView&blur=40x20'
   return (
     <div className="BannerWrapper" style={{ background: 'url(' + bgImage + ') center center/ 6000px' }}>
       <div className="banner wrap-v2">

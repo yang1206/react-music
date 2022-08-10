@@ -13,7 +13,6 @@ const NewAlbum: React.FC = () => {
     },
     moreLink: '/discover/ranking'
   }
-  const { newList, riseList, originalList } = useAppSelector(selectTopList).data
   const dispatch = useAppDispatch()
   useEffect(() => {
     //飙升榜
@@ -22,9 +21,8 @@ const NewAlbum: React.FC = () => {
     dispatch(getTopLists(3779629))
     //原创榜
     dispatch(getTopLists(2884035))
-    //热歌榜
-    //dispatch(getTopLists(3778678))
   }, [])
+  const { newList, riseList, originalList } = useAppSelector(selectTopList).data
   return (
     <div className="RankingWrapper">
       <RcmHeader {...props} />

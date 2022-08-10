@@ -102,47 +102,47 @@ button {
 }
 
 .sprite_01 {
-  background: url("@/assets/img/sprite_01.png") no-repeat 0 9999px;
+  background: url('@/assets/img/sprite_01.png') no-repeat 0 9999px;
 }
 
 .sprite_02 {
-  background: url("@/assets/img/sprite_02.png") no-repeat 0 9999px;
+  background: url('@/assets/img/sprite_02.png') no-repeat 0 9999px;
 }
 
 .sprite_cover {
-  background: url("@/assets/img/sprite_cover.png") no-repeat 0 9999px;
+  background: url('@/assets/img/sprite_cover.png') no-repeat 0 9999px;
 }
 
 .sprite_icon {
-  background: url("@/assets/img/sprite_icon.png") no-repeat 0 9999px;
+  background: url('@/assets/img/sprite_icon.png') no-repeat 0 9999px;
 }
 
 .sprite_icon2 {
-  background: url("@/assets/img/sprite_icon2.png") no-repeat 0 9999px;
+  background: url('@/assets/img/sprite_icon2.png') no-repeat 0 9999px;
 }
 
 .sprite_icon3 {
-  background: url("@/assets/img/sprite_icon3.png") no-repeat 0 9999px;
+  background: url('@/assets/img/sprite_icon3.png') no-repeat 0 9999px;
 }
 
 .sprite_button {
-  background: url("@/assets/img/sprite_button.png") no-repeat 0 9999px;
+  background: url('@/assets/img/sprite_button.png') no-repeat 0 9999px;
 }
 
 .sprite_button2 {
-  background: url("@/assets/img/sprite_button2.png") no-repeat 0 9999px;
+  background: url('@/assets/img/sprite_button2.png') no-repeat 0 9999px;
 }
 
 .sprite_table {
-  background: url("@/assets/img/sprite_table.png") no-repeat 0 9999px;
+  background: url('@/assets/img/sprite_table.png') no-repeat 0 9999px;
 }
 
 .sprite_playBar {
-  background: url("@/assets/img/playbar_sprite.png") no-repeat 0 9999px;
+  background: url('@/assets/img/playbar_sprite.png') no-repeat 0 9999px;
 }
 
 .sprite_playlist {
-  background: url("@/assets/img/playlist_sprite.png") no-repeat 0 9999px;
+  background: url('@/assets/img/playlist_sprite.png') no-repeat 0 9999px;
 }
 
 .image_cover {
@@ -152,7 +152,7 @@ button {
   bottom: 0;
   left: 0;
   text-indent: -9999px;
-  background: url("../img/sprite_cover.png") no-repeat -145px -57px;
+  background: url('../img/sprite_cover.png') no-repeat -145px -57px;
 }
 
 .ant-message .ant-message-notice-content {

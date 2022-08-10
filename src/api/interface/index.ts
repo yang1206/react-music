@@ -21,3 +21,8 @@ export namespace Recommend {
     id: number
   }
 }
+export namespace Song {
+  export interface SongDetail {
+    ids: number
+  }
+}

@@ -15,16 +15,16 @@ const HotRecommend: React.FC = () => {
       // navigate('/discover/songs')
     }
   }
-  const PersonalizedData = useAppSelector(selectPersonalized)
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(getPersonalized())
   }, [])
+  const PersonalizedData = useAppSelector(selectPersonalized)
   return (
     <div className="HotRecommendWrapper">
       <RcmHeader {...props} />
       <div className="recommend-list">
-        {PersonalizedData.data.map((item: Recommend.perSonalizeder) => {
+        {PersonalizedData?.data.map((item: Recommend.perSonalizeder) => {
           return <SongsCover key={item.id} info={item} />
         })}
       </div>
