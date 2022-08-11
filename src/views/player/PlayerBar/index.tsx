@@ -30,23 +30,23 @@ const PlayBar: React.FC = () => {
     setDuration(currentSong?.dt)
     //在hooks里设置歌曲src
     audioRef.current!.src = getPlayUrl(currentSong?.id)
-    audioRef
-      .current!.play()
-      .then(() => {
-        setIsPlaying(true)
-      })
-      .catch(() => {
-        setIsPlaying(false)
-      })
+    // audioRef
+    //   .current!.play()
+    //   .then(() => {
+    //     setIsPlaying(true)
+    //   })
+    //   .catch(() => {
+    //     setIsPlaying(false)
+    //   })
     currentSong?.dt ? setDuration(currentSong.dt) : setDuration(currentSong?.dt)
   }, [currentSong])
   //点击播放按钮方法
-  const play = () => {
+  const play = useCallback(() => {
     //类型断言 not null
     isPlaying ? audioRef.current!.pause() : audioRef.current!.play()
     //先判断在改变播放状态
     setIsPlaying(!isPlaying)
-  }
+  }, [isPlaying])
   const timeUpdate = (e: any) => {
     //如果进度条正在被拖动Progress，也就是当前进度条的位置就不随着歌曲进度改变
     if (!isChanging) {
@@ -81,7 +81,7 @@ const PlayBar: React.FC = () => {
       if (isPlaying) audioRef.current?.play()
     },
     //这里必须依赖duration，否则会设置为0
-    [duration]
+    [duration, isPlaying, play]
   )
   // let intViewportWidth = window.innerWidth
   return (
@@ -98,7 +98,7 @@ const PlayBar: React.FC = () => {
         </div>
         <div className="PlayInfo">
           <div className="image">
-            <NavLink to="/discover/player">
+            <NavLink to="/discover/song">
               <img src={getSizeImage(currentSong?.al.picUrl, 35)} alt="" />
             </NavLink>
           </div>
