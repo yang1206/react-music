@@ -7,13 +7,13 @@ interface InitialState {
   BannersData: Array<Recommend.Banners>
   PersonalizedData: Array<Recommend.perSonalizeder>
   newAlbumData: Array<Recommend.NewAlbums>
-  topListData: Recommend.TopList
+  RankingData: Recommend.TopList
 }
 const initialState: InitialState = {
   BannersData: [],
   PersonalizedData: [],
   newAlbumData: [],
-  topListData: {
+  RankingData: {
     newList: {},
     riseList: {},
     originalList: {}
@@ -39,13 +39,13 @@ export const recommendSlice = createSlice({
       //根据id存入对应的榜单数据
       switch (action.meta.arg) {
         case 3779629:
-          state.topListData.newList = action.payload.playlist
+          state.RankingData.newList = action.payload.playlist
           break
         case 19723756:
-          state.topListData.riseList = action.payload.playlist
+          state.RankingData.riseList = action.payload.playlist
           break
         case 2884035:
-          state.topListData.originalList = action.payload.playlist
+          state.RankingData.originalList = action.payload.playlist
           break
       }
     })
@@ -55,7 +55,7 @@ export const recommendSlice = createSlice({
 export const selectBanners = (state: RootState) => ({ data: state.recommend.BannersData, shallowEqual })
 export const selectPersonalized = (state: RootState) => ({ data: state.recommend.PersonalizedData, shallowEqual })
 export const selectNewAlbums = (state: RootState) => ({ data: state.recommend.newAlbumData, shallowEqual })
-export const selectTopList = (state: RootState) => ({ data: state.recommend.topListData, shallowEqual })
+export const selectTopList = (state: RootState) => ({ data: state.recommend.RankingData, shallowEqual })
 export default recommendSlice.reducer
 //统一导出异步action
 export { getBanner, getPersonalized, getNewAlbums, getTopLists }

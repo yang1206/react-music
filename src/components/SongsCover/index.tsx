@@ -23,8 +23,8 @@ const SongCover: React.FC<Props> = (props: any) => {
           </div>
         </div>
       </div>
-      <div className="cover-bottom">{info.name}</div>
-      {/* <div className="cover-source">by {info.copywriter || info.creator.name}</div> */}
+      <a className="cover-bottom">{info.name}</a>
+      {/* <div className="cover-source">by {info.copywriter}</div> */}
     </div>
   )
 }

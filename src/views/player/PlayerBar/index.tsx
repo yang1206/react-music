@@ -54,7 +54,6 @@ const PlayBar: React.FC = () => {
       setCurrentTime(e.target.currentTime * 1000)
     }
   }
-  setIsPlaying
   //根据是否播放展示不同按钮
   const playStyle = isPlaying ? '-165px' : '-204px'
   //拖动进度条事件

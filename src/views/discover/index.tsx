@@ -6,14 +6,16 @@ const Discover: React.FC = () => {
   return (
     <div className="DiscoverWrapper">
       <div className="top">
-        <div className="TopMenu wrap-v1">
-          {discoverMenu.map(item => {
-            return (
-              <div className="item" key={item.title}>
-                <NavLink to={item.link}>{item.title}</NavLink>
-              </div>
-            )
-          })}
+        <div className="wrap-v1">
+          <div className="TopMenu wrap-v2">
+            {discoverMenu.map(item => {
+              return (
+                <div className="item" key={item.title}>
+                  <NavLink to={item.link}>{item.title}</NavLink>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
       <Outlet />

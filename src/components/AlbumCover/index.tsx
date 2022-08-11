@@ -15,14 +15,14 @@ const AlbumCover: React.FC<Props> = (props: any) => {
   return (
     <div className="AlbumWrapper" style={{ width: width, height: size }}>
       <div className="album-image">
-        <img src={getSizeImage(info.picUrl, 180)} style={{ width: width, height: size }} alt=""></img>
+        <img src={getSizeImage(info.picUrl, 180)} style={{ width: size, height: size }} alt=""></img>
         <a href="/abc" className="cover sprite_cover" style={{ backgroundPosition: `0  ${bgp}` }}>
           {info.name}
         </a>
       </div>
       <div className="album-info" style={{ width: size }}>
-        <div className="name">{info.name}</div>
-        <div className="artist">{info.artist.name}</div>
+        <a className="name">{info.name}</a>
+        <a className="artist">{info.artist.name}</a>
       </div>
     </div>
   )
