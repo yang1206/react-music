@@ -1,12 +1,19 @@
 import React, { memo } from 'react'
 import { getSizeImage } from '@/utils/format'
 import { Recommend } from '@/store/interface/recommend'
+import { getSong /*changeCurrentSong, changePlayList, changeCurrentIndex*/ } from '@/store/slice/Player'
+import { useAppDispatch } from '@/hooks/useStore'
 import './index.less'
 interface Props {
   info: Recommend.topItem
 }
 const TopRanking: React.FC<Props> = props => {
   const { info } = props
+  const dispatch = useAppDispatch()
+  const playMusic = (item: any) => {
+    dispatch(getSong(item.id))
+    console.log(item)
+  }
   return (
     <div className="TopRankingWrapper">
       <div className="header">
@@ -32,7 +39,7 @@ const TopRanking: React.FC<Props> = props => {
               <div className="info">
                 <span className="name text-nowrap">{item.name}</span>
                 <div className="operate">
-                  <button className="btn sprite_02 play" /*onClick={e => playMusic(item)}*/></button>
+                  <button className="btn sprite_02 play" onClick={() => playMusic(item)}></button>
                   <button className="btn sprite_icon2 addto"></button>
                   <button className="btn sprite_02 favor"></button>
                 </div>

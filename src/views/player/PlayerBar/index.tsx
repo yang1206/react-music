@@ -2,11 +2,13 @@ import React, { useState, useEffect, useRef, useCallback, memo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Slider } from 'antd'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectSong, getSong } from '@/store/slice/Player'
+import { selectSong, selectSequence, getSong, changeSequence } from '@/store/slice/Player'
 import { getSizeImage, formatMinuteSecond, getPlayUrl } from '@/utils/format'
 import './index.less'
 const PlayBar: React.FC = () => {
-  const currentSong = useAppSelector(selectSong).data[0]
+  //从redux取出数据
+  const currentSong = useAppSelector(selectSong).data
+  const sequence = useAppSelector(selectSequence).data
   //请求歌曲详细信息
   const dispatch = useAppDispatch()
   //歌曲时长
@@ -19,25 +21,27 @@ const PlayBar: React.FC = () => {
   const [progress, setProgress] = useState(0)
   //播放时间计时
   const [currentTime, setCurrentTime] = useState(0)
-  //从redux取出数据
-
+  //播放顺序按钮的展示
+  const [loopClass, setLoopClass] = useState('sprite_playBar btn loop')
+  //播放暂停按钮的展示
+  const [playClass, setPlayClass] = useState('sprite_playBar btn play')
   //获取播放标签实例
   const audioRef = useRef<HTMLAudioElement | null>(null)
   useEffect(() => {
-    dispatch(getSong(150404))
-  }, [])
+    dispatch(getSong(null))
+  }, [dispatch])
   useEffect(() => {
     setDuration(currentSong?.dt)
     //在hooks里设置歌曲src
     audioRef.current!.src = getPlayUrl(currentSong?.id)
-    // audioRef
-    //   .current!.play()
-    //   .then(() => {
-    //     setIsPlaying(true)
-    //   })
-    //   .catch(() => {
-    //     setIsPlaying(false)
-    //   })
+    audioRef
+      .current!.play()
+      .then(() => {
+        setIsPlaying(true)
+      })
+      .catch(() => {
+        setIsPlaying(false)
+      })
     currentSong?.dt ? setDuration(currentSong.dt) : setDuration(currentSong?.dt)
   }, [currentSong])
   //点击播放按钮方法
@@ -46,6 +50,7 @@ const PlayBar: React.FC = () => {
     isPlaying ? audioRef.current!.pause() : audioRef.current!.play()
     //先判断在改变播放状态
     setIsPlaying(!isPlaying)
+    isPlaying ? setPlayClass('sprite_playBar btn play') : setPlayClass('sprite_playBar btn pause')
   }, [isPlaying])
   const timeUpdate = (e: any) => {
     //如果进度条正在被拖动Progress，也就是当前进度条的位置就不随着歌曲进度改变
@@ -82,17 +87,32 @@ const PlayBar: React.FC = () => {
     //这里必须依赖duration，否则会设置为0
     [duration, isPlaying, play]
   )
+  const changeSequenceData = () => {
+    let currentSequence = sequence + 1
+    if (currentSequence > 2) {
+      currentSequence = 0
+    }
+    switch (currentSequence) {
+      case 0:
+        setLoopClass('sprite_playBar btn loop')
+        break
+      case 1:
+        setLoopClass('sprite_playBar btn shuffle')
+        break
+      case 2:
+        setLoopClass('sprite_playBar btn one')
+        break
+    }
+    dispatch(changeSequence(currentSequence))
+  }
+
   // let intViewportWidth = window.innerWidth
   return (
     <div className="PlayerBarWrapper">
       <div className="content wrap-v2">
         <div className="Control">
           <button className="sprite_playBar btn prev"></button>
-          <button
-            className="sprite_playBar btn play"
-            onClick={() => play()}
-            style={{ backgroundPosition: `0 ${playStyle}` }}
-          ></button>
+          <button className={playClass} onClick={() => play()} style={{ backgroundPosition: `0 ${playStyle}` }}></button>
           <button className="sprite_playBar btn next"></button>
         </div>
         <div className="PlayInfo">
@@ -104,7 +124,7 @@ const PlayBar: React.FC = () => {
           <div className="info">
             <div className="song">
               <span className="song-name">{currentSong?.name}</span>
-              <span className="singer-name">{currentSong?.ar[0].name}</span>
+              {currentSong?.ar[0] && <span className="singer-name">{currentSong?.ar[0].name}</span>}
             </div>
             <div className="progress">
               <Slider value={progress} onChange={sliderChange} onAfterChange={sliderAfterChange} />
@@ -123,7 +143,12 @@ const PlayBar: React.FC = () => {
           </div>
           <div className="right sprite_playBar">
             <button className="sprite_playBar btn volume"></button>
-            <button className="sprite_playBar btn loop"></button>
+            <button
+              className={loopClass}
+              onClick={() => {
+                changeSequenceData()
+              }}
+            ></button>
             <button className="sprite_playBar btn playlist"></button>
           </div>
         </div>
