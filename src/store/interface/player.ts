@@ -18,4 +18,8 @@ export namespace Player {
     al: al
     dt: number
   }
+  export interface Lyric {
+    content: string
+    time: number
+  }
 }

@@ -26,8 +26,7 @@ const request = new Request({
       return result
     },
     responseInterceptorsCatch: error => {
-      error.response && message.error(error.response.data)
-      return Promise.reject(new Error(error.response.data))
+      error.response && message.error(error.response.data.message)
     }
   }
 })

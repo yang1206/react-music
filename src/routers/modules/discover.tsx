@@ -2,7 +2,7 @@ import { lazy } from 'react'
 import { RouteObject } from '@/routers/interface'
 import { Navigate } from 'react-router-dom'
 import lazyLoad from '@/routers/utils/lazyLoad'
-import Recommend from '@/views/discover/components/recommend'
+import Recommend from '@/views/discover/ChildPages/recommend'
 const HomeRouter: Array<RouteObject> = [
   {
     path: '/discover',
@@ -15,23 +15,23 @@ const HomeRouter: Array<RouteObject> = [
   },
   {
     path: '/discover/songs',
-    element: lazyLoad(lazy(() => import('@/views/discover/components/songs')))
+    element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/songs')))
   },
   {
     path: '/discover/album',
-    element: lazyLoad(lazy(() => import('@/views/discover/components/album')))
+    element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/album')))
   },
   {
     path: '/discover/djradio',
-    element: lazyLoad(lazy(() => import('@/views/discover/components/djradio')))
+    element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/djradio')))
   },
   {
     path: '/discover/ranking',
-    element: lazyLoad(lazy(() => import('@/views/discover/components/ranking')))
+    element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/ranking')))
   },
   {
     path: '/discover/artist',
-    element: lazyLoad(lazy(() => import('@/views/discover/components/artist')))
+    element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/artist')))
   },
   {
     path: '/discover/song',

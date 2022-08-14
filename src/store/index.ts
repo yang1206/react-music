@@ -11,7 +11,10 @@ export const store = configureStore({
     player: playerSlice
   },
   //使用redux-logger中间件
-  // middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    }),
   //生产环境关闭devTools // 安装dev工具  chrome应用商店 安装 React Developer Tools
   devTools: process.env.NODE_ENV !== 'production'
 })

@@ -29,6 +29,7 @@ const NewAlbum: React.FC = () => {
   //从store取出banners
   const newAlbums = useAppSelector(selectNewAlbums)
   const pageRef = useRef<CarouselRef>(null)
+  if (!newAlbums) return null
   return (
     <div className="AlbumWrapper">
       <RcmHeader {...headerProps} />

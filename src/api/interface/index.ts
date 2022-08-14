@@ -25,4 +25,7 @@ export namespace Song {
   export interface SongDetail {
     ids: number
   }
+  export interface lyric {
+    id: number
+  }
 }

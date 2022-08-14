@@ -7,3 +7,11 @@ export const getSongDetail = (data: Song.SongDetail) => {
     data
   })
 }
+
+export const getLyricData = (data: { id: number }) => {
+  return request({
+    url: '/lyric',
+    method: 'GET',
+    data
+  })
+}

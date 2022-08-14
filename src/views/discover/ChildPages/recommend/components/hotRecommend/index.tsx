@@ -20,6 +20,7 @@ const HotRecommend: React.FC = () => {
     dispatch(getPersonalized())
   }, [])
   const PersonalizedData = useAppSelector(selectPersonalized)
+  if (!PersonalizedData) return null
   return (
     <div className="HotRecommendWrapper">
       <RcmHeader {...props} />

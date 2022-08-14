@@ -1,9 +1,9 @@
+/* stylelint-disable rule-empty-line-before */
 .PlayerBarWrapper {
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 99;
   height: 52px;
   zoom: 1;
   background: #252424;
@@ -22,6 +22,34 @@
     height: 47px;
     transform: translateX(-50%);
 
+    /* 进入 */
+    .playlist-enter,
+    .playlist-appear {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+
+    /* 执行动画 */
+    .playlist-enter-active,
+    .playlist-appear-active {
+      opacity: 1;
+      transition: opacity 300ms, transform 300ms;
+      transform: scale(1);
+    }
+
+    /* 离开 */
+    .playlist-exit {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .playlist-exit-active {
+      opacity: 0;
+      transition: opacity 300ms, transform 300ms;
+      transform: scale(0.6);
+    }
+    .playlist-exit-done {
+      opacity: 0;
+    }
     .Control {
       display: flex;
       align-items: center;
@@ -131,7 +159,6 @@
           }
 
           .time {
-            /* stylelint-disable-next-line rule-empty-line-before */
             .now-time {
               color: #e1e1e1;
             }
@@ -219,6 +246,34 @@
 
           &.playlist:hover {
             background-position: -42px -98px !important;
+          }
+        }
+      }
+      .top-volume {
+        position: absolute;
+        top: -131px;
+        left: 60px;
+        width: 32px;
+        height: 113px;
+        padding: 10px;
+        overflow: hidden;
+        clear: both;
+        background-position: 0 -503px;
+
+        /* ant design Slider style change */
+        .ant-slider-vertical {
+          margin: 0;
+          .ant-slider-rail {
+            background-color: transparent;
+          }
+          .ant-slider-track {
+            background: url('@/assets/img/playbar_sprite.png') no-repeat 0 9999px;
+            background-position: -40px bottom;
+          }
+          .ant-slider-handle {
+            background: url('@/assets/img/sprite_icon.png');
+            background-position: -42px -250px;
+            border: 0;
           }
         }
       }

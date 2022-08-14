@@ -145,6 +145,10 @@ button {
   background: url("@/assets/img/playlist_sprite.png") no-repeat 0 9999px;
 }
 
+.sprite_player {
+  background: url("@/assets/img/playbar_sprite.png") no-repeat 0 9999px;
+}
+
 .image_cover {
   position: absolute;
   top: 0;

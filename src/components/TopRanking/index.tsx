@@ -12,7 +12,6 @@ const TopRanking: React.FC<Props> = props => {
   const dispatch = useAppDispatch()
   const playMusic = (item: any) => {
     dispatch(getSong(item.id))
-    console.log(item)
   }
   return (
     <div className="TopRankingWrapper">
