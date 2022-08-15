@@ -15,3 +15,11 @@ export const getLyricData = (data: { id: number }) => {
     data
   })
 }
+
+export const getSongSimi = (data: { id: number }) => {
+  return request({
+    url: '/simi/song',
+    method: 'GET',
+    data
+  })
+}

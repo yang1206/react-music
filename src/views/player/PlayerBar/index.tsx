@@ -254,7 +254,7 @@ const PlayBar: React.FC = () => {
           </div>
         </div>
       </div>
-      <audio ref={audioRef} onTimeUpdate={timeUpdate} onEnded={playEnded} />
+      <audio id="audio" ref={audioRef} onTimeUpdate={timeUpdate} onEnded={playEnded} />
     </div>
   )
 }
