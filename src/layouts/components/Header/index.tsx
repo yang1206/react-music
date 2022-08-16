@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
-import { Input } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+// import { Input } from 'antd'
+// import { SearchOutlined } from '@ant-design/icons'
+import Search from './components/Serarch'
 import { headerLinks } from '@/common/localData'
 import './index.less'
 export default function Header() {
@@ -32,7 +33,7 @@ export default function Header() {
           </div>
         </div>
         <div className="HeaderRight">
-          <Input className="search" placeholder="音乐/视频/电台/用户" prefix={<SearchOutlined />} />
+          <Search />
           <div className="center">创作者中心</div>
           <div className="login">登录</div>
         </div>

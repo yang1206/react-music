@@ -4,11 +4,13 @@ import { configureStore } from '@reduxjs/toolkit'
 // import counterSlice from './slice/demo'
 import recommendSlice from './slice/recommend'
 import playerSlice from './slice/Player'
+import searchSlice from './slice/Search'
 export const store = configureStore({
   reducer: {
     // counter: counterSlice,
     recommend: recommendSlice,
-    player: playerSlice
+    player: playerSlice,
+    search: searchSlice
   },
   //使用redux-logger中间件
   middleware: getDefaultMiddleware =>

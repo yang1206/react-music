@@ -23,11 +23,10 @@ const Player: React.FC = () => {
         </div>
         <div className="PlayerRight">
           {simiList &&
-            simiList.map((item, index) => {
+            simiList.map(item => {
               return (
                 <SongItem
                   key={item.id}
-                  currentRanking={index + 1}
                   className="song_item"
                   // coverPic={index < 3?item.al.picUrl:''}
                   duration={formatMinuteSecond(item.dt)}

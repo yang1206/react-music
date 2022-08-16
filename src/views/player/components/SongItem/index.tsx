@@ -11,7 +11,6 @@ import './index.less'
 const SongItem: React.FC<any> = props => {
   // props/state
   const {
-    currentRanking,
     coverPic,
     // duration,
     singer,
@@ -23,8 +22,7 @@ const SongItem: React.FC<any> = props => {
   const dispatch = useAppDispatch()
   const playList = useAppSelector(selectPlayList).data
   // other function
-  const playMusic = (e, isTo = false) => {
-    // 如果不跳转,那么组织超链接的默认行为
+  const playMusic = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, isTo = false) => {
     if (!isTo) e.preventDefault()
     dispatch(getSong(songId))
     // 播放音乐
@@ -34,7 +32,6 @@ const SongItem: React.FC<any> = props => {
 
   return (
     <div className={className + ' SongItemWrapper'} style={{ margin: '20px 0' }}>
-      <div className="song-item rank-count">{currentRanking}</div>
       {coverPic && (
         <NavLink to="/discover/song" className="song-item" onClick={e => playMusic(e, true)}>
           <img src={getSizeImage(coverPic, 50)} alt="" />
@@ -42,9 +39,8 @@ const SongItem: React.FC<any> = props => {
       )}
       <div className="song-item song-info">
         <div className="left-info">
-          <PlayCircleOutlined className="font-active" onClick={e => playMusic(e)} />
           <div className="singer-song">
-            <a href="/play" onClick={e => playMusic(e)} className="text-nowrap">
+            <a onClick={e => playMusic(e)} className="text-nowrap">
               {songName}
             </a>
             <br />
@@ -54,10 +50,10 @@ const SongItem: React.FC<any> = props => {
           </div>
         </div>
         <div className="right-operator">
+          <PlayCircleOutlined className="font-active" onClick={e => playMusic(e)} />
           <button className="sprite_icon2 btn addto" onClick={e => addPlaylist(e, songId)}></button>
         </div>
       </div>
-      {/* <div className="song-item duration">{duration}</div> */}
     </div>
   )
 }
