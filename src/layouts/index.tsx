@@ -3,8 +3,11 @@ import { Outlet /*, useLocation */ } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Header from '@/layouts/components/Header'
 import Footer from '@/layouts/components/Footer'
+import { useGlobalKeyboardEvent } from '@/hooks/useKeyboard'
 const { Content } = Layout
 const LayoutIndex = () => {
+  //全局唤醒搜索框hook
+  useGlobalKeyboardEvent()
   // const { pathname } = useLocation()
   // console.log(pathname)
   return (
