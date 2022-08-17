@@ -22,11 +22,11 @@ export const headerLinks: IHeaderLinks[] = [
   {
     title: '音乐人',
     link: 'https://music.163.com/nmusician/web/index#/'
-  },
-  {
-    title: '下载客户端',
-    link: 'https://music.163.com/#/download'
   }
+  // {
+  //   title: '下载客户端',
+  //   link: 'https://music.163.com/#/download'
+  // }
 ]
 export const footerLinks = [
   {
