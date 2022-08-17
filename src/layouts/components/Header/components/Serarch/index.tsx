@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback, memo } from 'react'
+import React, { useRef, useEffect, useState, useCallback, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Input, InputRef } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
@@ -8,22 +8,21 @@ import { getSong } from '@/store/slice/Player'
 import { debounce } from '@/utils/format'
 import './index.less'
 const Search: React.FC = () => {
-  const inputRef = useRef<InputRef>(null)
   const navigate = useNavigate()
+  const inputRef = useRef<InputRef>(null)
   const [recordActive, setRecordActive] = useState(-1)
   const [value, setValue] = useState('')
   const searchSongList = useAppSelector(selectSearchSongList).data
   const focusState = useAppSelector(selectFocusState).data
   const dispatch = useAppDispatch()
   const changeInput = debounce((target: { value: string }) => {
-    let targetValue = target.value.trim()
-    setValue(targetValue)
-    if (targetValue.length < 1) return
+    let value = target.value.trim()
+    if (value.length < 1) return
     // 显示下拉框
     dispatch(changeFocusState(true))
     // 发送网络请求
-    dispatch(getSearchSongList(targetValue))
-  }, 100)
+    dispatch(getSearchSongList(value))
+  }, 400)
   //(根据当前焦点状态设置input焦点)
   useEffect(() => {
     // 获取焦点
@@ -40,7 +39,6 @@ const Search: React.FC = () => {
     }
     dispatch(changeFocusState(false))
     // 只要在搜索框回车: 都进行跳转
-    console.log(value)
     redirect()
   }, [dispatch, recordActive, searchSongList])
   // 获取焦点
@@ -48,6 +46,13 @@ const Search: React.FC = () => {
     inputRef.current.select()
     // 更改为获取焦点状态
     dispatch(changeFocusState(true))
+  }, [dispatch])
+  //失去焦点
+  const handleBlur = useCallback(() => {
+    //定时器防止页面消失点击不到
+    setTimeout(() => {
+      dispatch(changeFocusState(false))
+    }, 200)
   }, [dispatch])
   // 监控用户是否按: "上"或"下"键
   const watchKeyboard = useCallback(
@@ -67,21 +72,21 @@ const Search: React.FC = () => {
     },
     [recordActive, setRecordActive, searchSongList]
   )
-  const changeEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target!.value)
-  }
   // 点击当前item歌曲项
   const changeCurrentSong = (id: number, item: { name: string; artists: { name: string }[] }) => {
     // 放到搜索文本框
     setValue(item.name + '-' + item.artists[0].name)
     //派发action
     dispatch(getSong(id))
-    // dispatch(changeFocusState(false))
+    dispatch(changeFocusState(false))
+  }
+  const changeEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target!.value)
   }
   //路由跳转并携带参数
   const redirect = () => {
     if (value.length > 0) {
-      navigate(`/search/single?song=${value}&type=1`, {
+      navigate(`/search?song=${value}&type=1`, {
         replace: false
       })
     }
@@ -114,6 +119,7 @@ const Search: React.FC = () => {
         onChange={e => changeEvent(e)}
         onInput={({ target }) => changeInput(target)}
         onFocus={handleFocus}
+        onBlur={handleBlur}
         onPressEnter={() => handleEnter()}
         value={value}
         onKeyDown={watchKeyboard}
@@ -121,10 +127,13 @@ const Search: React.FC = () => {
       />
       <div className="down-slider" style={{ display: focusState ? 'block' : 'none' }}>
         <div className="search-header">
-          <span className="discover"></span>
+          <span className="discover">搜歌曲</span>
         </div>
 
         <div className="list">
+          <div className="zuo">
+            <span className="song">单曲</span>
+          </div>
           <span className="main">
             {searchSongList &&
               searchSongList.map((item, index) => {

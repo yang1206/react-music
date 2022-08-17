@@ -4,11 +4,12 @@
   /* 搜索框 */
 
   .search {
-    width: 237px;
+    width: 221px;
     height: 32px;
     border-radius: 16px;
 
     input {
+      /* stylelint-disable-next-line string-quotes */
       font-family: '微软雅黑';
       font-size: 14px;
 
@@ -60,11 +61,8 @@
     right: 0;
     left: 0;
     z-index: 999;
-    width: 237px;
-    text-shadow: 0 1px 0 rgb(255 255 255 / 90%);
+    width: 221px;
     background: #ffffff;
-
-    /* height: 144px; */
     border: 1px solid #bebebe;
     border-radius: 4px;
     box-shadow: 0 4px 7px #555555;
@@ -83,18 +81,28 @@
       display: flex;
       border: 1px solid rgb(183 183 187);
 
+      .zuo {
+        width: 65px;
+        padding-top: 10px;
+        border-bottom: none;
+
+        .song {
+          margin-left: 8px;
+          color: #cccccc;
+        }
+      }
+
       .main {
         display: inline-block;
         font-size: 13px;
         line-height: 28px;
 
         .item {
-          width: 235px;
+          width: 168px;
           height: 35px;
           overflow: hidden;
           line-height: 35px;
           color: #000000;
-          text-align: center;
           text-indent: 8px;
           text-overflow: ellipsis;
           white-space: nowrap;

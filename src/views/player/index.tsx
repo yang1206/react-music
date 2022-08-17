@@ -12,7 +12,6 @@ const Player: React.FC = () => {
   useEffect(() => {
     getSongSimi({ id: currentSong.id }).then(res => {
       setSimiList(res.songs)
-      console.log(simiList)
     })
   }, [currentSong])
   return (

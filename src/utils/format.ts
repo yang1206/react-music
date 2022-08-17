@@ -47,7 +47,7 @@ export function formatMinuteSecond(time: number) {
 }
 
 // 函数防抖: 解决refresh频繁刷新
-export function debounce(func: { apply: (arg0: any, arg1: any[]) => void }, delay: number) {
+export function debounce(func, delay) {
   let timer = null
   return function (...args: any[]) {
     if (timer) clearInterval(timer)
