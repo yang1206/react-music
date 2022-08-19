@@ -82,6 +82,7 @@ const changePlaySong = createAsyncThunk<
 //请求歌词信息
 const getLyric = createAsyncThunk('player/getLyric', async (id: number) => {
   const data = await getLyricData({ id: id }).then(res => {
+    console.log(res)
     const lyric = res.lrc.lyric
     const lyricList = parseLyric(lyric)
     return lyricList

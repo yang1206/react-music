@@ -1,14 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-import { getSearchSongList } from './action'
+import { getSearchSong, getSearchSongList } from './action'
 import { RootState } from '@/store'
 interface InitialState {
   searchSongList: Array<any>
   focusState: boolean
+  singleSongList: Array<any>
+  singerList: Array<any>
 }
 const initialState: InitialState = {
   searchSongList: [],
-  focusState: false
+  focusState: false,
+  singleSongList: [],
+  singerList: []
 }
 
 export const searchSlice = createSlice({
@@ -21,15 +25,19 @@ export const searchSlice = createSlice({
   },
   extraReducers: builder => {
     // 进行请求阶段的一些操作
-    builder.addCase(getSearchSongList.fulfilled, (state, action) => {
+    builder.addCase(getSearchSong.fulfilled, (state, action) => {
       state.searchSongList = action.payload.result.songs
+    })
+    builder.addCase(getSearchSongList.fulfilled, (state, action) => {
+      state.singleSongList = action.payload.result.songs
     })
   }
 })
 //提前取出保存的数据并导出
 export const selectFocusState = (state: RootState) => ({ data: state.search.focusState, shallowEqual })
 export const selectSearchSongList = (state: RootState) => ({ data: state.search.searchSongList, shallowEqual })
+export const selectSingleSongList = (state: RootState) => ({ data: state.search.singleSongList, shallowEqual })
 export default searchSlice.reducer
 export const { changeFocusState } = searchSlice.actions
 //统一导出异步action
-export { getSearchSongList }
+export { getSearchSong, getSearchSongList }

@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { Input, InputRef } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectSearchSongList, selectFocusState, changeFocusState, getSearchSongList } from '@/store/slice/Search'
+import { selectSearchSongList, selectFocusState, changeFocusState, getSearchSong } from '@/store/slice/Search'
 import { getSong } from '@/store/slice/Player'
-import { debounce } from '@/utils/format'
+import { useDebounceFn } from 'ahooks'
 import './index.less'
 const Search: React.FC = () => {
   const navigate = useNavigate()
@@ -15,14 +15,18 @@ const Search: React.FC = () => {
   const searchSongList = useAppSelector(selectSearchSongList).data
   const focusState = useAppSelector(selectFocusState).data
   const dispatch = useAppDispatch()
-  const changeInput = debounce((target: { value: string }) => {
-    let value = target.value.trim()
-    if (value.length < 1) return
-    // 显示下拉框
-    dispatch(changeFocusState(true))
-    // 发送网络请求
-    dispatch(getSearchSongList(value))
-  }, 400)
+  //搜索框联想搜索，使用aHooks进行防抖
+  const { run } = useDebounceFn(
+    e => {
+      let value = e.target.value.trim()
+      if (value.length < 1) return
+      // 显示下拉框
+      dispatch(changeFocusState(true))
+      // 发送网络请求
+      dispatch(getSearchSong(value))
+    },
+    { wait: 800 }
+  )
   //(根据当前焦点状态设置input焦点)
   useEffect(() => {
     // 获取焦点
@@ -31,16 +35,13 @@ const Search: React.FC = () => {
     else inputRef.current.blur()
   }, [focusState])
   // 表单回车:跳转到搜索详情
-  const handleEnter = useCallback(() => {
+  const handleEnter = e => {
     // 说明当前光标有”高亮当前行“
-    if (recordActive >= 0) {
-      // 保存value
-      setValue(searchSongList[recordActive].name + '-' + searchSongList[recordActive].artists[0].name)
-    }
     dispatch(changeFocusState(false))
+    // getValue()
     // 只要在搜索框回车: 都进行跳转
-    redirect()
-  }, [dispatch, recordActive, searchSongList])
+    redirect(e.target.value)
+  }
   // 获取焦点
   const handleFocus = useCallback(() => {
     inputRef.current.select()
@@ -84,9 +85,9 @@ const Search: React.FC = () => {
     setValue(e.target!.value)
   }
   //路由跳转并携带参数
-  const redirect = () => {
+  const redirect = (v: string) => {
     if (value.length > 0) {
-      navigate(`/search?song=${value}&type=1`, {
+      navigate(`/search?song=${v}&type=1`, {
         replace: false
       })
     }
@@ -117,10 +118,10 @@ const Search: React.FC = () => {
         size="large"
         prefix={<SearchOutlined />}
         onChange={e => changeEvent(e)}
-        onInput={({ target }) => changeInput(target)}
+        onInput={e => run(e)}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        onPressEnter={() => handleEnter()}
+        onPressEnter={e => handleEnter(e)}
         value={value}
         onKeyDown={watchKeyboard}
         suffix={icons}
