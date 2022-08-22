@@ -4,17 +4,21 @@ import { getSongDetail, getLyricData } from '@/api/song'
 import { parseLyric } from '@/utils/parseLyric'
 import { getRandom } from '@/utils/math'
 //请求歌曲详细信息
+interface getSong {
+  id: number
+  isPlay?: boolean
+}
 const getSong = createAsyncThunk<
   any,
-  number,
+  getSong,
   {
     dispatch: any
     state: any
   }
->('player/getSong', async (id: number, { getState, dispatch }) => {
-  if (id) {
+>('player/getSong', async (params: getSong, { getState, dispatch }) => {
+  if (params.id) {
     const playList = getState().player.playList
-    const songIndex = playList.findIndex((song: { id: number }) => song.id === id)
+    const songIndex = playList.findIndex((song: { id: number }) => song.id === params.id)
     let song = null
     if (songIndex !== -1) {
       // 找到数据
@@ -24,20 +28,21 @@ const getSong = createAsyncThunk<
       dispatch(getLyric(currentSong.id))
     } else {
       // 未找到数据
-      await getSongDetail({ ids: id }).then(res => {
+      await getSongDetail({ ids: params.id }).then(res => {
         song = res.songs && res.songs[0]
         if (!song) return
         const newPlayList = [...playList]
         newPlayList.push(song)
         dispatch(changePlayList(newPlayList))
         dispatch(changeCurrentIndex(newPlayList.length - 1))
-        dispatch(changeCurrentSong(song))
+        //定义一个参数判断是点击了播放还是点击了加入播放列表
+        params.isPlay && dispatch(changeCurrentSong(song))
       })
     }
 
     //请求歌词
     if (!song) return
-    dispatch(getLyric(song.id))
+    params.isPlay && dispatch(getLyric(song.id))
   }
 })
 
@@ -82,7 +87,6 @@ const changePlaySong = createAsyncThunk<
 //请求歌词信息
 const getLyric = createAsyncThunk('player/getLyric', async (id: number) => {
   const data = await getLyricData({ id: id }).then(res => {
-    console.log(res)
     const lyric = res.lrc.lyric
     const lyricList = parseLyric(lyric)
     return lyricList

@@ -1,0 +1,142 @@
+.SongListDetailWrapper {
+  width: 100%;
+  padding: 47px 30px 40px 39px;
+
+  .gap {
+    margin-top: 15px;
+  }
+
+  .HeaderTitle {
+    .conver-img {
+      position: relative;
+
+      span {
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        width: 208px;
+        height: 208px;
+        background-position: 0 -1285px;
+      }
+    }
+
+    .song-detail {
+      margin-left: 30px;
+      font-size: 14px;
+
+      .detail-title-wrapper {
+        display: flex;
+
+        .icons {
+          width: 54px;
+          height: 24px;
+          margin-right: 12px;
+          background-image: url('../../../../assets//img//sprite_icon2.png');
+          background-position: 0 -243px;
+        }
+
+        .detail-title {
+          font-size: 20px;
+          line-height: 24px;
+        }
+      }
+
+      .avatar {
+        display: flex;
+        margin-top: 18px;
+        line-height: 35px;
+
+        .avatar-name {
+          margin: 0 15px;
+        }
+      }
+
+      .label-warpper {
+        line-height: 35px;
+
+        > span {
+          height: 30px;
+          margin-right: 10px;
+          line-height: 30px;
+        }
+      }
+
+      .description-detail {
+        .description-detail {
+          position: relative;
+          max-height: 24.5333vw;
+          overflow: hidden;
+          font-size: 3.2vw;
+          line-height: 6.1333vw;
+          text-align: justify;
+          transition: 0.3s max-height;
+        }
+
+        .description-detail::before {
+          float: right;
+          height: calc(100% - 6vw);
+          content: '';
+        }
+
+        .description-detail::after {
+          position: absolute;
+          width: 999vw;
+          height: 999vw;
+
+          /* opacity: 0.3; */
+          margin-left: -13.3333vw;
+          content: '';
+          box-shadow: inset calc(19vw - 999vw) calc(19vw - 999vw) 0 0 #ffffff;
+        }
+
+        .expand {
+          position: relative;
+          float: right;
+          margin-left: 2.6667vw;
+          clear: both;
+          font-size: 3.2vw;
+          line-height: 6vw;
+        }
+
+        .expand::after {
+          cursor: pointer;
+          content: '展开';
+        }
+
+        .expand-checkbox {
+          display: none;
+        }
+
+        .expand-checkbox:checked + .description-detail {
+          max-height: none;
+        }
+
+        .expand-checkbox:checked + .description-detail::after {
+          visibility: hidden;
+        }
+
+        .expand-checkbox:checked + .description-detail .expand::before {
+          /* visibility: hidden; */
+          display: none;
+        }
+
+        .expand-checkbox:checked + .description-detail .expand::after {
+          cursor: pointer;
+          content: '收起';
+        }
+
+        .expand::before {
+          position: absolute;
+          left: -0.2667vw;
+          color: #000000;
+          content: '...';
+          transform: translateX(-100%);
+        }
+      }
+    }
+
+    .MainDetail {
+      margin-top: 25px;
+    }
+  }
+}

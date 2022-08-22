@@ -1,4 +1,4 @@
-import { Layout } from 'antd'
+import { BackTop, Layout } from 'antd'
 import { Outlet /*, useLocation */ } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Header from '@/layouts/components/Header'
@@ -23,6 +23,7 @@ const LayoutIndex = () => {
         </TransitionGroup> */}
       </Content>
       <Footer />
+      <BackTop />
     </Layout>
   )
 }

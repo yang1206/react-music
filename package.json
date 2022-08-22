@@ -20,6 +20,8 @@
     "ahooks": "^3.7.0",
     "antd": "^4.21.7",
     "axios": "^0.27.2",
+    "crypto-js": "^4.1.1",
+    "js-md5": "^0.7.3",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "postcss-less": "^6.0.0",

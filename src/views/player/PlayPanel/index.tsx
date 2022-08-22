@@ -22,7 +22,7 @@ const PlayPanel: React.FC<any> = props => {
   // 点击item播放音乐
   const clickItem = (item: { id: number }) => {
     // 播放音乐 dispatch
-    dispatch(getSong(item.id))
+    dispatch(getSong({ id: item.id, isPlay: true }))
     playMusic()
   }
 

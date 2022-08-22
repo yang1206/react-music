@@ -13,7 +13,7 @@ export function useAddPlaylist(playlist, message) {
     // 阻止超链接跳转
     e.preventDefault && e.preventDefault()
     // 获取歌曲详情,添加到播放列表
-    dispatch(getSong(id))
+    dispatch(getSong({ id: id, isPlay: false }))
     // 提示添加成功或失败
     const index = getFindIdIndex(playlist, id)
     switch (index) {
@@ -22,6 +22,7 @@ export function useAddPlaylist(playlist, message) {
         break
       default:
         message.success({ content: '不能添加重复的歌曲' })
+        break
     }
   }
 }

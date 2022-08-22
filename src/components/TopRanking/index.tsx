@@ -2,7 +2,10 @@ import React, { memo } from 'react'
 import { getSizeImage } from '@/utils/format'
 import { Recommend } from '@/store/interface/recommend'
 import { getSong /*changeCurrentSong, changePlayList, changeCurrentIndex*/ } from '@/store/slice/Player'
-import { useAppDispatch } from '@/hooks/useStore'
+import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
+import { selectPlayList } from '@/store/slice/Player'
+import { useAddPlaylist } from '@/hooks/useAddPlaylist'
+import { message } from 'antd'
 import './index.less'
 interface Props {
   info: Recommend.topItem
@@ -10,9 +13,11 @@ interface Props {
 const TopRanking: React.FC<Props> = props => {
   const { info } = props
   const dispatch = useAppDispatch()
+  const playList = useAppSelector(selectPlayList).data
   const playMusic = (item: any) => {
-    dispatch(getSong(item.id))
+    dispatch(getSong({ id: item.id, isPlay: true }))
   }
+  const addPlaylist = useAddPlaylist(playList, message)
   return (
     <div className="TopRankingWrapper">
       <div className="header">
@@ -36,10 +41,10 @@ const TopRanking: React.FC<Props> = props => {
             <div key={item.id} className="list-item">
               <div className="rank">{index + 1}</div>
               <div className="info">
-                <span className="name text-nowrap">{item.name}</span>
+                <a className="name text-nowrap">{item.name}</a>
                 <div className="operate">
                   <button className="btn sprite_02 play" onClick={() => playMusic(item)}></button>
-                  <button className="btn sprite_icon2 addto"></button>
+                  <button className="btn sprite_icon2 addto" onClick={e => addPlaylist(e, item.id)}></button>
                   <button className="btn sprite_02 favor"></button>
                 </div>
               </div>

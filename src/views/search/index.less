@@ -1,6 +1,5 @@
 .SearchWrapper {
   .content {
-    height: 1000px;
     padding: 40px;
     margin: 0 auto;
     background-color: #ffffff;
@@ -33,17 +32,16 @@
       }
 
       .card-container > .ant-tabs-card .ant-tabs-content {
-        height: 120px;
         margin-top: -16px;
-      }
-
-      .card-container > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {
-        padding: 16px;
-        background: #fafafa;
       }
 
       .card-container > .ant-tabs-card > .ant-tabs-nav::before {
         display: none;
+      }
+
+      .ant-tabs-tab:hover {
+        color: #d13f38;
+        border-top: 2px solid #d13030;
       }
 
       .card-container > .ant-tabs-card .ant-tabs-tab,
@@ -68,6 +66,29 @@
       .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
         font-weight: 500;
         color: #363636 !important;
+      }
+
+      .card-container .SingleSongWrapper {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .card-container .SingerWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      .card-container .SearchAlbum {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+
+        .albumItem {
+          margin: 20px;
+        }
       }
 
       #components-tabs-demo-card-top .code-box-demo {

@@ -47,7 +47,7 @@ const PlayBar: React.FC = () => {
   // 是否显示音量播放条
   const [isShowBar, setIsShowBar] = useState(false)
   useEffect(() => {
-    dispatch(getSong(150412))
+    dispatch(getSong({ id: 150412, isPlay: true }))
   }, [dispatch])
   useEffect(() => {
     setDuration(currentSong?.dt)

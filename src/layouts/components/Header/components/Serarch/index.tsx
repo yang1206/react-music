@@ -78,7 +78,7 @@ const Search: React.FC = () => {
     // 放到搜索文本框
     setValue(item.name + '-' + item.artists[0].name)
     //派发action
-    dispatch(getSong(id))
+    dispatch(getSong({ id: id, isPlay: true }))
     dispatch(changeFocusState(false))
   }
   const changeEvent = (e: React.ChangeEvent<HTMLInputElement>) => {

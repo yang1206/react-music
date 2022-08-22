@@ -3,7 +3,8 @@ import { Navigate } from 'react-router-dom'
 import { RouteObject } from '@/routers/interface'
 import lazyLoad from '@/routers/utils/lazyLoad'
 import DiscoverRouter from '@/routers/modules/discover'
-import SearchRouter from './search'
+import SearchRouter from '@/routers/modules/search'
+import PlayRouter from '@/routers/modules/playlist'
 import LayoutIndex from '@/layouts'
 const routes: RouteObject[] = [
   {
@@ -26,7 +27,8 @@ const routes: RouteObject[] = [
         path: '/mine',
         element: lazyLoad(lazy(() => import('@/views/mine')))
       },
-      ...SearchRouter
+      ...SearchRouter,
+      ...PlayRouter
     ]
   }
 ]

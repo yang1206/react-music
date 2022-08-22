@@ -4,7 +4,7 @@ import lazyLoad from '@/routers/utils/lazyLoad'
 const SearchRouter: Array<RouteObject> = [
   {
     path: '/search',
-    element: lazyLoad(lazy(() => import('@/views/search/index')))
+    element: lazyLoad(lazy(() => import('@/views/search')))
   }
 ]
 export default SearchRouter

@@ -24,7 +24,7 @@ const SongItem: React.FC<any> = props => {
   // other function
   const playMusic = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, isTo = false) => {
     if (!isTo) e.preventDefault()
-    dispatch(getSong(songId))
+    dispatch(getSong({ id: songId, isPlay: true }))
     // 播放音乐
     // document.getElementById('audio').autoplay = true
   }

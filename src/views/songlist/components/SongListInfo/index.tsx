@@ -1,0 +1,88 @@
+import { memo } from 'react'
+import { Skeleton, Tag } from 'antd'
+import { useAppSelector } from '@/hooks/useStore'
+import { getSizeImage, parseTime } from '@/utils/format'
+import { selectSongListDetailInfo } from '@/store/slice/SongList'
+import RcmHeader from '@/components/RcmHeader'
+import PlayList from '@/components/PlayList'
+import './index.less'
+const SongListInfo: React.FC = () => {
+  const SongListDetail = useAppSelector(selectSongListDetailInfo).data.playList
+  const coverPicUrl = SongListDetail && SongListDetail.coverImgUrl
+  const headerTitle = SongListDetail && SongListDetail.name
+  const avatarPic =
+    SongListDetail &&
+    SongListDetail.creator &&
+    SongListDetail.creator.avatarUrl &&
+    getSizeImage(SongListDetail.creator.avatarUrl, 35)
+  const avatarName = SongListDetail && SongListDetail.creator && SongListDetail.creator.nickname
+  const avatarDatetime = SongListDetail && SongListDetail.createTime && parseTime(SongListDetail.createTime, '{y}-{m}-{d}')
+  const labelsArr = SongListDetail && SongListDetail.tags
+  const description = SongListDetail && SongListDetail.description
+  const playCount = SongListDetail && SongListDetail.playCount
+  const playlist = SongListDetail && SongListDetail.tracks
+
+  const renderTags = () => {
+    return (
+      labelsArr &&
+      labelsArr.map(value => {
+        return (
+          <Tag color="#de021d" key={value}>
+            {value}
+          </Tag>
+        )
+      })
+    )
+  }
+
+  const renderRightSlot = (
+    <span>
+      播放：<em style={{ color: '#c20c0c' }}>{playCount}</em>次
+    </span>
+  )
+  return (
+    <div className="SongListDetailWrapper">
+      {!SongListDetail && <Skeleton active />}
+      {/* 歌单详情头部 */}
+      <div className="HeaderTitle flex">
+        <div className="conver-img">
+          <img src={getSizeImage(coverPicUrl, 200)} alt="" />
+          <span className="image_cover"></span>
+        </div>
+        <div className="song-detail">
+          <div className="detail-title-wrapper">
+            <i className="icons"></i>
+            <h2 className="detail-title">{headerTitle}</h2>
+          </div>
+          <div className="avatar">
+            <div className="avatar-pic">
+              <img src={avatarPic} alt="" />
+            </div>
+            <div className="avatar-name">{avatarName}</div>
+            <div className="avatar-datetime">{avatarDatetime}创建</div>
+          </div>
+          <div className="label-warpper flex gap">
+            <span>标签: </span>
+            {renderTags()}
+            <div className="sprite_button favorite pointer" style={{ marginBottom: '5px' }} /*onClick={() => collectSonglist()}*/>
+              <i className="sprite_button inner">
+                <em className="sprite_button favorite-icon"></em>
+                收藏歌单
+              </i>
+            </div>
+          </div>
+          <div className="description-info gap">
+            <label className="expand"></label>
+            <div className="description-detail">介绍: {description}</div>
+          </div>
+        </div>
+      </div>
+      {/* 歌单详情音乐列表 */}
+      <div className="MainDetail">
+        <RcmHeader title="歌曲列表" right={renderRightSlot} />
+        {playlist && <PlayList playlist={playlist} />}
+      </div>
+    </div>
+  )
+}
+export default memo(SongListInfo)

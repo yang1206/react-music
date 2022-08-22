@@ -29,3 +29,29 @@ export namespace Song {
     id: number
   }
 }
+
+export namespace SongList {
+  export interface SongListDetail {
+    id: string
+  }
+}
+
+export namespace Login {
+  export interface goPhoneLogin {
+    phone: string
+    password?: string
+    countrycode?: string
+    md5_password: string
+  }
+  export interface goEmailLogin {
+    email: string
+    password?: string
+    md5_password: string
+  }
+  export interface Register {
+    captcha: string
+    phone: number
+    password: string
+    nickname: string
+  }
+}
