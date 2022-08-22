@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-import { getSong, changePlaySong, getLyric } from './action'
+import { getSong, changePlaySong, getSongDetailArray, getLyric } from './action'
 import { RootState } from '@/store'
 import { Player } from '@/store/interface/player'
+import { setCurrentSongIndex } from '@/utils/storage'
 interface InitialState {
   currentSongData: Player.SongDetail
   currentSongIndex: number
@@ -10,6 +11,7 @@ interface InitialState {
   sequence: number
   lyricList: Array<Player.Lyric>
   currentLyricIndex: number
+  playListCount: number
 }
 const initialState: InitialState = {
   currentSongData: {
@@ -24,7 +26,8 @@ const initialState: InitialState = {
   playList: [],
   sequence: 0, //播放顺序  0 顺序播放 1 随机播放 2 单曲循环
   lyricList: [],
-  currentLyricIndex: 0
+  currentLyricIndex: 0,
+  playListCount: 5
 }
 
 export const playerSlice = createSlice({
@@ -35,6 +38,7 @@ export const playerSlice = createSlice({
       state.currentSongData = payload
     },
     changeCurrentIndex: (state: { currentSongIndex: any }, { payload }: any) => {
+      setCurrentSongIndex(payload)
       state.currentSongIndex = payload
     },
     changePlayList: (state: { playList: any }, { payload }: any) => {
@@ -48,6 +52,9 @@ export const playerSlice = createSlice({
     },
     changeCurrentLyricList: (state, { payload }: any) => {
       state.lyricList = payload
+    },
+    changePlayListCount: (state, { payload }: any) => {
+      state.playListCount = payload
     }
   },
   extraReducers: builder => {
@@ -71,7 +78,8 @@ export const {
   changePlayList,
   changeSequence,
   changeCurrentLyricIndex,
-  changeCurrentLyricList
+  changeCurrentLyricList,
+  changePlayListCount
 } = playerSlice.actions
 //统一导出异步action
-export { getSong, changePlaySong, getLyric }
+export { getSong, changePlaySong, getSongDetailArray, getLyric }

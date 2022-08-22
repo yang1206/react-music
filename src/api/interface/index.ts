@@ -39,9 +39,9 @@ export namespace SongList {
 export namespace Login {
   export interface goPhoneLogin {
     phone: string
-    password?: string
+    password?: string | undefined
     countrycode?: string
-    md5_password: string
+    md5_password?: string
   }
   export interface goEmailLogin {
     email: string

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
 import { RootState } from '@/store'
+import { getLoginProfileInfo } from './action'
 type InitialState = {
   isVisible: boolean
   isLogin: boolean
@@ -42,13 +43,6 @@ export const LoginSlice = createSlice({
       state.cookie = payload
     }
   }
-  // extraReducers: builder => {
-  //   // 进行请求阶段的一些操作
-  //   builder.addCase(getSongListDetailData.fulfilled, (state, action) => {
-  //     state.songListDetailInfo.playList = action.payload.playlist
-  //     state.songListDetailInfo.privileges = action.payload.privileges
-  //   })
-  // }
 })
 //提前取出保存的数据并导出
 export const selectIsVisible = (state: RootState) => ({ data: state.login.isVisible, shallowEqual })
@@ -59,4 +53,4 @@ export const selectCookie = (state: RootState) => ({ data: state.login.cookie, s
 export const { changeIsVisible, changeProfileInfo, changeCookie, changeLoginState, changeToken } = LoginSlice.actions
 export default LoginSlice.reducer
 //统一导出异步action
-// export { getSongListDetailData }
+export { getLoginProfileInfo }

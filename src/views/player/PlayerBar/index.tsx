@@ -10,7 +10,7 @@ import {
   selectSequence,
   selectPlayList,
   selectCurrentLyricIndex,
-  getSong,
+  // getSong,
   changePlaySong,
   changeSequence,
   changeCurrentLyricIndex
@@ -46,9 +46,6 @@ const PlayBar: React.FC = () => {
   const [showPanel, setShowPanel] = useState(false)
   // 是否显示音量播放条
   const [isShowBar, setIsShowBar] = useState(false)
-  useEffect(() => {
-    dispatch(getSong({ id: 150412, isPlay: true }))
-  }, [dispatch])
   useEffect(() => {
     setDuration(currentSong?.dt)
     //在hooks里设置歌曲src

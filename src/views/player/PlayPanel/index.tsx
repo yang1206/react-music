@@ -1,7 +1,15 @@
 import React, { memo } from 'react'
 import { ClearOutlined, CloseOutlined, HeartOutlined } from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectSong, selectPlayList, selectCurrentIndex, getSong, changePlayList } from '@/store/slice/Player'
+import {
+  selectSong,
+  selectPlayList,
+  selectCurrentIndex,
+  getSong,
+  changePlayList,
+  changePlayListCount
+} from '@/store/slice/Player'
+import { removeAllSong } from '@/utils/storage'
 import PlayListItem from './components/PlayListItem'
 import LyricContent from './components/LyricContent'
 import './index.less'
@@ -14,10 +22,11 @@ const PlayPanel: React.FC<any> = props => {
   // 清除全部歌曲
   const clearAllPlaylist = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
-    // removeAllSong()
+    removeAllSong()
     let newArr = [...playList]
     newArr.splice(0, playList.length)
     dispatch(changePlayList(newArr))
+    dispatch(changePlayListCount(newArr.length))
   }
   // 点击item播放音乐
   const clickItem = (item: { id: number }) => {

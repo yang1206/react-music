@@ -2,16 +2,18 @@ import { Dropdown, Menu } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import { clearLoginState } from '@/utils/secretKey'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectLoginState, selectProfile, changeIsVisible } from '@/store/slice/Login'
-// import './index.less'
+import { selectLoginState, selectProfile, selectIsVisible, changeIsVisible } from '@/store/slice/Login'
+import Login from '@/components/Login'
+import './index.less'
 export default function Avatar() {
   const dispatch = useAppDispatch()
   const isLogin = useAppSelector(selectLoginState).data
+  const isVisible = useAppSelector(selectIsVisible).data
   const profile = useAppSelector(selectProfile).data
 
   // 用户下拉JSX
   //登陆后
-  const profileDwonMenu = (
+  const profileDownMenu = (
     <Menu
       items={[
         {
@@ -44,17 +46,16 @@ export default function Avatar() {
   return (
     <>
       {isLogin ? (
-        <Dropdown overlay={profileDwonMenu}>
-          {showProfileContent()}
-          <DownOutlined />
-        </Dropdown>
+        <Dropdown overlay={profileDownMenu}>{showProfileContent()}</Dropdown>
       ) : (
         <div className="login" onClick={() => !isLogin && dispatch(changeIsVisible(true))}>
           <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
             登录
+            <DownOutlined />
           </a>
         </div>
       )}
+      {isVisible && <Login />}
     </>
   )
 }

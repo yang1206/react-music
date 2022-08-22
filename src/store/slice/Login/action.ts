@@ -21,12 +21,10 @@ const getLoginProfileInfo = createAsyncThunk<
   }
 >('login/getLoginProfileInfo', async ({ username, password, tip }: LoginParam, { dispatch }) => {
   gotoPhoneLogin({ phone: username, md5_password: md5(password) }).then(res => {
-    // console.log(res)
     if (res.code !== 200) {
       message.error('账号或密码错误')
     } else {
       tip && message.success('登录成功')
-      // console.log(res)
       // 登录成功
       document.cookie = res.cookie
       // 保存登录信息
@@ -35,14 +33,12 @@ const getLoginProfileInfo = createAsyncThunk<
       dispatch(changeLoginState(true))
       dispatch(changeToken(res.token))
       dispatch(changeCookie(res.cookie))
-      console.log(res)
       // 更改登录状态
       loginInfo.username = username
       loginInfo.password = password
       loginInfo.state = true
       let newLoginInfo = Object.assign(getLoginInfo('loginInfo'), loginInfo)
       setLoginInfo('loginInfo', newLoginInfo)
-      // console.log(getLoginInfo('loginInfo'))
       // 关闭模态框
       dispatch(changeIsVisible(false))
     }
