@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js'
-import { secretKey } from '../config/token'
+import { secretKey } from '@/config/token'
 import { message } from 'antd'
 
 /**

@@ -4,14 +4,20 @@ import { RootState } from '@/store'
 type InitialState = {
   isVisible: boolean
   isLogin: boolean
-  profile: string
+  profile: {
+    nickname: string
+    avatarUrl: string
+  }
   token: string
   cookie: string
 }
 const initialState: InitialState = {
   isVisible: false,
   isLogin: false, // 登录状态
-  profile: '',
+  profile: {
+    nickname: '',
+    avatarUrl: ''
+  },
   token: '',
   cookie: ''
 }
