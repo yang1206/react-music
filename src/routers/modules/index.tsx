@@ -5,6 +5,7 @@ import lazyLoad from '@/routers/utils/lazyLoad'
 import DiscoverRouter from '@/routers/modules/discover'
 import SearchRouter from '@/routers/modules/search'
 import PlayRouter from '@/routers/modules/playlist'
+import UserRouter from '@/routers/modules/user'
 import LayoutIndex from '@/layouts'
 const routes: RouteObject[] = [
   {
@@ -28,7 +29,8 @@ const routes: RouteObject[] = [
         element: lazyLoad(lazy(() => import('@/views/mine')))
       },
       ...SearchRouter,
-      ...PlayRouter
+      ...PlayRouter,
+      ...UserRouter
     ]
   }
 ]

@@ -5,7 +5,6 @@ import { getSizeImage } from '@/utils/format'
 import { getSong, selectPlayList } from '@/store/slice/Player'
 import { useAppSelector, useAppDispatch } from '@/hooks/useStore'
 import { PlayCircleOutlined } from '@ant-design/icons'
-import { message } from 'antd'
 import './index.less'
 
 type Props = {
@@ -27,7 +26,7 @@ const PlayListItem: React.FC<Props> = (props: Props) => {
     if (!isTo) e.preventDefault()
     dispatch(getSong({ id: songId, isPlay: true }))
   }
-  const addPlaylist = useAddPlaylist(playList, message)
+  const addPlaylist = useAddPlaylist(playList)
   const width = coverPic ? '258px' : '328px'
   return (
     <div className={`SongItemWrapper ${className}`}>

@@ -4,7 +4,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  height: 52px;
+  height: 53px;
   zoom: 1;
   background: #252424;
   background-repeat: repeat;
@@ -12,7 +12,7 @@
   border-radius: 5px 5px 0 0;
   opacity: 0.95;
 
-  .content {
+  .player-content {
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -175,7 +175,7 @@
       position: relative;
       top: 5px;
       display: flex;
-
+      flex-wrap: nowrap;
       .btn {
         width: 25px;
         height: 25px;
@@ -200,6 +200,7 @@
 
       .right {
         display: flex;
+        flex-wrap: nowrap;
         align-items: center;
         width: 126px;
         padding-left: 13px;

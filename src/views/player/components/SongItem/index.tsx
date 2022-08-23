@@ -6,7 +6,6 @@ import { selectPlayList } from '@/store/slice/Player'
 import { getSizeImage } from '@/utils/format'
 import { getSong } from '@/store/slice/Player'
 import { PlayCircleOutlined } from '@ant-design/icons'
-import { message } from 'antd'
 import './index.less'
 const SongItem: React.FC<any> = props => {
   // props/state
@@ -28,7 +27,7 @@ const SongItem: React.FC<any> = props => {
     // 播放音乐
     // document.getElementById('audio').autoplay = true
   }
-  const addPlaylist = useAddPlaylist(playList, message)
+  const addPlaylist = useAddPlaylist(playList)
 
   return (
     <div className={className + ' SongItemWrapper'} style={{ margin: '20px 0' }}>

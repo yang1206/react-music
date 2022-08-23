@@ -118,7 +118,7 @@ const PlayBar: React.FC = () => {
   //拖动进度条事件
   const sliderChange = useCallback(
     (value: any) => {
-      //改变状态，让进度条拖动时进度条不在不赋值
+      //改变状态，让进度条拖动时进度条不赋值
       setIsChanging(true)
       const time = (value / 100.0) * duration
       //拖动的时候设置当前时间
@@ -149,12 +149,15 @@ const PlayBar: React.FC = () => {
     switch (currentSequence) {
       case 1:
         setLoopClass('sprite_playBar btn shuffle')
+        message.success('随机播放')
         break
       case 2:
         setLoopClass('sprite_playBar btn one')
+        message.success('单曲循环')
         break
       default:
         setLoopClass('sprite_playBar btn loop')
+        message.success('列表循环')
         break
     }
     dispatch(changeSequence(currentSequence))
@@ -174,7 +177,7 @@ const PlayBar: React.FC = () => {
 
   return (
     <div className="PlayerBarWrapper">
-      <div className="content wrap-v2">
+      <div className="player-content wrap-v2">
         <div className="Control">
           <button
             className="sprite_playBar btn prev"
@@ -241,7 +244,6 @@ const PlayBar: React.FC = () => {
                 closeWindow={changeShowPanel}
                 playMusic={play}
                 changeSong={changePlaySong}
-                isPlaying={isPlaying}
               />
             </CSSTransition>
           </div>

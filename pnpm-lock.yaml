@@ -39,7 +39,6 @@ specifiers:
   react-router-dom: ^6.3.0
   react-transition-group: ^4.4.5
   redux-logger: ^3.0.6
-  redux-persist: ^6.0.0
   stylelint: ^14.9.1
   stylelint-config-prettier: ^9.0.3
   stylelint-config-recess-order: ^3.0.0
@@ -66,7 +65,6 @@ dependencies:
   react-router-dom: registry.npmmirror.com/react-router-dom/6.3.0_biqbaboplfbrettd7655fr4n2y
   react-transition-group: registry.npmmirror.com/react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y
   redux-logger: registry.npmmirror.com/redux-logger/3.0.6
-  redux-persist: registry.npmmirror.com/redux-persist/6.0.0_react@18.2.0
 
 devDependencies:
   '@commitlint/cli': registry.npmmirror.com/@commitlint/cli/17.0.3
@@ -5547,21 +5545,6 @@ packages:
     version: 3.0.6
     dependencies:
       deep-diff: registry.npmmirror.com/deep-diff/0.3.8
-    dev: false
-
-  registry.npmmirror.com/redux-persist/6.0.0_react@18.2.0:
-    resolution: {integrity: sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/redux-persist/-/redux-persist-6.0.0.tgz}
-    id: registry.npmmirror.com/redux-persist/6.0.0
-    name: redux-persist
-    version: 6.0.0
-    peerDependencies:
-      react: '>=16'
-      redux: '>4.0.0'
-    peerDependenciesMeta:
-      react:
-        optional: true
-    dependencies:
-      react: registry.npmmirror.com/react/18.2.0
     dev: false
 
   registry.npmmirror.com/redux-thunk/2.4.1_redux@4.2.0:

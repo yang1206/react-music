@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { useAddPlaylist } from '@/hooks/useAddPlaylist'
 import { selectPlayList } from '@/store/slice/Player'
 import { getSong } from '@/store/slice/Player'
-import { message } from 'antd'
 import './index.less'
 interface Props {
   songId: number
@@ -23,7 +22,7 @@ const SingleSong: React.FC<Props> = ({ songId, songName, singer, album, duration
     dispatch(getSong({ id: songId, isPlay: true }))
   }
 
-  const addPlaylist = useAddPlaylist(playList, message)
+  const addPlaylist = useAddPlaylist(playList)
   return (
     <div className="SingleSongItemWrapper">
       <div className="song-name">

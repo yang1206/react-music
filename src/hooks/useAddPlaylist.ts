@@ -1,13 +1,13 @@
 import { useAppDispatch } from './useStore'
 import { getSong } from '@/store/slice/Player'
 import { getFindIdIndex } from '@/utils/math'
+import { message } from 'antd'
 
 /**
- * 调用该函数:传递播放列表和message组件,返回一个函数供于合成事件调用
+ * 调用该函数:传递播放列表
  * @param {Array} playlist redux保存中播放列表
- * @param {Message} message Ant design消息组件:用于弹窗
  */
-export function useAddPlaylist(playlist, message) {
+export function useAddPlaylist(playlist: any[]) {
   const dispatch = useAppDispatch()
   return (e: { preventDefault: () => any }, id: number) => {
     // 阻止超链接跳转

@@ -67,10 +67,10 @@ const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string
     }
     setIsSendState(true)
   }
-  const onRegisterFinishFailed = () => {}
   return (
     <>
       <Form
+        id="login"
         style={{
           display: loginState !== 'register' ? 'block' : 'none'
         }}
@@ -81,6 +81,7 @@ const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string
         onFinishFailed={onFinishFailed}
       >
         <Form.Item
+          id="username"
           label={parseLoginModeText}
           name="username"
           rules={[
@@ -95,6 +96,7 @@ const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string
         </Form.Item>
 
         <Form.Item
+          id="password"
           label="密码"
           name="password"
           rules={[
@@ -117,15 +119,16 @@ const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string
         </Form.Item>
       </Form>
       <Form
+        id="register"
         style={{
           display: loginState === 'register' ? 'block' : 'none'
         }}
         {...layout}
         name="basic"
         onFinish={onRegisterFinish}
-        onFinishFailed={onRegisterFinishFailed}
       >
         <Form.Item
+          id="phone"
           label={parseLoginModeText}
           name="phone"
           rules={[
@@ -145,7 +148,12 @@ const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string
           />
         </Form.Item>
 
-        <Form.Item label="密码" name="password" rules={[{ pattern: pwdReg, message: '密码最短6位', required: true }]}>
+        <Form.Item
+          id="password"
+          label="密码"
+          name="register_password"
+          rules={[{ pattern: pwdReg, message: '密码最短6位', required: true }]}
+        >
           <Input.Password />
         </Form.Item>
         <Form.Item>
@@ -154,6 +162,7 @@ const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string
           </div>
         </Form.Item>
         <Form.Item
+          id="code"
           className={loginFormStyle.gap}
           label="验证码"
           name="code"
@@ -165,6 +174,7 @@ const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string
           <Input disabled={!isSendState} />
         </Form.Item>
         <Form.Item
+          id="nickname"
           className={loginFormStyle.gap}
           label="昵称"
           name="nickname"

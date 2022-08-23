@@ -35,7 +35,8 @@ export default function Avatar() {
         {
           key: '3',
           className: 'logout',
-          label: <a>退出登录</a>,
+          danger: true,
+          label: '退出登录',
           onClick: () => clearLoginState()
         }
       ]}

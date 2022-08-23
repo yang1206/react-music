@@ -5,7 +5,6 @@ import { getSong /*changeCurrentSong, changePlayList, changeCurrentIndex*/ } fro
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { selectPlayList } from '@/store/slice/Player'
 import { useAddPlaylist } from '@/hooks/useAddPlaylist'
-import { message } from 'antd'
 import './index.less'
 interface Props {
   info: Recommend.topItem
@@ -17,7 +16,7 @@ const TopRanking: React.FC<Props> = props => {
   const playMusic = (item: any) => {
     dispatch(getSong({ id: item.id, isPlay: true }))
   }
-  const addPlaylist = useAddPlaylist(playList, message)
+  const addPlaylist = useAddPlaylist(playList)
   return (
     <div className="TopRankingWrapper">
       <div className="header">

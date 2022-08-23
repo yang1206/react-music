@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
-import './index.less'
-const Mine: React.FC = () => {
+const User: React.FC = () => {
   return (
     <div>
       <div className="mineWrapper w980">
@@ -14,4 +13,4 @@ const Mine: React.FC = () => {
     </div>
   )
 }
-export default memo(Mine)
+export default memo(User)

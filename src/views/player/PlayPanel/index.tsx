@@ -13,12 +13,21 @@ import { removeAllSong } from '@/utils/storage'
 import PlayListItem from './components/PlayListItem'
 import LyricContent from './components/LyricContent'
 import './index.less'
-const PlayPanel: React.FC<any> = props => {
+
+interface Props {
+  showPanel: boolean
+  playlistCount: number
+  closeWindow: () => void
+  playMusic: () => void
+  changeSong: any
+}
+const PlayPanel: React.FC<Props> = (props: Props) => {
+  const { showPanel, playlistCount, closeWindow, playMusic, changeSong } = props
   const dispatch = useAppDispatch()
   const currentSong = useAppSelector(selectSong).data
   const currentSongIndex = useAppSelector(selectCurrentIndex).data
   const playList = useAppSelector(selectPlayList).data
-  const { showPanel, playlistCount, closeWindow, playMusic, changeSong } = props
+
   // 清除全部歌曲
   const clearAllPlaylist = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
@@ -30,6 +39,8 @@ const PlayPanel: React.FC<any> = props => {
   }
   // 点击item播放音乐
   const clickItem = (item: { id: number }) => {
+    //如果点击了当前播放的歌曲，则什么也不操作
+    if (item.id === currentSong.id) return
     // 播放音乐 dispatch
     dispatch(getSong({ id: item.id, isPlay: true }))
     playMusic()
