@@ -63,11 +63,11 @@ export const deepCopy = <T>(obj: any): T => {
 }
 
 /**
- * 本地存储添加歌曲id,如果存在就不再添加
+ * @description 本地存储添加歌曲id,如果存在就不再添加
  * @param {Number} id 歌曲id
  * @param {String} key 本地存储key
  */
-export function addPlaylistId(id, key = LOCAL_PLAYLIST_ID_KEY) {
+export function addPlaylistId(id: number | any[], key: string = LOCAL_PLAYLIST_ID_KEY) {
   const songListId = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : []
   if (id instanceof Array) {
     id.forEach(id => {
@@ -83,21 +83,21 @@ export function addPlaylistId(id, key = LOCAL_PLAYLIST_ID_KEY) {
 }
 
 /**
- * 获取歌曲列表id
+ * @description 获取歌曲列表id
  * @param {String} key
  * @returns {Array} 歌曲列表项id
  */
-export function getPlaylistId(key = LOCAL_PLAYLIST_ID_KEY) {
+export function getPlaylistId(key: string = LOCAL_PLAYLIST_ID_KEY): Array<any> {
   const songListId = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : []
   return songListId
 }
 
 /**
- * 删除的歌曲ID
- * @param {Number or String} id 要删除的歌曲ID
+ * @description 删除的歌曲ID
+ * @param {Number} id String} id 要删除的歌曲ID
  * @param {String} key
  */
-export function removeSongId(id, key = LOCAL_PLAYLIST_ID_KEY) {
+export function removeSongId(id: any, key: string = LOCAL_PLAYLIST_ID_KEY) {
   const songListId = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : []
   // 数组有值 & 查找到了要移除的id
   if (songListId.length && songListId.includes(id)) {
@@ -107,10 +107,10 @@ export function removeSongId(id, key = LOCAL_PLAYLIST_ID_KEY) {
 }
 
 /**
- * 清除全部歌曲
+ * @description 清除全部歌曲
  * @param {String} key
  */
-export function removeAllSong(key = LOCAL_PLAYLIST_ID_KEY) {
+export function removeAllSong(key: string = LOCAL_PLAYLIST_ID_KEY) {
   let songListId = localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : []
   // 数组有值 & 查找到了要移除的id
   if (songListId.length) {
@@ -120,37 +120,37 @@ export function removeAllSong(key = LOCAL_PLAYLIST_ID_KEY) {
 }
 
 /**
- * 重置本次存储歌曲列表ID
+ * @description 重置本次存储歌曲列表ID
  * @param {Array} idArr 新歌曲列表数组
  */
-export function resetPlaylistId(idArr) {
+export function resetPlaylistId(idArr: Array<any>) {
   removeAllSong()
   idArr && idArr.forEach((id: any) => addPlaylistId(id))
 }
 
 // ------记忆当前播放歌曲Index------
 /**
- * 更新音乐索引
+ * @description 更新音乐索引
  * @param {Number} index 音乐索引
  * @param {*} key
  */
-export function setCurrentSongIndex(index, key = LOCAL_CURRENT_SONG_INDEX_KEY) {
-  localStorage.setItem(key, index)
+export function setCurrentSongIndex(index: number, key: any = LOCAL_CURRENT_SONG_INDEX_KEY) {
+  localStorage.setItem(key, JSON.stringify(index))
 }
 
 /**
- * 初始存储
- * @param {Numebr} index 音乐索引
+ * @description 初始存储
+ * @param {Number} index 音乐索引
  * @param {String} key
  */
-export function initCurrentSongIndex(index = 0, key = LOCAL_CURRENT_SONG_INDEX_KEY) {
+export function initCurrentSongIndex(index: number = 0, key: string = LOCAL_CURRENT_SONG_INDEX_KEY) {
   if (!localStorage.getItem(key)) {
     localStorage.setItem(key, JSON.stringify(index))
   }
 }
 
 /**
- * 获取歌曲索引
+ * @description 获取歌曲索引
  * @param {String} key
  * @returns 获取歌曲索引
  */

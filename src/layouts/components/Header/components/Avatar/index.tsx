@@ -34,6 +34,7 @@ export default function Avatar() {
         },
         {
           key: '3',
+          className: 'logout',
           label: <a>退出登录</a>,
           onClick: () => clearLoginState()
         }
@@ -46,12 +47,14 @@ export default function Avatar() {
   return (
     <>
       {isLogin ? (
-        <Dropdown overlay={profileDownMenu}>{showProfileContent()}</Dropdown>
+        <>
+          <Dropdown overlay={profileDownMenu}>{showProfileContent()}</Dropdown>
+          <DownOutlined style={{ marginLeft: '5px' }} />
+        </>
       ) : (
         <div className="login" onClick={() => !isLogin && dispatch(changeIsVisible(true))}>
           <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
             登录
-            <DownOutlined />
           </a>
         </div>
       )}

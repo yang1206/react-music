@@ -1,5 +1,5 @@
 /**
- *
+ * @description 歌词滚动
  * @param {Element} element 元素
  * @param {} to
  * @param {Number} duration 总时长

@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useRef } from 'react'
 import { useAppSelector } from '@/hooks/useStore'
 import { selectLyric, selectCurrentLyricIndex } from '@/store/slice/Player'
-import { scrollTo } from '@/utils/ui'
+import { scrollTo } from '@/utils/scroll'
 import './index.less'
 const LyricContent: React.FC<any> = () => {
   const currentLyric = useAppSelector(selectLyric).data

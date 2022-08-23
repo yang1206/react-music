@@ -1,4 +1,9 @@
-export function getCount(count: number) {
+/**
+ * @description 播放量转发
+ * @param {Number} count 播放量
+ * @returns {string | number}
+ */
+export function getCount(count: number): string | number {
   if (count < 0) return
   if (count < 10000) {
     return count
@@ -8,13 +13,32 @@ export function getCount(count: number) {
     return Math.floor(count / 10000000) / 10 + '亿'
   }
 }
+
+/**
+ * @description 获取指定图片大小链接
+ * @param {string} imgUrl 链接
+ * @param {number} size 大小
+ * @returns {string} 指定size大小的图片链接
+ */
 export function getSizeImage(imgUrl: string | undefined, size?: number): string {
   return `${imgUrl}?param=${size}x${size}`
 }
-export function getPlayUrl(id: number) {
+
+/**
+ * @description 获取音乐播放链接
+ * @param {number} id 歌曲id
+ * @returns {string}
+ */
+export function getPlayUrl(id: number): string {
   return `https://music.163.com/song/media/outer/url?id=${id}.mp3`
 }
-export function formatDate(time: string | number | Date, fmt: string) {
+/**
+ * @description 格式化时间
+ * @param {string | number | Date} time 初始化时间
+ * @param {string} fmt
+ * @returns {string}
+ */
+export function formatDate(time: string | number | Date, fmt: string): string {
   let date = new Date(time)
 
   if (/(y+)/.test(fmt)) {
@@ -87,10 +111,10 @@ export function getMatchReg(loginState: string) {
  * @returns {string}
  * {y}-{m}-{d} {h}:{i}:{s}
  */
-export function parseTime(time, cFormat) {
+export function parseTime(time: string | number | Date | any, cFormat: string): string {
   if (!time || arguments.length === 0) return null
   const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
-  let date
+  let date: Date
   if (typeof time === 'object') {
     date = time
   } else {
