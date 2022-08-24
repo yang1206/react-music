@@ -1,4 +1,5 @@
 import { RouteObject } from '@/routers/interface'
+import { address } from '@/common/localData'
 /**
  * @description 播放量转发
  * @param {Number} count 播放量
@@ -177,4 +178,8 @@ export function handleRouter(routerList, newArr: string[] = []) {
     item.children && item.children.length && handleRouter(item.children, newArr)
   })
   return newArr
+}
+
+export function getCity(id) {
+  return address[id]
 }

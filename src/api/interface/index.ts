@@ -55,3 +55,9 @@ export namespace Login {
     nickname: string
   }
 }
+
+export namespace User {
+  export interface userSongList {
+    uid: string
+  }
+}

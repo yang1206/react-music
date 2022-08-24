@@ -17,7 +17,7 @@ interface HttpRequestConfig<T, R> extends RequestConfig<IResponse<R>> {
 }
 const request = new Request({
   baseURL: import.meta.env.VITE_API_URL,
-  timeout: 1000 * 60 * 5,
+  timeout: 1000 * 60 * 4,
   withCredentials: true,
   interceptors: {
     // 请求拦截器

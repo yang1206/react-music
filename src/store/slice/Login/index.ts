@@ -8,6 +8,8 @@ type InitialState = {
   profile: {
     nickname: string
     avatarUrl: string
+    gender: number
+    [props: string]: any
   }
   token: string
   cookie: string
@@ -17,7 +19,8 @@ const initialState: InitialState = {
   isLogin: false, // 登录状态
   profile: {
     nickname: '',
-    avatarUrl: ''
+    avatarUrl: '',
+    gender: null
   },
   token: '',
   cookie: ''
