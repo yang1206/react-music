@@ -10,12 +10,15 @@ import {
   selectSequence,
   selectPlayList,
   selectCurrentLyricIndex,
+  selectIsShowLyrics,
   // getSong,
   changePlaySong,
   changeSequence,
-  changeCurrentLyricIndex
+  changeCurrentLyricIndex,
+  changeShowLyrics
 } from '@/store/slice/Player'
 import { getSizeImage, formatMinuteSecond, getPlayUrl } from '@/utils/format'
+import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons'
 import './index.less'
 const PlayBar: React.FC = () => {
   //从redux取出数据
@@ -24,6 +27,7 @@ const PlayBar: React.FC = () => {
   const playList = useAppSelector(selectPlayList).data
   const currentLyricIndex = useAppSelector(selectCurrentLyricIndex).data
   const sequence = useAppSelector(selectSequence).data
+  const isShowLyrics = useAppSelector(selectIsShowLyrics).data
   //请求歌曲详细信息
   const dispatch = useAppDispatch()
   //歌曲时长
@@ -102,15 +106,19 @@ const PlayBar: React.FC = () => {
     if (!(currentLyricIndex === i - 1)) {
       dispatch(changeCurrentLyricIndex(i - 1))
       const content = currentLyric[i - 1] && currentLyric[i - 1].content
-      if (isPlaying) {
-        message.open({
-          key: 'lyric',
-          content: content,
-          duration: 0
-        })
+      if (isShowLyrics) {
+        if (isPlaying) {
+          message.open({
+            key: 'lyric',
+            content: content,
+            duration: 0
+          })
+        }
+        // 如果显示播放列表那么不展示歌词
+        showPanel && message.destroy('lyric')
+      } else {
+        message.destroy('lyric')
       }
-      // 如果显示播放列表那么不展示歌词
-      showPanel && message.destroy('lyric')
     }
   }
   //根据是否播放展示不同按钮
@@ -215,7 +223,26 @@ const PlayBar: React.FC = () => {
         <div className="Operator">
           <div className="left">
             <button className="sprite_playBar btn favor"></button>
-            <button className="sprite_playBar btn share"></button>
+            <button className="sprite_playBar btn lyrics">
+              <Tooltip title="开启/关闭滚动歌词">
+                {isShowLyrics && (
+                  <EyeOutlined
+                    style={{ fontSize: '22px', color: '#ccc' }}
+                    onClick={() => {
+                      dispatch(changeShowLyrics(false))
+                    }}
+                  />
+                )}
+                {!isShowLyrics && (
+                  <EyeInvisibleOutlined
+                    style={{ fontSize: '22px', color: '#ffffff' }}
+                    onClick={() => {
+                      dispatch(changeShowLyrics(true))
+                    }}
+                  />
+                )}
+              </Tooltip>
+            </button>
           </div>
           <div className="right sprite_playBar">
             <Tooltip title="调节音量">

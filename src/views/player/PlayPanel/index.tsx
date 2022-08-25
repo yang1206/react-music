@@ -63,7 +63,7 @@ const PlayPanel: React.FC<Props> = (props: Props) => {
           </div>
         </div>
         <div className="playlist-header-right">
-          <div className="song-name">{currentSong.name}</div>
+          <div className="song-name">{currentSong && currentSong.name}</div>
           <div className="close-window" onClick={closeWindow}>
             <CloseOutlined />
           </div>

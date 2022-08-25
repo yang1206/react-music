@@ -173,15 +173,22 @@
 
     .Operator {
       position: relative;
-      top: 5px;
       display: flex;
       flex-wrap: nowrap;
+
+      .left {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
       .btn {
         width: 25px;
         height: 25px;
         cursor: pointer;
       }
-
+      .lyrics {
+        margin-right: 3px;
+      }
       .favor {
         background-position: -88px -163px;
 

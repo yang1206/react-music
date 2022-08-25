@@ -5,9 +5,12 @@ import { RootState } from '@/store'
 type InitialState = {
   songListDetailInfo: {
     playList: {
+      id: number
       coverImgUrl: string
       name: string
       createTime: number
+      userId: number
+      [props: string]: any
       creator: {
         avatarUrl: string
         nickname: string
@@ -24,12 +27,15 @@ const initialState: InitialState = {
   songListDetailInfo: {
     playList: {
       coverImgUrl: '',
+      id: null,
       name: '',
+      userId: null,
       createTime: 0,
       creator: {
         avatarUrl: '',
         nickname: ''
       },
+      subscribed: null,
       tags: [],
       description: '',
       playCount: 0,

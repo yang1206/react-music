@@ -1,26 +1,37 @@
 import request from '../service'
+//登陆后可调用的接口
 
 //获取用户歌单
-export const gotoUserSongList = (uid: string) => {
+export const gotoUserSongList = (data: { uid: string }) => {
   return request({
     url: '/user/playlist',
     method: 'GET',
-    params: {
-      uid,
-      timestamp: new Date().getTime()
-    }
+    data
   })
 }
 
 //创建歌单
-export const CreateSongList = (name: string, cookie: string) => {
+export const CreateSongList = (data: { name: string }) => {
   return request({
     url: '/playlist/create',
     method: 'GET',
-    params: {
-      name,
-      cookie
-    }
+    data
+  })
+}
+
+export const subscribeSongList = (data: { id: string | number; t: number }) => {
+  return request({
+    url: '/playlist/subscribe',
+    method: 'GET',
+    data
+  })
+}
+
+export const deleteSongList = (data: { id: string | number }) => {
+  return request({
+    url: '/playlist/delete',
+    method: 'GET',
+    data
   })
 }
 

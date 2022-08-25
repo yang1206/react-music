@@ -1,28 +1,28 @@
-import React, { useCallback /*, useEffect*/, useState, memo } from 'react'
+import React, { useCallback, useEffect, useState, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectProfile /*, selectIsVisible, selectCookie*/, selectLoginState, changeIsVisible } from '@/store/slice/Login'
-// import { gotoUserSongList, CreateSongList } from '@/api/user'
+import { selectProfile, selectLoginState, changeIsVisible } from '@/store/slice/Login'
+import { gotoUserSongList, CreateSongList } from '@/api/user'
 import { getCity, getSizeImage } from '@/utils/format'
 import Authentication from '@/components/Authentication'
 import Modal from 'antd/lib/modal/Modal'
 import { ManOutlined, PlayCircleOutlined, WomanOutlined } from '@ant-design/icons'
-import { Input /*, message*/ } from 'antd'
+import { Input, message } from 'antd'
 import RcmHeader from '@/components/RcmHeader'
 import SongsCover from '@/components/SongsCover'
+import './index.less'
 const User: React.FC = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [playlist /*, setPlaylist*/] = useState([])
+  const [myPlaylist, setMyPlaylist] = useState([])
+  const [subPlaylist, setSubPlaylist] = useState([])
   const [isModalVisible, setIsModalVisible] = useState(false)
-  // const [playlistName, setPlaylistName] = useState('')
+  const [playlistName, setPlaylistName] = useState(null)
   const isLogin = useAppSelector(selectLoginState).data
   const userinfo = useAppSelector(selectProfile).data
-  // const cookie = useAppSelector(selectCookie).data
 
   const userPic = userinfo && userinfo.avatarUrl && getSizeImage(userinfo.avatarUrl, 180)
   const nickname = userinfo && userinfo.nickname
-  const vip = userinfo && userinfo.vipType
   const gender = userinfo && userinfo.gender === 1 ? 'man' : 'woman'
   const dynamic = [
     {
@@ -40,8 +40,23 @@ const User: React.FC = () => {
   ]
   const signature = userinfo && userinfo.signature
   const city = userinfo && userinfo.city && getCity(userinfo.city)
-  const songlistCount = userinfo && userinfo.playlistCount
-  // const userId = userinfo && userinfo.userId
+  const userId = userinfo && userinfo.userId
+  // other hook
+  useEffect(() => {
+    gotoUserSongList({ uid: userId }).then(res => {
+      let my = []
+      let sub = []
+      res.playlist.map((item: { subscribed: boolean }) => {
+        if (item.subscribed) {
+          sub.push(item)
+        } else {
+          my.push(item)
+        }
+      })
+      setMyPlaylist(my)
+      setSubPlaylist(sub)
+    })
+  }, [userId])
   // handle
   const handleCancel = () => {
     setIsModalVisible(false)
@@ -55,7 +70,12 @@ const User: React.FC = () => {
   const showModal = useCallback(() => {
     dispatch(changeIsVisible(true))
   }, [dispatch])
-  const handleOk = () => {}
+  const handleOk = () => {
+    CreateSongList({ name: playlistName }).then(() => {
+      message.success('创建成功')
+      setIsModalVisible(false)
+    })
+  }
   // template
   const renderDynamicList = () => {
     return dynamic.map(item => {
@@ -84,10 +104,6 @@ const User: React.FC = () => {
         <div className="user-detail">
           <div className="nickname-wrap">
             <h3 className="nickname gap">{nickname}</h3>
-            <span className="icon-small lev">
-              {vip}
-              <i className="icon-small"></i>
-            </span>
             <div className="gender-icon">
               {gender === 'man' ? (
                 <ManOutlined className="gender-icon man" />
@@ -102,11 +118,21 @@ const User: React.FC = () => {
         </div>
       </div>
       <div className="song-list">
-        <RcmHeader title={`我的歌单(${songlistCount})`} right={renderCreatePlaylist()} />
+        <RcmHeader title={`我的歌单(${myPlaylist.length})`} right={renderCreatePlaylist()} />
         <div className="playlist flex">
-          {playlist &&
-            playlist.map &&
-            playlist.map(item => {
+          {myPlaylist &&
+            myPlaylist.map &&
+            myPlaylist.map(item => {
+              return <SongsCover info={item} key={item.id} />
+            })}
+        </div>
+      </div>
+      <div className="song-list">
+        <RcmHeader title={`我收藏的歌单(${subPlaylist.length})`} right={renderCreatePlaylist()} />
+        <div className="playlist flex">
+          {subPlaylist &&
+            subPlaylist.map &&
+            subPlaylist.map(item => {
               return <SongsCover info={item} key={item.id} />
             })}
         </div>
@@ -116,8 +142,8 @@ const User: React.FC = () => {
           size="large"
           placeholder="请输入歌单"
           prefix={<PlayCircleOutlined />}
-          // value={playlistName}
-          // onInput={e => setPlaylistName(e.target.value)}
+          value={playlistName}
+          onChange={e => setPlaylistName(e.target.value)}
         />
       </Modal>
     </div>

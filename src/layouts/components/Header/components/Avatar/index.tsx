@@ -19,7 +19,7 @@ export default function Avatar() {
         {
           key: '1',
           label: (
-            <a target="_blank" rel="noopener noreferrer" href="#/user">
+            <a rel="noopener noreferrer" href="#/user">
               {profile.nickname}
             </a>
           )

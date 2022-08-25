@@ -12,6 +12,7 @@ interface InitialState {
   lyricList: Array<Player.Lyric>
   currentLyricIndex: number
   playListCount: number
+  showLyrics: boolean
 }
 const initialState: InitialState = {
   currentSongData: {
@@ -27,27 +28,28 @@ const initialState: InitialState = {
   sequence: 0, //播放顺序  0 顺序播放 1 随机播放 2 单曲循环
   lyricList: [],
   currentLyricIndex: 0,
-  playListCount: 5
+  playListCount: 5,
+  showLyrics: true
 }
 
 export const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    changeCurrentSong: (state: { currentSongData: any }, { payload }: any) => {
+    changeCurrentSong: (state, { payload }: any) => {
       state.currentSongData = payload
     },
-    changeCurrentIndex: (state: { currentSongIndex: any }, { payload }: any) => {
+    changeCurrentIndex: (state, { payload }: any) => {
       setCurrentSongIndex(payload)
       state.currentSongIndex = payload
     },
-    changePlayList: (state: { playList: any }, { payload }: any) => {
+    changePlayList: (state, { payload }: any) => {
       state.playList = payload
     },
-    changeSequence: (state: { sequence: number }, { payload }: any) => {
+    changeSequence: (state, { payload }: any) => {
       state.sequence = payload
     },
-    changeCurrentLyricIndex: (state: { currentLyricIndex: number }, { payload }: any) => {
+    changeCurrentLyricIndex: (state, { payload }: any) => {
       state.currentLyricIndex = payload
     },
     changeCurrentLyricList: (state, { payload }: any) => {
@@ -55,6 +57,9 @@ export const playerSlice = createSlice({
     },
     changePlayListCount: (state, { payload }: any) => {
       state.playListCount = payload
+    },
+    changeShowLyrics: (state, { payload }) => {
+      state.showLyrics = payload
     }
   },
   extraReducers: builder => {
@@ -71,6 +76,7 @@ export const selectSequence = (state: RootState) => ({ data: state.player.sequen
 export const selectLyric = (state: RootState) => ({ data: state.player.lyricList, shallowEqual })
 export const selectCurrentLyricIndex = (state: RootState) => ({ data: state.player.currentLyricIndex, shallowEqual })
 export const selectPlayList = (state: RootState) => ({ data: state.player.playList, shallowEqual })
+export const selectIsShowLyrics = (state: RootState) => ({ data: state.player.showLyrics, shallowEqual })
 export default playerSlice.reducer
 export const {
   changeCurrentSong,
@@ -79,7 +85,8 @@ export const {
   changeSequence,
   changeCurrentLyricIndex,
   changeCurrentLyricList,
-  changePlayListCount
+  changePlayListCount,
+  changeShowLyrics
 } = playerSlice.actions
 //统一导出异步action
 export { getSong, changePlaySong, getSongDetailArray, getLyric }
