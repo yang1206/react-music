@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-import { getSong, changePlaySong, getSongDetailArray, getLyric } from './action'
+import { getSong, changePlaySong, getSongDetailArray, getLyric, getHotComment } from './action'
 import { RootState } from '@/store'
 import { Player } from '@/store/interface/player'
 import { setCurrentSongIndex } from '@/utils/storage'
@@ -13,6 +13,9 @@ interface InitialState {
   currentLyricIndex: number
   playListCount: number
   showLyrics: boolean
+  firstLoad: boolean
+  hotComments: Array<any>
+  currentCommentTotal: number
 }
 const initialState: InitialState = {
   currentSongData: {
@@ -28,8 +31,11 @@ const initialState: InitialState = {
   sequence: 0, //播放顺序  0 顺序播放 1 随机播放 2 单曲循环
   lyricList: [],
   currentLyricIndex: 0,
+  firstLoad: true,
   playListCount: 5,
-  showLyrics: true
+  showLyrics: true,
+  hotComments: [],
+  currentCommentTotal: 0
 }
 
 export const playerSlice = createSlice({
@@ -60,12 +66,21 @@ export const playerSlice = createSlice({
     },
     changeShowLyrics: (state, { payload }) => {
       state.showLyrics = payload
+    },
+    changeCurrentTotal: (state, { payload }) => {
+      state.currentCommentTotal = payload
+    },
+    changeFirstLoad: (state, { payload }) => {
+      state.firstLoad = payload
     }
   },
   extraReducers: builder => {
     // 进行请求阶段的一些操作
     builder.addCase(getLyric.fulfilled, (state, action) => {
       state.lyricList = action.payload
+    })
+    builder.addCase(getHotComment.fulfilled, (state, action) => {
+      state.hotComments = action.payload
     })
   }
 })
@@ -77,6 +92,9 @@ export const selectLyric = (state: RootState) => ({ data: state.player.lyricList
 export const selectCurrentLyricIndex = (state: RootState) => ({ data: state.player.currentLyricIndex, shallowEqual })
 export const selectPlayList = (state: RootState) => ({ data: state.player.playList, shallowEqual })
 export const selectIsShowLyrics = (state: RootState) => ({ data: state.player.showLyrics, shallowEqual })
+export const selectFirstLoad = (state: RootState) => ({ data: state.player.firstLoad, shallowEqual })
+export const selectHotComments = (state: RootState) => ({ data: state.player.hotComments, shallowEqual })
+export const selectCurrentTotal = (state: RootState) => ({ data: state.player.currentCommentTotal, shallowEqual })
 export default playerSlice.reducer
 export const {
   changeCurrentSong,
@@ -86,7 +104,9 @@ export const {
   changeCurrentLyricIndex,
   changeCurrentLyricList,
   changePlayListCount,
-  changeShowLyrics
+  changeShowLyrics,
+  changeCurrentTotal,
+  changeFirstLoad
 } = playerSlice.actions
 //统一导出异步action
-export { getSong, changePlaySong, getSongDetailArray, getLyric }
+export { getSong, changePlaySong, getSongDetailArray, getLyric, getHotComment }

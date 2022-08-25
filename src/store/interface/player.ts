@@ -17,6 +17,7 @@ export namespace Player {
     ar: Array<any>
     al: al
     dt: number
+    [key: string]: any
   }
   export interface Lyric {
     content: string

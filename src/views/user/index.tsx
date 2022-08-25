@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { selectProfile, selectLoginState, changeIsVisible } from '@/store/slice/Login'
-import { gotoUserSongList, CreateSongList } from '@/api/user'
+import { gotoUserSongList, getUserLevel, CreateSongList, getRecentdSong } from '@/api/user'
 import { getCity, getSizeImage } from '@/utils/format'
 import Authentication from '@/components/Authentication'
 import Modal from 'antd/lib/modal/Modal'
@@ -18,6 +18,7 @@ const User: React.FC = () => {
   const [subPlaylist, setSubPlaylist] = useState([])
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [playlistName, setPlaylistName] = useState(null)
+  const [level, setLevel] = useState(0)
   const isLogin = useAppSelector(selectLoginState).data
   const userinfo = useAppSelector(selectProfile).data
 
@@ -43,6 +44,7 @@ const User: React.FC = () => {
   const userId = userinfo && userinfo.userId
   // other hook
   useEffect(() => {
+    getRecentdSong()
     gotoUserSongList({ uid: userId }).then(res => {
       let my = []
       let sub = []
@@ -55,6 +57,9 @@ const User: React.FC = () => {
       })
       setMyPlaylist(my)
       setSubPlaylist(sub)
+    })
+    getUserLevel().then(res => {
+      setLevel(res.data.level)
     })
   }, [userId])
   // handle
@@ -104,6 +109,7 @@ const User: React.FC = () => {
         <div className="user-detail">
           <div className="nickname-wrap">
             <h3 className="nickname gap">{nickname}</h3>
+            <span className="lev">lv:{level}</span>
             <div className="gender-icon">
               {gender === 'man' ? (
                 <ManOutlined className="gender-icon man" />

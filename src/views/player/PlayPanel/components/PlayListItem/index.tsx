@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { DownloadOutlined, DeleteOutlined, GithubOutlined, LikeOutlined } from '@ant-design/icons'
+import { DownloadOutlined, DeleteOutlined, LikeOutlined } from '@ant-design/icons'
 import { formatDate, getPlayUrl } from '@/utils/format'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { selectPlayList, selectSong, changePlayList, changeCurrentSong, changePlayListCount } from '@/store/slice/Player'
@@ -31,11 +31,12 @@ const PlayListItem: React.FC<any> = props => {
     nextMusic()
   }
   return (
-    <div className={isActive + ' PlaylistItemWrapper'} onClick={clickItem}>
-      <div className="song-name">{songName}</div>
+    <div className={isActive + ' PlaylistItemWrapper'}>
+      <div className="song-name" onClick={clickItem}>
+        {songName}
+      </div>
       <div className="control-and-singer">
         <LikeOutlined />
-        <GithubOutlined />
         <DownloadOutlined onClick={() => window.open(getPlayUrl(songId))} />
         <DeleteOutlined onClick={e => clearCurrentSong(e)} />
         <span>{singer}</span>

@@ -9,7 +9,7 @@ type InitialState = {
     nickname: string
     avatarUrl: string
     gender: number
-    [props: string]: any
+    [key: string]: any
   }
   token: string
   cookie: string

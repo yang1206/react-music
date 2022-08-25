@@ -1,19 +1,23 @@
 import React, { memo, useEffect, useState } from 'react'
-import { selectSong } from '@/store/slice/Player'
-import { useAppSelector } from '@/hooks/useStore'
+import { selectSong, getHotComment } from '@/store/slice/Player'
+import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { formatMinuteSecond } from '@/utils/format'
 import { getSongSimi } from '@/api/song'
 import SongInfo from './components/SongInfo'
 import SongItem from './components/SongItem'
 import './index.less'
 const Player: React.FC = () => {
+  const dispatch = useAppDispatch()
   const [simiList, setSimiList] = useState([])
   const currentSong = useAppSelector(selectSong).data
   useEffect(() => {
+    //获取热评
+    dispatch(getHotComment(currentSong.id))
+    //获取相似推荐歌曲
     getSongSimi({ id: currentSong.id }).then(res => {
       setSimiList(res.songs)
     })
-  }, [currentSong])
+  }, [currentSong, dispatch])
   return (
     <div className="PlayerWrapper">
       <div className="content wrap-v2">

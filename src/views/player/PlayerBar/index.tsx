@@ -11,11 +11,13 @@ import {
   selectPlayList,
   selectCurrentLyricIndex,
   selectIsShowLyrics,
+  selectFirstLoad,
   // getSong,
   changePlaySong,
   changeSequence,
   changeCurrentLyricIndex,
-  changeShowLyrics
+  changeShowLyrics,
+  changeFirstLoad
 } from '@/store/slice/Player'
 import { getSizeImage, formatMinuteSecond, getPlayUrl } from '@/utils/format'
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons'
@@ -28,6 +30,7 @@ const PlayBar: React.FC = () => {
   const currentLyricIndex = useAppSelector(selectCurrentLyricIndex).data
   const sequence = useAppSelector(selectSequence).data
   const isShowLyrics = useAppSelector(selectIsShowLyrics).data
+  const isFirstLoad = useAppSelector(selectFirstLoad).data
   //请求歌曲详细信息
   const dispatch = useAppDispatch()
   //歌曲时长
@@ -51,21 +54,25 @@ const PlayBar: React.FC = () => {
   // 是否显示音量播放条
   const [isShowBar, setIsShowBar] = useState(false)
   useEffect(() => {
-    setDuration(currentSong?.dt)
-    //在hooks里设置歌曲src
-    audioRef.current!.src = getPlayUrl(currentSong?.id)
-    audioRef
-      .current!.play()
-      .then(() => {
-        setIsPlaying(true)
-      })
-      .catch(() => {
-        setIsPlaying(false)
-      })
+    if (!isFirstLoad) {
+      setDuration(currentSong?.dt)
+      //在hooks里设置歌曲src
+      audioRef.current!.src = getPlayUrl(currentSong?.id)
+      audioRef
+        .current!.play()
+        .then(() => {
+          setIsPlaying(true)
+        })
+        .catch(() => {
+          setIsPlaying(false)
+        })
+    }
     currentSong?.dt ? setDuration(currentSong.dt) : setDuration(currentSong?.dt)
-  }, [currentSong])
+  }, [currentSong, isFirstLoad])
   //点击播放按钮方法
   const play = useCallback(() => {
+    //点击了播放，改变第一次播放的状态
+    dispatch(changeFirstLoad(false))
     //类型断言 not null
     isPlaying ? audioRef.current!.pause() : audioRef.current!.play()
     //先判断在改变播放状态
@@ -172,6 +179,7 @@ const PlayBar: React.FC = () => {
   }
   //上一首下一首
   const changeMusic = (tag: number) => {
+    dispatch(changeFirstLoad(false))
     dispatch(changePlaySong(tag))
   }
   //播放列表是否显示

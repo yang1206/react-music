@@ -4,12 +4,14 @@ import {
   changeCurrentIndex,
   changePlayList,
   changeCurrentLyricList,
-  changePlayListCount
+  changePlayListCount,
+  changeFirstLoad
 } from '@/store/slice/Player'
-import { getSongDetail, getLyricData } from '@/api/song'
+import { getSongDetail, getLyricData, cheackMusic, getHotCommentData } from '@/api/song'
 import { parseLyric } from '@/utils/parseLyric'
 import { getRandom } from '@/utils/math'
 import { addPlaylistId } from '@/utils/storage'
+import { message } from 'antd'
 //请求歌曲详细信息
 interface getSong {
   id: number
@@ -23,8 +25,14 @@ const getSong = createAsyncThunk<
     state: any
   }
 >('player/getSong', async (params: getSong, { getState, dispatch }) => {
-  if (params.id) {
+  //检查歌曲是否可用
+  let checkSong = await cheackMusic({ id: params.id }).then(res => {
+    return res.success
+  })
+  if (checkSong && params.id) {
     const playList = getState().player.playList
+    const isLogin = getState().login.isLogin
+    const vipType = getState().login.profile?.vipType
     const songIndex = playList.findIndex((song: { id: number }) => song.id === params.id)
     let song = null
     if (songIndex !== -1) {
@@ -36,22 +44,48 @@ const getSong = createAsyncThunk<
     } else {
       // 未找到数据
       await getSongDetail({ ids: params.id }).then(res => {
-        song = res.songs && res.songs[0]
-        addPlaylistId(params.id)
-        if (!song) return
-        const newPlayList = [...playList]
-        newPlayList.push(song)
-        dispatch(changePlayList(newPlayList))
-        dispatch(changeCurrentIndex(newPlayList.length - 1))
-        dispatch(changePlayListCount(newPlayList.length))
-        //定义一个参数判断是点击了播放还是点击了加入播放列表
-        params.isPlay && dispatch(changeCurrentSong(song))
+        //判断歌曲是否需要付费
+        if (res.privileges[0].fee !== 0 && res.privileges[0].fee !== 8) {
+          //如果已经登录且不是vip或未登录，直接提示
+          if ((isLogin && vipType === 0) || !isLogin) {
+            message.info('该歌曲需要付费或vip')
+            //如果已经登录且是vip就播放
+          } else if (isLogin && vipType == 1) {
+            song = res.songs && res.songs[0]
+            addPlaylistId(params.id)
+            if (!song) return
+            const newPlayList = [...playList]
+            newPlayList.push(song)
+            //已经播放歌曲，改变第一次播放状态
+            params.isPlay && dispatch(changeFirstLoad(false))
+            dispatch(changePlayList(newPlayList))
+            dispatch(changeCurrentIndex(newPlayList.length - 1))
+            dispatch(changePlayListCount(newPlayList.length))
+            //定义一个参数判断是点击了播放还是点击了加入播放列表
+            params.isPlay && dispatch(changeCurrentSong(song))
+            //请求歌词
+            if (!song) return
+            params.isPlay && dispatch(getLyric(song.id))
+          }
+        } else {
+          song = res.songs && res.songs[0]
+          addPlaylistId(params.id)
+          if (!song) return
+          const newPlayList = [...playList]
+          newPlayList.push(song)
+          dispatch(changePlayList(newPlayList))
+          dispatch(changeCurrentIndex(newPlayList.length - 1))
+          dispatch(changePlayListCount(newPlayList.length))
+          //定义一个参数判断是点击了播放还是点击了加入播放列表
+          params.isPlay && dispatch(changeCurrentSong(song))
+          //请求歌词
+          if (!song) return
+          params.isPlay && dispatch(getLyric(song.id))
+        }
       })
     }
-
-    //请求歌词
-    if (!song) return
-    params.isPlay && dispatch(getLyric(song.id))
+  } else {
+    message.error('暂无版权')
   }
 })
 
@@ -121,7 +155,9 @@ const changePlaySong = createAsyncThunk<
 >('player/changePlaySong', async (tag: number, { getState, dispatch }) => {
   const sequence = getState().player.sequence
   const playList = getState().player.playList
+  console.log(playList, sequence)
   let currentSongIndex = getState().player.currentSongIndex
+  console.log(currentSongIndex)
   let randomIndex = getRandom(playList.length)
   if (playList.length == 0) return
   switch (sequence) {
@@ -141,6 +177,7 @@ const changePlaySong = createAsyncThunk<
       break
   }
   const currentSong = playList[currentSongIndex]
+  console.log(currentSong)
   dispatch(changeCurrentSong(currentSong))
   dispatch(changeCurrentIndex(currentSongIndex))
   dispatch(changeCurrentLyricList([]))
@@ -157,4 +194,12 @@ const getLyric = createAsyncThunk('player/getLyric', async (id: number) => {
   return data
 })
 
-export { getSong, changePlaySong, getLyric, getSongDetailArray }
+//获取歌曲热评
+const getHotComment = createAsyncThunk('player/getHotComment', async (id: number) => {
+  const data = await getHotCommentData({ id: id, type: 0 }).then(res => {
+    return res.hotComments
+  })
+  return data
+})
+
+export { getSong, changePlaySong, getLyric, getSongDetailArray, getHotComment }
