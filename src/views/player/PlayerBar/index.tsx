@@ -179,7 +179,7 @@ const PlayBar: React.FC = () => {
   }
   //上一首下一首
   const changeMusic = (tag: number) => {
-    dispatch(changeFirstLoad(false))
+    // dispatch(changeFirstLoad(false))
     dispatch(changePlaySong(tag))
   }
   //播放列表是否显示

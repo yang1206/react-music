@@ -40,7 +40,9 @@ const TopRanking: React.FC<Props> = props => {
             <div key={item.id} className="list-item">
               <div className="rank">{index + 1}</div>
               <div className="info">
-                <a className="name text-nowrap">{item.name}</a>
+                <a className="name text-nowrap" onClick={() => playMusic(item)}>
+                  {item.name}
+                </a>
                 <div className="operate">
                   <button className="btn sprite_02 play" onClick={() => playMusic(item)}></button>
                   <button className="btn sprite_icon2 addto" onClick={e => addPlaylist(e, item.id)}></button>

@@ -7,7 +7,7 @@ import {
   changePlayListCount,
   changeFirstLoad
 } from '@/store/slice/Player'
-import { getSongDetail, getLyricData, cheackMusic, getHotCommentData } from '@/api/song'
+import { getSongDetail, getLyricData, checkMusic, getHotCommentData } from '@/api/song'
 import { parseLyric } from '@/utils/parseLyric'
 import { getRandom } from '@/utils/math'
 import { addPlaylistId } from '@/utils/storage'
@@ -26,10 +26,12 @@ const getSong = createAsyncThunk<
   }
 >('player/getSong', async (params: getSong, { getState, dispatch }) => {
   //检查歌曲是否可用
-  let checkSong = await cheackMusic({ id: params.id }).then(res => {
+  let checkSong = await checkMusic({ id: params.id }).then(res => {
     return res.success
   })
   if (checkSong && params.id) {
+    //已经点击播放歌曲，改变第一次播放状态
+    dispatch(changeFirstLoad(false))
     const playList = getState().player.playList
     const isLogin = getState().login.isLogin
     const vipType = getState().login.profile?.vipType
@@ -56,8 +58,6 @@ const getSong = createAsyncThunk<
             if (!song) return
             const newPlayList = [...playList]
             newPlayList.push(song)
-            //已经播放歌曲，改变第一次播放状态
-            params.isPlay && dispatch(changeFirstLoad(false))
             dispatch(changePlayList(newPlayList))
             dispatch(changeCurrentIndex(newPlayList.length - 1))
             dispatch(changePlayListCount(newPlayList.length))
@@ -155,9 +155,7 @@ const changePlaySong = createAsyncThunk<
 >('player/changePlaySong', async (tag: number, { getState, dispatch }) => {
   const sequence = getState().player.sequence
   const playList = getState().player.playList
-  console.log(playList, sequence)
   let currentSongIndex = getState().player.currentSongIndex
-  console.log(currentSongIndex)
   let randomIndex = getRandom(playList.length)
   if (playList.length == 0) return
   switch (sequence) {
@@ -177,7 +175,6 @@ const changePlaySong = createAsyncThunk<
       break
   }
   const currentSong = playList[currentSongIndex]
-  console.log(currentSong)
   dispatch(changeCurrentSong(currentSong))
   dispatch(changeCurrentIndex(currentSongIndex))
   dispatch(changeCurrentLyricList([]))

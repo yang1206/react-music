@@ -26,7 +26,7 @@ export const getSongSimi = (data: { id: number }) => {
 }
 
 //检查音乐是否可用
-export const cheackMusic = (data: { id: number }) => {
+export const checkMusic = (data: { id: number }) => {
   return request({
     url: '/check/music',
     method: 'GET',
