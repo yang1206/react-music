@@ -74,7 +74,7 @@ const PlayBar: React.FC = () => {
     //点击了播放，改变第一次播放的状态
     dispatch(changeFirstLoad(false))
     //类型断言 not null
-    isPlaying ? audioRef.current!.pause() : audioRef.current!.play()
+    isPlaying ? audioRef.current!.pause() : audioRef.current!.play().catch()
     //先判断在改变播放状态
     setIsPlaying(!isPlaying)
     isPlaying ? setPlayClass('sprite_playBar btn play') : setPlayClass('sprite_playBar btn pause')
@@ -113,6 +113,7 @@ const PlayBar: React.FC = () => {
     if (!(currentLyricIndex === i - 1)) {
       dispatch(changeCurrentLyricIndex(i - 1))
       const content = currentLyric[i - 1] && currentLyric[i - 1].content
+      if (content === '纯音乐，请欣赏') return
       if (isShowLyrics) {
         if (isPlaying) {
           message.open({
@@ -288,7 +289,7 @@ const PlayBar: React.FC = () => {
           </div>
         </div>
       </div>
-      <audio id="audio" ref={audioRef} onTimeUpdate={timeUpdate} onEnded={playEnded} />
+      <audio id="audio" preload="none" ref={audioRef} onTimeUpdate={timeUpdate} onEnded={playEnded} />
     </div>
   )
 }

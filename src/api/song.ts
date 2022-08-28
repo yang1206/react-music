@@ -51,3 +51,31 @@ export const getSongComment = (id: number, limit = 20, offset: number) => {
     data: { id, limit, offset, timestamp: new Date().getTime() }
   })
 }
+// 点赞
+/* cid : 评论 id
+t : 是否点赞 ,1 为点赞 ,0 为取消点赞 */
+export function sendLikeComment(id: number, cid: number, t: number) {
+  return request({
+    url: '/comment/like',
+    data: {
+      id,
+      cid,
+      t,
+      type: 0
+    }
+  })
+}
+
+// 评论歌曲
+export function sendSongComment(id: any, content: any) {
+  return request({
+    url: '/comment',
+    data: {
+      t: 1, // 发送
+      type: 0, // 歌曲类型
+      id,
+      content: content,
+      timestamp: new Date().getTime()
+    }
+  })
+}

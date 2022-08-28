@@ -75,7 +75,7 @@ const PlayPanel: React.FC<Props> = (props: Props) => {
             playList.map((item, index) => {
               return (
                 <PlayListItem
-                  key={item.id}
+                  key={index}
                   isActive={(currentSongIndex ? currentSongIndex : 0) === index ? 'active' : ''}
                   songName={item.name}
                   singer={item.ar[0].name}

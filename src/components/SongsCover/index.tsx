@@ -5,7 +5,7 @@ import { Recommend } from '@/store/interface/recommend'
 import './index.less'
 interface Props {
   info: Recommend.perSonalizeder
-  key: number
+  key?: number
 }
 const SongCover: React.FC<Props> = (props: any) => {
   const { info, right } = props

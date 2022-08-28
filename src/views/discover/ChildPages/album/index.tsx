@@ -1,6 +1,13 @@
-import React from 'react'
-
-const Album: React.FC = () => {
-  return <div>Friend</div>
+import React, { memo } from 'react'
+import HotAlbum from './components/HotAlbum'
+import AllAlbum from './components/AllAlbum'
+import './index.less'
+const Songs: React.FC = () => {
+  return (
+    <div className="playlistWrapper wrap-v2">
+      <HotAlbum />
+      <AllAlbum />
+    </div>
+  )
 }
-export default Album
+export default memo(Songs)

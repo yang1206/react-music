@@ -172,7 +172,7 @@ export const searchRoute = (path: string, routes: RouteObject[] = []): RouteObje
  * @param {Array} newArr 菜单的一维数组
  * @return array
  */
-export function handleRouter(routerList, newArr: string[] = []) {
+export function handleRouter(routerList: Array<any>, newArr: string[] = []) {
   routerList.forEach(item => {
     typeof item === 'object' && item.path && newArr.push(item.path)
     item.children && item.children.length && handleRouter(item.children, newArr)
@@ -180,6 +180,25 @@ export function handleRouter(routerList, newArr: string[] = []) {
   return newArr
 }
 
-export function getCity(id) {
+export function getCity(id: string | number) {
   return address[id]
+}
+
+/**
+ * 获取url参数
+ * @param url 参数名
+ */
+export function getQueryObject(url?: string) {
+  url = url == null ? window.location.href : url
+  const search = url.substring(url.lastIndexOf('?') + 1)
+  const obj = {}
+  const reg = /([^?&=]+)=([^?&=]*)/g
+  search.replace(reg, (rs, $1, $2) => {
+    const name = decodeURIComponent($1)
+    let val = decodeURIComponent($2)
+    val = String(val)
+    obj[name] = val
+    return rs
+  })
+  return obj
 }

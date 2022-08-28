@@ -82,11 +82,7 @@ export const discoverMenu = [
   },
   {
     title: '歌单',
-    link: '/discover/songs'
-  },
-  {
-    title: '主播电台',
-    link: '/discover/djradio'
+    link: '/discover/playlist'
   },
   {
     title: '歌手',

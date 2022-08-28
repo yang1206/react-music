@@ -23,11 +23,15 @@ export const getTopAlbums = (data?: Recommend.TopAlbums) => {
   })
 }
 //全部新碟
-export const getNewAlbums = (data?: Recommend.NewAlbums) => {
+export const getNewAlbums = (area: string = 'ALL', limit?: number, offset?: any) => {
   return request({
     url: '/album/new',
     method: 'GET',
-    data
+    data: {
+      area,
+      limit,
+      offset
+    }
   })
 }
 //首页热门新碟
@@ -54,9 +58,12 @@ export const getPlaylist = (data: Recommend.Playlist) => {
   })
 }
 //获取全部榜单
-export const getAllTopList = () => {
+export const getAllTopList = (id: number | string) => {
   return request({
     url: '/toplist',
-    method: 'GET'
+    method: 'GET',
+    data: {
+      id
+    }
   })
 }

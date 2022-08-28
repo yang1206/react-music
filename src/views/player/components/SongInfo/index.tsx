@@ -1,10 +1,13 @@
 import React, { memo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Collapse } from 'antd'
 import { selectSong, selectLyric } from '@/store/slice/Player'
 import { useAppSelector } from '@/hooks/useStore'
 import { getSizeImage, getPlayUrl } from '@/utils/format'
 import './index.less'
 const SongInfo: React.FC = () => {
+  const navigate = useNavigate()
+
   const currentSong = useAppSelector(selectSong).data
   const LyricList = useAppSelector(selectLyric).data
   const { Panel } = Collapse
@@ -12,7 +15,7 @@ const SongInfo: React.FC = () => {
   const songName = currentSong.name ? currentSong?.name : ''
   const singer = currentSong.ar && currentSong.ar[0]?.name
   const album = currentSong.al && currentSong.al?.name
-
+  const albumId = currentSong.al && currentSong.al?.id
   const playMusic = () => {
     console.log(document.querySelector('#audio'))
   }
@@ -34,7 +37,16 @@ const SongInfo: React.FC = () => {
         </div>
         <div className="settle-album">
           <span>所属专辑：</span>
-          <a className="no-link">{album}</a>
+          <a
+            className=""
+            onClick={() => {
+              navigate(`/album?id=${albumId}`, {
+                replace: false
+              })
+            }}
+          >
+            {album}
+          </a>
         </div>
         <div className="controls">
           <div className="sprite_button play pointer" onClick={() => playMusic()}>

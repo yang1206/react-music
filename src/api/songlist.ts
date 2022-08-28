@@ -16,3 +16,22 @@ export const getSongListAll = (data: SongList.SongListDetail) => {
     data
   })
 }
+
+export function getSongCategory() {
+  return request({
+    url: '/playlist/catlist',
+    method: 'GET'
+  })
+}
+
+export function getSongCategoryList(cat = '全部', offset = 0, limit = 35) {
+  return request({
+    url: '/top/playlist',
+    method: 'GET',
+    data: {
+      cat,
+      limit,
+      offset
+    }
+  })
+}

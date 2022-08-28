@@ -6,7 +6,8 @@ import recommendSlice from './slice/recommend'
 import playerSlice from './slice/Player'
 import searchSlice from './slice/Search'
 import SongListSlice from './slice/SongList'
-import Login from './slice/Login'
+import LoginSlice from './slice/Login'
+import TopListSlice from './slice/TopList'
 export const store = configureStore({
   reducer: {
     // counter: counterSlice,
@@ -14,7 +15,8 @@ export const store = configureStore({
     player: playerSlice,
     search: searchSlice,
     songList: SongListSlice,
-    login: Login
+    login: LoginSlice,
+    topList: TopListSlice
   },
   //使用redux-logger中间件
   middleware: getDefaultMiddleware =>

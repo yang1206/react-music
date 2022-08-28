@@ -5,6 +5,7 @@ import { formatMinuteSecond } from '@/utils/format'
 import { getSongSimi } from '@/api/song'
 import SongInfo from './components/SongInfo'
 import SongItem from './components/SongItem'
+import SongComments from './components/SongComments'
 import './index.less'
 const Player: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -23,6 +24,7 @@ const Player: React.FC = () => {
       <div className="content wrap-v2">
         <div className="PlayerLeft">
           <SongInfo />
+          <SongComments />
         </div>
         <div className="PlayerRight">
           {simiList &&

@@ -14,16 +14,12 @@ const HomeRouter: Array<RouteObject> = [
     // index: true
   },
   {
-    path: '/discover/songs',
+    path: '/discover/playlist',
     element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/songs')))
   },
   {
     path: '/discover/album',
     element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/album')))
-  },
-  {
-    path: '/discover/djradio',
-    element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/djradio')))
   },
   {
     path: '/discover/ranking',

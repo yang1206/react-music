@@ -31,6 +31,7 @@ const SongListInfo: React.FC = () => {
   const playlist = SongListDetail && SongListDetail.tracks
   const subscribed = SongListDetail.subscribed
 
+  // 收藏/取消收藏歌单
   const collectSongList = useCallback(() => {
     if (isLogin) {
       // 收藏歌单接口
@@ -47,6 +48,7 @@ const SongListInfo: React.FC = () => {
       dispatch(changeIsVisible(true))
     }
   }, [isLogin, dispatch, playlist])
+  //删除歌单
   const deleteList = useCallback(() => {
     if (isLogin) {
       deleteSongList({ id: SongListDetail.id }).then(res => {

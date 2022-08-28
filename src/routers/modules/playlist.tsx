@@ -4,7 +4,7 @@ import lazyLoad from '@/routers/utils/lazyLoad'
 const PlayListRouter: Array<RouteObject> = [
   {
     path: '/playlist',
-    element: lazyLoad(lazy(() => import('@/views/songlist')))
+    element: lazyLoad(lazy(() => import('@/views/playlist')))
   }
 ]
 export default PlayListRouter

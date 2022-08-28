@@ -5,6 +5,7 @@ import lazyLoad from '@/routers/utils/lazyLoad'
 import DiscoverRouter from '@/routers/modules/discover'
 import SearchRouter from '@/routers/modules/search'
 import PlayRouter from '@/routers/modules/playlist'
+import AlbumRouter from '@/routers/modules/album'
 import UserRouter from '@/routers/modules/user'
 import LayoutIndex from '@/layouts'
 const routes: RouteObject[] = [
@@ -30,7 +31,8 @@ const routes: RouteObject[] = [
       },
       ...SearchRouter,
       ...PlayRouter,
-      ...UserRouter
+      ...UserRouter,
+      ...AlbumRouter
     ]
   }
 ]

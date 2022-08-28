@@ -6,7 +6,7 @@ type Headers = {
   keywords?: Array<any>
   moreLink?: string
   right?: any
-  keywordClick?: (item: string) => void
+  keywordClick?: (item: string, index?: number) => void
 }
 const RcmHeader: React.FC<Headers> = props => {
   const { title, keywords, keywordClick, moreLink, right } = props
@@ -16,10 +16,10 @@ const RcmHeader: React.FC<Headers> = props => {
         <span className="title">{title}</span>
         <div className="keyword">
           {keywords &&
-            keywords.map(item => {
+            keywords.map((item, index) => {
               return (
                 <div className="item" key={item}>
-                  <span className="link" onClick={() => keywordClick(item)}>
+                  <span className="link" onClick={() => keywordClick(item, index)}>
                     {item}
                   </span>
                   <span className="divider">|</span>

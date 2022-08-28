@@ -1,16 +1,16 @@
 import React, { memo } from 'react'
 import { Pagination } from 'antd'
-
+import './index.less'
 interface Props {
   currentPage: number
   total: number
-  onPageChange: () => void
+  onPageChange: (currentPage: number) => void
+  pageSize?: number
 }
 const CustomPagination: React.FC<Props> = props => {
   const { currentPage, total, onPageChange } = props
-
   // render function
-  const itemRender = (type, originalElement) => {
+  const itemRender = (_page: any, type: string, originalElement: any) => {
     if (type === 'prev') {
       return <button className="control prev"> &lt; 上一页</button>
     }
