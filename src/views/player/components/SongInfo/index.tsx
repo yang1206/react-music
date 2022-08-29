@@ -1,24 +1,21 @@
 import React, { memo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Collapse } from 'antd'
 import { selectSong, selectLyric } from '@/store/slice/Player'
 import { useAppSelector } from '@/hooks/useStore'
 import { getSizeImage, getPlayUrl } from '@/utils/format'
 import './index.less'
 const SongInfo: React.FC = () => {
-  const navigate = useNavigate()
-
   const currentSong = useAppSelector(selectSong).data
   const LyricList = useAppSelector(selectLyric).data
   const { Panel } = Collapse
   const pirUrl = currentSong.al && currentSong.al?.picUrl
   const songName = currentSong.name ? currentSong?.name : ''
   const singer = currentSong.ar && currentSong.ar[0]?.name
+  const singerId = currentSong.ar && currentSong.ar[0]?.id
   const album = currentSong.al && currentSong.al?.name
   const albumId = currentSong.al && currentSong.al?.id
-  const playMusic = () => {
-    console.log(document.querySelector('#audio'))
-  }
+  const playMusic = () => {}
   return (
     <div className="SongInfoWrapper">
       <div className="album">
@@ -33,20 +30,11 @@ const SongInfo: React.FC = () => {
         </div>
         <div className="singer">
           <span>歌手：</span>
-          <a>{singer}</a>
+          <Link to={`/artist?id=${singerId}`}>{singer}</Link>
         </div>
         <div className="settle-album">
           <span>所属专辑：</span>
-          <a
-            className=""
-            onClick={() => {
-              navigate(`/album?id=${albumId}`, {
-                replace: false
-              })
-            }}
-          >
-            {album}
-          </a>
+          <Link to={`/album?id=${albumId}`}>{album}</Link>
         </div>
         <div className="controls">
           <div className="sprite_button play pointer" onClick={() => playMusic()}>

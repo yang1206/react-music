@@ -29,6 +29,7 @@ const PlayList: React.FC<Props> = (props: Props) => {
                 duration={formatMinuteSecond(item.dt)}
                 songName={item.name}
                 singer={item.ar[0].name}
+                singerId={item.ar[0].id}
                 songId={item.id}
                 album={item.al.name}
                 albumId={item.al.id}

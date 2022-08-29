@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { Slider, message, Tooltip } from 'antd'
 import { CSSTransition } from 'react-transition-group'
 import PlayPanel from '@/views/player/PlayPanel'
@@ -216,8 +216,14 @@ const PlayBar: React.FC = () => {
           </div>
           <div className="info">
             <div className="song">
-              <span className="song-name">{currentSong?.name}</span>
-              {currentSong?.ar[0] && <span className="singer-name">{currentSong?.ar[0].name}</span>}
+              <Link to={`/discover/song`} className="song-name">
+                {currentSong?.name}
+              </Link>
+              {currentSong?.ar[0] && (
+                <Link to={`/artist?id=${currentSong?.ar[0].id}`} className="singer-name">
+                  {currentSong?.ar[0].name}
+                </Link>
+              )}
             </div>
             <div className="progress">
               <Slider value={progress} onChange={sliderChange} onAfterChange={sliderAfterChange} />

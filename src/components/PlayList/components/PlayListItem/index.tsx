@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useAddPlaylist } from '@/hooks/useAddPlaylist'
 import { getSizeImage } from '@/utils/format'
 import { getSong, selectPlayList } from '@/store/slice/Player'
@@ -18,10 +18,11 @@ type Props = {
   album?: string
   albumId?: number
   hideAl: boolean
+  singerId: number
 }
 
 const PlayListItem: React.FC<Props> = (props: Props) => {
-  const { currentRanking, coverPic, duration, singer, songId, songName, className = '', album, albumId, hideAl } = props
+  const { currentRanking, coverPic, duration, singer, songId, songName, className = '', album, albumId, hideAl, singerId } = props
   const playList = useAppSelector(selectPlayList).data
   const dispatch = useAppDispatch()
   const playMusic = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, isTo = false) => {
@@ -35,9 +36,9 @@ const PlayListItem: React.FC<Props> = (props: Props) => {
     <div className={`SongItemWrapper ${className}`}>
       <div className="song-item rank-count">{currentRanking}</div>
       {coverPic && (
-        <NavLink to="/discover/song" className="song-item" onClick={e => playMusic(e, true)}>
+        <Link to="/discover/song" className="song-item" onClick={e => playMusic(e, true)}>
           <img src={getSizeImage(coverPic, 50)} alt="" />
-        </NavLink>
+        </Link>
       )}
       <div className="song-item song-info" style={{ width: width }}>
         <div className="left-info">
@@ -51,11 +52,13 @@ const PlayListItem: React.FC<Props> = (props: Props) => {
         </div>
       </div>
       <div className="song-item duration">{duration}</div>
-      <a className="song-item singer">{singer}</a>
+      <Link to={`/artist?id=${singerId}`} className="song-item singer">
+        {singer}
+      </Link>
       {album && !hideAl && (
-        <NavLink to={`/album?id=${albumId}`} className="song-item album">
+        <Link to={`/album?id=${albumId}`} className="song-item album">
           {album}
-        </NavLink>
+        </Link>
       )}
     </div>
   )
