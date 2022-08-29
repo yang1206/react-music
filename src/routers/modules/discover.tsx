@@ -30,6 +30,10 @@ const HomeRouter: Array<RouteObject> = [
     element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/artist')))
   },
   {
+    path: '/discover/dailysongs',
+    element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/dailysongs')))
+  },
+  {
     path: '/discover/song',
     element: lazyLoad(lazy(() => import('@/views/player')))
   }

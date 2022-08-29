@@ -15,10 +15,13 @@ type Props = {
   songId: number
   songName: string
   className: string
+  album?: string
+  albumId?: number
+  hideAl: boolean
 }
 
 const PlayListItem: React.FC<Props> = (props: Props) => {
-  const { currentRanking, coverPic, duration, singer, songId, songName, className = '' } = props
+  const { currentRanking, coverPic, duration, singer, songId, songName, className = '', album, albumId, hideAl } = props
   const playList = useAppSelector(selectPlayList).data
   const dispatch = useAppDispatch()
   const playMusic = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, isTo = false) => {
@@ -49,6 +52,11 @@ const PlayListItem: React.FC<Props> = (props: Props) => {
       </div>
       <div className="song-item duration">{duration}</div>
       <a className="song-item singer">{singer}</a>
+      {album && !hideAl && (
+        <NavLink to={`/album?id=${albumId}`} className="song-item album">
+          {album}
+        </NavLink>
+      )}
     </div>
   )
 }

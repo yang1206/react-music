@@ -1,8 +1,7 @@
 import React, { useEffect, memo } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { formatMinuteSecond } from '@/utils/format'
 import RcmHeader from '@/components/RcmHeader'
-import TopSongItem from '../SongItem'
+import PlayList from '@/components/PlayList'
 import {
   selectCurrentTopListTitleInfo,
   selectCurrentTopList,
@@ -29,31 +28,7 @@ const TopListMain: React.FC = () => {
   return (
     <div className="TopListMainWrapper">
       <RcmHeader title="歌曲列表" right={rightSlot} />
-      <div className="toplist-main">
-        <div className="main-header">
-          <div className="sprite_table header-item"></div>
-          <div className="sprite_table header-item header-title">标题</div>
-          <div className="sprite_table header-item header-time">时长</div>
-          <div className="sprite_table header-item header-singer">歌手</div>
-        </div>
-        <div className="main-list">
-          {currentTopList &&
-            currentTopList.slice(0, 100).map((item, index) => {
-              return (
-                <TopSongItem
-                  key={item.id}
-                  currentRanking={index + 1}
-                  className="song_item"
-                  coverPic={item.al.picUrl && index < 3 ? item.al.picUrl : ''}
-                  duration={formatMinuteSecond(item.dt)}
-                  songName={item.name}
-                  singer={item.ar[0].name}
-                  songId={item.id}
-                />
-              )
-            })}
-        </div>
-      </div>
+      <PlayList playlist={currentTopList} hideAl={true} />
     </div>
   )
 }

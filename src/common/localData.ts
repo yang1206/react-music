@@ -91,6 +91,10 @@ export const discoverMenu = [
   {
     title: '新碟上架',
     link: '/discover/album'
+  },
+  {
+    title: '每日歌曲',
+    link: '/discover/dailysongs'
   }
 ]
 

@@ -67,3 +67,11 @@ export const getAllTopList = (id: number | string) => {
     }
   })
 }
+
+//获取每日推荐歌曲
+export const getRecommendsongs = () => {
+  return request({
+    url: '/recommend/songs',
+    method: 'GET'
+  })
+}
