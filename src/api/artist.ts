@@ -48,16 +48,24 @@ export const getArtistsAlbum = (id: number | string) => {
 // 8:日本
 // 16韩国
 // 0:其他
-export const getArtistsList = (id: number | string, type?: number, area?: number, initial?: string, offset?: number) => {
+export const getArtistsList = (
+  type?: number | string,
+  area?: number | string,
+  cat?: number | string,
+  offset?: number,
+  initial?: string,
+  limit = 16
+) => {
   return request({
     url: '/artist/list',
     method: 'GET',
     data: {
-      id,
       type,
       area,
+      cat,
       offset,
-      initial
+      initial,
+      limit
     }
   })
 }

@@ -216,6 +216,10 @@ button {
   background: url('@/assets/img/icon.png') no-repeat 0 9999px;
 }
 
+.artist {
+  background: url('@/assets/img/singer_sprite.png') no-repeat 0 9999px;
+}
+
 main.content {
   width: 980px;
   min-height: 700px;

@@ -12,7 +12,7 @@ import {
   getSearchAlbumList
 } from '@/store/slice/Search'
 import SingleSong from './components/SingleSong'
-import SingerItem from './components/Singer'
+import ArtistCover from '@/components/ArtistCover'
 import AlbumCover from '@/components/AlbumCover'
 import { formatMinuteSecond } from '@/utils/format'
 import './index.less'
@@ -108,7 +108,7 @@ const SearchContent: React.FC = () => {
                 <div className="SingerWrapper">
                   {singerList &&
                     singerList.map(item => {
-                      return <SingerItem key={item.id} coverPic={item.picUrl} singer={item.name} />
+                      return <ArtistCover key={item.id} id={item.id} coverPic={item.picUrl} singer={item.name} />
                     })}
                 </div>
               </TabPane>

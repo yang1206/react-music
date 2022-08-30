@@ -163,17 +163,17 @@ export const singerCategories = [
     artists: [
       {
         name: '华语男歌手',
-        url: '/discover/artist?id=1001',
+        url: '/discover/artist?area=7&type=1',
         type: 1
       },
       {
         name: '华语女歌手',
-        url: '/discover/artist?id=1002',
+        url: '/discover/artist?area=7&type=2',
         type: 2
       },
       {
         name: '华语组合/乐队',
-        url: '/discover/artist?id=1003',
+        url: '/discover/artist?area=7&type=3',
         type: 3
       }
     ]
@@ -184,17 +184,17 @@ export const singerCategories = [
     artists: [
       {
         name: '欧美男歌手',
-        url: '/discover/artist?id=2001',
+        url: '/discover/artist?area=96&type=1',
         type: 1
       },
       {
         name: '欧美女歌手',
-        url: '/discover/artist?id=2002',
+        url: '/discover/artist?area=96&type=2',
         type: 2
       },
       {
         name: '欧美组合乐队',
-        url: '/discover/artist?id=2003',
+        url: '/discover/artist?area=96&type=3',
         type: 3
       }
     ]
@@ -205,17 +205,17 @@ export const singerCategories = [
     artists: [
       {
         name: '日本男歌手',
-        url: '/discover/artist?id=6001',
+        url: '/discover/artist?area=8&type=1',
         type: 1
       },
       {
         name: '日本女歌手',
-        url: '/discover/artist?id=6002',
+        url: '/discover/artist?area=8&type=2',
         type: 2
       },
       {
         name: '日本组合/乐队',
-        url: '/discover/artist?id=6003',
+        url: '/discover/artist?area=8&type=3',
         type: 3
       }
     ]
@@ -226,17 +226,17 @@ export const singerCategories = [
     artists: [
       {
         name: '韩国男歌手',
-        url: '/discover/artist?id=7001',
+        url: '/discover/artist?area=16&type=1',
         type: 1
       },
       {
         name: '韩国女歌手',
-        url: '/discover/artist?id=7002',
+        url: '/discover/artist?area=16&type=2',
         type: 2
       },
       {
         name: '韩国组合/乐队',
-        url: '/discover/artist?id=7003',
+        url: '/discover/artist?area=16&type=3',
         type: 3
       }
     ]
@@ -247,17 +247,17 @@ export const singerCategories = [
     artists: [
       {
         name: '其他男歌手',
-        url: '/discover/artist?id=4001',
+        url: '/discover/artist?area=0&type=1',
         type: 1
       },
       {
         name: '其他女歌手',
-        url: '/discover/artist?id=4002',
+        url: '/discover/artist?area=0&type=2',
         type: 2
       },
       {
         name: '其他组合乐队',
-        url: '/discover/artist?id=4003',
+        url: '/discover/artist?area=0&type=3',
         type: 3
       }
     ]
