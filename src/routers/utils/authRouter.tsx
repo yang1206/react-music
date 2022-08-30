@@ -6,7 +6,7 @@ import { store } from '@/store'
 /**
  * @description 路由守卫组件
  * */
-const AuthRouter = (props: { children: JSX.Element }) => {
+const AuthRouter = (props: any) => {
   const { pathname } = useLocation()
   const route = searchRoute(pathname, routes)
   // * 在跳转路由之前，清除所有的请求
