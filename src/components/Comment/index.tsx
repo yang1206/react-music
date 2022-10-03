@@ -1,4 +1,4 @@
-import { Comment, Avatar, Form, Button, Input, message } from 'antd'
+import { Avatar, Button, Comment, Form, Input, message } from 'antd'
 import React, { useState } from 'react'
 
 const { TextArea } = Input
@@ -28,7 +28,7 @@ interface Props {
   isLogin: boolean
   photo: string
 }
-const CurComment: React.FC<Props> = props => {
+const CurComment: React.FC<Props> = (props) => {
   // const [comments, setComments] = useState([])
   const [submitting] = useState(false)
   const [value, setValue] = useState('')

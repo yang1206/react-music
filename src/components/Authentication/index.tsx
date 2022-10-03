@@ -1,5 +1,5 @@
-import { useEffect, memo } from 'react'
-import { message, Skeleton } from 'antd'
+import { memo, useEffect } from 'react'
+import { Skeleton, message } from 'antd'
 
 const Auth = (props: { showModal: () => void; flag: boolean; to: () => void }) => {
   const { flag } = props

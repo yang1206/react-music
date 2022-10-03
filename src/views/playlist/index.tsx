@@ -1,9 +1,9 @@
-import { useEffect, memo } from 'react'
+import { memo, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import SongListInfo from './components/SongListInfo'
 import NavBar from '@/components/NavBar'
 import { useAppDispatch } from '@/hooks/useStore'
 import { getSongListDetailData } from '@/store/slice/SongList'
-import SongListInfo from './components/SongListInfo'
 import './index.less'
 const PlayList: React.FC = () => {
   const [params] = useSearchParams()

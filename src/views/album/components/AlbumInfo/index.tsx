@@ -12,7 +12,10 @@ const AlbumInfo: React.FC<Props> = (props: Props) => {
   const coverPicUrl = albumDetail && albumDetail.album.blurPicUrl
   const headerTitle = albumDetail && albumDetail.album.name
   const artistName = albumDetail && albumDetail.album.artist && albumDetail.album.artist.name
-  const ReleaseDate = albumDetail && albumDetail.album.publishTime && parseTime(albumDetail.album.publishTime, '{y}-{m}-{d}')
+  const ReleaseDate
+    = albumDetail
+    && albumDetail.album.publishTime
+    && parseTime(albumDetail.album.publishTime, '{y}-{m}-{d}')
   const description = albumDetail && albumDetail.album.description
   const shareCount = albumDetail && albumDetail.album.info.shareCount
   const commentCount = albumDetail && albumDetail.album.info.commentCount

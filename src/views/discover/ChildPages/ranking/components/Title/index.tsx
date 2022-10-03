@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
+import { FieldTimeOutlined } from '@ant-design/icons'
 import { useAppSelector } from '@/hooks/useStore'
 import { selectCurrentTopListTitleInfo } from '@/store/slice/TopList'
-import { getSizeImage, formatMonthDay } from '@/utils/format'
-import { FieldTimeOutlined } from '@ant-design/icons'
+import { formatMonthDay, getSizeImage } from '@/utils/format'
 import './index.less'
 const TopListTitle = () => {
   const titleInfo = useAppSelector(selectCurrentTopListTitleInfo).data

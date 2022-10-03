@@ -1,8 +1,8 @@
-import React, { useEffect, memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import RcmHeader from '@/components/RcmHeader'
 import TopRanking from '@/components/TopRanking'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectTopList, getTopLists } from '@/store/slice/recommend'
+import { getTopLists, selectTopList } from '@/store/slice/recommend'
 import './index.less'
 const NewAlbum: React.FC = () => {
   const props = {
@@ -11,15 +11,15 @@ const NewAlbum: React.FC = () => {
     keywordClick: () => {
       //
     },
-    moreLink: '/discover/ranking'
+    moreLink: '/discover/ranking',
   }
   const dispatch = useAppDispatch()
   useEffect(() => {
-    //飙升榜
+    // 飙升榜
     dispatch(getTopLists(19723756))
-    //新歌榜
+    // 新歌榜
     dispatch(getTopLists(3779629))
-    //原创榜
+    // 原创榜
     dispatch(getTopLists(2884035))
   }, [])
   const { newList, riseList, originalList } = useAppSelector(selectTopList).data

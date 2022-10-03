@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 import { PlayCircleOutlined } from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { useAddPlaylist } from '@/hooks/useAddPlaylist'
-import { selectPlayList } from '@/store/slice/Player'
-import { getSong } from '@/store/slice/Player'
+import { getSong, selectPlayList } from '@/store/slice/Player'
+
 import './index.less'
 interface Props {
   songId: number

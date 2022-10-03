@@ -7,7 +7,7 @@ const NavBar: React.FC = () => {
     <div className="NavBarWrapper wrap-v1">
       <div className="">
         <div className="TopMenu wrap-v2">
-          {discoverMenu.map(item => {
+          {discoverMenu.map((item) => {
             return (
               <div className="item" key={item.title}>
                 <NavLink to={item.link}>{item.title}</NavLink>

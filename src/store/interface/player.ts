@@ -1,9 +1,9 @@
 export namespace Player {
-  export type ar = {
+  export interface ar {
     id: number
     name: string
   }
-  export type al = {
+  export interface al {
     id: number
     name: string
     picUrl: string

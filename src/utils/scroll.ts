@@ -6,14 +6,18 @@
  */
 export function scrollTo(element: { scrollTop: number }, to: number, duration: number) {
   // 当前播放时间
-  if (duration <= 0) return
-  // 目标-当前距离的卷曲的top
-  let difference = to - element.scrollTop
-  let perTick = (difference / duration) * 10
+  if (duration <= 0)
+    return
 
-  setTimeout(function () {
+  // 目标-当前距离的卷曲的top
+  const difference = to - element.scrollTop
+  const perTick = (difference / duration) * 10
+
+  setTimeout(() => {
     element.scrollTop = element.scrollTop + perTick
-    if (element.scrollTop === to) return
+    if (element.scrollTop === to)
+      return
+
     scrollTo(element, to, duration - 10)
   }, 10)
 }

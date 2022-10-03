@@ -1,7 +1,7 @@
-import React, { useState, memo } from 'react'
+import React, { memo, useState } from 'react'
+import SongsCategory from '../SongsCategory'
 import { useAppSelector } from '@/hooks/useStore'
 import { selectCurrentCategory } from '@/store/slice/SongList'
-import SongsCategory from '../SongsCategory'
 import './index.less'
 const SongsHeader: React.FC = () => {
   const [showCategory, setShowCategory] = useState(false)
@@ -9,7 +9,7 @@ const SongsHeader: React.FC = () => {
   return (
     <div className="SongsHeaderWrapper">
       <div className="SongsHeaderLeft">
-        <span className="title">{currentCategory ? currentCategory : '全部'}</span>
+        <span className="title">{currentCategory || '全部'}</span>
         <button className="select" onClick={() => setShowCategory(!showCategory)}>
           <span>选择分类</span>
           <i className="sprite_icon2"></i>

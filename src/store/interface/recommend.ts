@@ -14,7 +14,7 @@ export namespace Recommend {
     id: number
     picUrl: string
   }
-  export type topItem = {
+  export interface topItem {
     id?: number
     name?: string
     coverImgUrl?: string

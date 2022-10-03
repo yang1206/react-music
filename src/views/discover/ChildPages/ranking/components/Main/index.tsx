@@ -1,12 +1,12 @@
-import React, { useEffect, memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import RcmHeader from '@/components/RcmHeader'
 import PlayList from '@/components/PlayList'
 import {
-  selectCurrentTopListTitleInfo,
+  getTopListItem,
   selectCurrentTopList,
   selectCurrentTopListId,
-  getTopListItem
+  selectCurrentTopListTitleInfo,
 } from '@/store/slice/TopList'
 import './index.less'
 const TopListMain: React.FC = () => {

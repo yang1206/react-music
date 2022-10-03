@@ -1,14 +1,19 @@
 import { useEffect } from 'react'
 import { BackTop, Layout } from 'antd'
-import { Outlet /*, useLocation */ } from 'react-router-dom'
+import { Outlet /* , useLocation */ } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { useAppDispatch } from '@/hooks/useStore'
 import initLoginInfo from '@/config/token'
-import { setLoginInfo, getLoginInfo } from '@/utils/secretKey'
+import { getLoginInfo, setLoginInfo } from '@/utils/secretKey'
 import { getLoginProfileInfo } from '@/store/slice/Login'
 import { getSongDetailArray } from '@/store/slice/Player'
 import { useGlobalKeyboardEvent } from '@/hooks/useKeyboard'
-import { addPlaylistId, getCurrentSongIndex, getPlaylistId, initCurrentSongIndex } from '@/utils/storage'
+import {
+  addPlaylistId,
+  getCurrentSongIndex,
+  getPlaylistId,
+  initCurrentSongIndex,
+} from '@/utils/storage'
 import { SONG_PLAYLIST_ID as songPlayListId } from '@/common/constants'
 import Header from '@/layouts/components/Header'
 import Footer from '@/layouts/components/Footer'
@@ -22,7 +27,7 @@ const LayoutIndex = () => {
     // 存在登录信息
     if (localStorage.getItem('loginInfo') != null) {
       const { username, password } = getLoginInfo('loginInfo')
-      username && password ? dispatch(getLoginProfileInfo({ username: username, password: password })) : ''
+      dispatch(getLoginProfileInfo({ username, password }))
     }
     // 不存在登录信息
     else {
@@ -40,11 +45,11 @@ const LayoutIndex = () => {
 
   // 本地存储读取歌曲列表ID
   useEffect(() => {
-    //动态获取locals store音乐索引
+    // 动态获取locals store音乐索引
     const index = getCurrentSongIndex()
-    dispatch(getSongDetailArray({ listId: getPlaylistId(), index: index }))
+    dispatch(getSongDetailArray({ listId: getPlaylistId(), index }))
   }, [dispatch])
-  //全局唤醒搜索框hook
+  // 全局唤醒搜索框hook
   useGlobalKeyboardEvent()
   // const { pathname } = useLocation()
   // console.log(pathname)

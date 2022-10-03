@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-import { formatMinuteSecond } from '@/utils/format'
 import PlayListItem from './components/PlayListItem'
+import { formatMinuteSecond } from '@/utils/format'
 import './index.less'
-type Props = {
+interface Props {
   playlist: Array<any>
   hideAl?: boolean
 }
@@ -18,8 +18,8 @@ const PlayList: React.FC<Props> = (props: Props) => {
         {!props.hideAl && <div className="sprite_table header-item header-album">专辑</div>}
       </div>
       <div className="main-list">
-        {playlist &&
-          playlist.map((item, index) => {
+        {playlist
+          && playlist.map((item, index) => {
             return (
               <PlayListItem
                 key={item.id}

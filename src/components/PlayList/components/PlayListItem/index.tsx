@@ -1,13 +1,13 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
+import { PlayCircleOutlined } from '@ant-design/icons'
 import { useAddPlaylist } from '@/hooks/useAddPlaylist'
 import { getSizeImage } from '@/utils/format'
 import { getSong, selectPlayList } from '@/store/slice/Player'
-import { useAppSelector, useAppDispatch } from '@/hooks/useStore'
-import { PlayCircleOutlined } from '@ant-design/icons'
+import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import './index.less'
 
-type Props = {
+interface Props {
   currentRanking: number
   coverPic: string
   duration: string
@@ -22,12 +22,26 @@ type Props = {
 }
 
 const PlayListItem: React.FC<Props> = (props: Props) => {
-  const { currentRanking, coverPic, duration, singer, songId, songName, className = '', album, albumId, hideAl, singerId } = props
+  const {
+    currentRanking,
+    coverPic,
+    duration,
+    singer,
+    songId,
+    songName,
+    className = '',
+    album,
+    albumId,
+    hideAl,
+    singerId,
+  } = props
   const playList = useAppSelector(selectPlayList).data
   const dispatch = useAppDispatch()
   const playMusic = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, isTo = false) => {
     // 如果不跳转,那么组织超链接的默认行为
-    if (!isTo) e.preventDefault()
+    if (!isTo)
+      e.preventDefault()
+
     dispatch(getSong({ id: songId, isPlay: true }))
   }
   const addPlaylist = useAddPlaylist(playList)
@@ -40,7 +54,7 @@ const PlayListItem: React.FC<Props> = (props: Props) => {
           <img src={getSizeImage(coverPic, 50)} alt="" />
         </Link>
       )}
-      <div className="song-item song-info" style={{ width: width }}>
+      <div className="song-item song-info" style={{ width }}>
         <div className="left-info">
           <PlayCircleOutlined className="font-active" onClick={e => playMusic(e)} />
           <a href="/play" onClick={e => playMusic(e)} className="text-nowrap">
@@ -48,7 +62,10 @@ const PlayListItem: React.FC<Props> = (props: Props) => {
           </a>
         </div>
         <div className="right-operator">
-          <button className="sprite_icon2 btn addto" onClick={e => addPlaylist(e, songId)}></button>
+          <button
+            className="sprite_icon2 btn addto"
+            onClick={e => addPlaylist(e, songId)}
+          ></button>
         </div>
       </div>
       <div className="song-item duration">{duration}</div>

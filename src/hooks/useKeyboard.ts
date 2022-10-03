@@ -18,14 +18,13 @@ export function useChangeDropBoxState(state = false) {
 export async function useGlobalKeyboardEvent() {
   const showDropBoxState = useChangeDropBoxState(true)
   const closeDropBoxState = useChangeDropBoxState(false)
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.key === 'k') {
       // 阻止默认事件
       e.preventDefault()
       showDropBoxState()
     }
-    if (e.key === 'Escape') {
+    if (e.key === 'Escape')
       closeDropBoxState()
-    }
   })
 }

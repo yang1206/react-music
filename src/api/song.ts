@@ -1,10 +1,10 @@
+import type { Song } from './interface'
 import request from '@/service'
-import { Song } from './interface'
 export const getSongDetail = (data: Song.SongDetail) => {
   return request({
     url: '/song/detail',
     method: 'GET',
-    data
+    data,
   })
 }
 
@@ -12,43 +12,43 @@ export const getLyricData = (data: { id: number }) => {
   return request({
     url: '/lyric',
     method: 'GET',
-    data
+    data,
   })
 }
 
-//相似歌曲
+// 相似歌曲
 export const getSongSimi = (data: { id: number }) => {
   return request({
     url: '/simi/song',
     method: 'GET',
-    data
+    data,
   })
 }
 
-//检查音乐是否可用
+// 检查音乐是否可用
 export const checkMusic = (data: { id: number }) => {
   return request({
     url: '/check/music',
     method: 'GET',
-    data
+    data,
   })
 }
 
-//获取热门评论
+// 获取热门评论
 export const getHotCommentData = (data: { id: number; type: number }) => {
   return request({
     url: '/comment/hot',
     method: 'GET',
-    data
+    data,
   })
 }
 
-//获取歌曲评论
+// 获取歌曲评论
 export const getSongComment = (id: number, limit = 20, offset: number) => {
   return request({
     url: '/comment/music',
     method: 'GET',
-    data: { id, limit, offset, timestamp: new Date().getTime() }
+    data: { id, limit, offset, timestamp: new Date().getTime() },
   })
 }
 // 点赞
@@ -61,8 +61,8 @@ export function sendLikeComment(id: number, cid: number, t: number) {
       id,
       cid,
       t,
-      type: 0
-    }
+      type: 0,
+    },
   })
 }
 
@@ -74,8 +74,8 @@ export function sendSongComment(id: any, content: any) {
       t: 1, // 发送
       type: 0, // 歌曲类型
       id,
-      content: content,
-      timestamp: new Date().getTime()
-    }
+      content,
+      timestamp: new Date().getTime(),
+    },
   })
 }

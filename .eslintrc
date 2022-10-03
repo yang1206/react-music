@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "@antfu"
+    // "plugin:prettier/recommended"
+  ]
+  // "rules": {
+  //   "allowTernary": false,
+  //   "allowShortCircuit": false,
+  //   "allowTaggedTemplates": false
+  // }
+}

@@ -6,26 +6,24 @@ export function handleSongsCategory(data) {
   const categoryData = Object.entries(category).map(([, value]) => {
     return {
       name: value,
-      subs: []
+      subs: [],
     }
   })
 
   // 3.将subs添加到对应的类别中
-  for (let item of data.sub) {
+  for (const item of data.sub)
     categoryData[item.category].subs.push(item)
-  }
 
   return categoryData
 }
 
 // 获取歌手字母类别
 export function generateSingerAlpha() {
-  let alphabets = ['-1']
-  let start = 'A'.charCodeAt(0)
-  let last = 'Z'.charCodeAt(0)
-  for (let i = start; i <= last; ++i) {
+  const alphabets = ['-1']
+  const start = 'A'.charCodeAt(0)
+  const last = 'Z'.charCodeAt(0)
+  for (let i = start; i <= last; ++i)
     alphabets.push(String.fromCharCode(i))
-  }
 
   alphabets.push('0')
 

@@ -10,11 +10,13 @@ interface Props {
 }
 
 const ArtistCover: React.FC<Props> = ({ coverPic, singer, id }: Props) => {
-  const picUrl = (coverPic && getSizeImage(coverPic, 140)) || 'https://gitee.com/xmkm/cloudPic/raw/master/img/20210505140847.png'
+  const picUrl
+    = (coverPic && getSizeImage(coverPic, 140))
+    || 'https://gitee.com/xmkm/cloudPic/raw/master/img/20210505140847.png'
   const navigate = useNavigate()
   const toArtist = () => {
     navigate(`/artist?id=${id}`, {
-      replace: false
+      replace: false,
     })
   }
   return (

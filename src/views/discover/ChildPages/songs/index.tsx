@@ -1,10 +1,10 @@
-import React, { useEffect, memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 // import { getQueryObject } from '@/utils/format'
-import { useAppDispatch } from '@/hooks/useStore'
-import { getCategory, getPlayList, changeCurrentCategory } from '@/store/slice/SongList'
 import SongsHeader from './components/SongsHeader'
 import SongsList from './components/SongsList'
+import { useAppDispatch } from '@/hooks/useStore'
+import { changeCurrentCategory, getCategory, getPlayList } from '@/store/slice/SongList'
 import './index.less'
 const Songs: React.FC = () => {
   const [params] = useSearchParams()

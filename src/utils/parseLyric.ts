@@ -18,10 +18,12 @@ export function parseLyric(lyricString: string) {
   const lineStrings = lyricString.split('\n')
 
   const lyrics = []
-  for (let line of lineStrings) {
+  for (const line of lineStrings) {
     if (line) {
       const result = parseExp.exec(line)
-      if (!result) continue
+      if (!result)
+        continue
+
       const time1 = +result[1] * 60 * 1000
       const time2 = +result[2] * 1000
       const time3 = result[3].length === 3 ? +result[3] * 1 : +result[3] * 10

@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { RouteObject } from '@/routers/interface'
+import type { RouteObject } from '@/routers/interface'
 import lazyLoad from '@/routers/utils/lazyLoad'
 const UserRouter: Array<RouteObject> = [
   {
@@ -7,8 +7,8 @@ const UserRouter: Array<RouteObject> = [
     element: lazyLoad(lazy(() => import('@/views/user'))),
     meta: {
       title: '用户中心',
-      requiresAuth: true
-    }
-  }
+      requiresAuth: true,
+    },
+  },
 ]
 export default UserRouter

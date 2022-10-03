@@ -1,7 +1,7 @@
+import { message } from 'antd'
 import { useAppDispatch } from './useStore'
 import { getSong } from '@/store/slice/Player'
 import { getFindIdIndex } from '@/utils/math'
-import { message } from 'antd'
 
 /**
  * 调用该函数:传递播放列表
@@ -13,7 +13,7 @@ export function useAddPlaylist(playlist: any[]) {
     // 阻止超链接跳转
     e.preventDefault && e.preventDefault()
     // 获取歌曲详情,添加到播放列表
-    dispatch(getSong({ id: id, isPlay: false }))
+    dispatch(getSong({ id, isPlay: false }))
     // 提示添加成功或失败
     const index = getFindIdIndex(playlist, id)
     switch (index) {

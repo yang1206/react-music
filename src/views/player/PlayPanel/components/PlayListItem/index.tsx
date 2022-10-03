@@ -1,11 +1,11 @@
 import React, { memo } from 'react'
-import { DownloadOutlined, DeleteOutlined, LikeOutlined } from '@ant-design/icons'
+import { DeleteOutlined, DownloadOutlined, LikeOutlined } from '@ant-design/icons'
 import { formatDate, getPlayUrl } from '@/utils/format'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectPlayList, selectSong, changePlayList, changeCurrentSong, changePlayListCount } from '@/store/slice/Player'
+import { changeCurrentSong, changePlayList, changePlayListCount, selectPlayList, selectSong } from '@/store/slice/Player'
 import { removeSongId } from '@/utils/storage'
 import './index.less'
-const PlayListItem: React.FC<any> = props => {
+const PlayListItem: React.FC<any> = (props) => {
   const { songName, singer, duration, isActive, clickItem, songId, nextMusic, playMusic } = props
   const dispatch = useAppDispatch()
   const playList = useAppSelector(selectPlayList).data
@@ -17,13 +17,17 @@ const PlayListItem: React.FC<any> = props => {
     // 移除歌曲
     removeSongId(songId)
     const currentSongIndex = playList.findIndex((song: { id: number }) => song.id === songId)
-    if (playList.length > 1 && currentSong.id === songId) return
-    if (playList.length === 1) return
+    if (playList.length > 1 && currentSong.id === songId)
+      return
+
+    if (playList.length === 1)
+      return
+
     if (currentSong.id === songId) {
       playMusic()
       dispatch(changeCurrentSong(playList[currentSongIndex - 1]))
     }
-    let newArr = [...playList]
+    const newArr = [...playList]
     newArr.splice(currentSongIndex, 1)
     dispatch(changePlayList(newArr))
     dispatch(changePlayListCount(newArr.length))
@@ -31,7 +35,7 @@ const PlayListItem: React.FC<any> = props => {
     nextMusic()
   }
   return (
-    <div className={isActive + ' PlaylistItemWrapper'}>
+    <div className={`${isActive} PlaylistItemWrapper`}>
       <div className="song-name" onClick={clickItem}>
         {songName}
       </div>

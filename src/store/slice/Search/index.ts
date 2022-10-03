@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-import { getSearchSong, getSearchSongList, getSearchSingerList, getSearchAlbumList } from './action'
-import { RootState } from '@/store'
+import { getSearchAlbumList, getSearchSingerList, getSearchSong, getSearchSongList } from './action'
+import type { RootState } from '@/store'
 interface InitialState {
   searchSongList: Array<any>
   focusState: boolean
@@ -14,7 +14,7 @@ const initialState: InitialState = {
   focusState: false,
   singleSongList: [],
   singerList: [],
-  albumList: []
+  albumList: [],
 }
 
 export const searchSlice = createSlice({
@@ -23,9 +23,9 @@ export const searchSlice = createSlice({
   reducers: {
     changeFocusState: (state, { payload }: any) => {
       state.focusState = payload
-    }
+    },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     // 进行请求阶段的一些操作
     builder.addCase(getSearchSong.fulfilled, (state, action) => {
       state.searchSongList = action.payload.result.songs
@@ -39,15 +39,30 @@ export const searchSlice = createSlice({
     builder.addCase(getSearchAlbumList.fulfilled, (state, action) => {
       state.albumList = action.payload.result.albums
     })
-  }
+  },
 })
-//提前取出保存的数据并导出
-export const selectFocusState = (state: RootState) => ({ data: state.search.focusState, shallowEqual })
-export const selectSearchSongList = (state: RootState) => ({ data: state.search.searchSongList, shallowEqual })
-export const selectSingleSongList = (state: RootState) => ({ data: state.search.singleSongList, shallowEqual })
-export const selectSingerList = (state: RootState) => ({ data: state.search.singerList, shallowEqual })
-export const selectAlbumList = (state: RootState) => ({ data: state.search.albumList, shallowEqual })
+// 提前取出保存的数据并导出
+export const selectFocusState = (state: RootState) => ({
+  data: state.search.focusState,
+  shallowEqual,
+})
+export const selectSearchSongList = (state: RootState) => ({
+  data: state.search.searchSongList,
+  shallowEqual,
+})
+export const selectSingleSongList = (state: RootState) => ({
+  data: state.search.singleSongList,
+  shallowEqual,
+})
+export const selectSingerList = (state: RootState) => ({
+  data: state.search.singerList,
+  shallowEqual,
+})
+export const selectAlbumList = (state: RootState) => ({
+  data: state.search.albumList,
+  shallowEqual,
+})
 export default searchSlice.reducer
 export const { changeFocusState } = searchSlice.actions
-//统一导出异步action
+// 统一导出异步action
 export { getSearchSong, getSearchSongList, getSearchSingerList, getSearchAlbumList }

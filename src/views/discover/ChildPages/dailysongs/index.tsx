@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback, memo } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import DateHeader from './components/Date'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { changeIsVisible, selectLoginState } from '@/store/slice/Login'
 import { getRecommendsongs } from '@/api/recommend'
-import DateHeader from './components/Date'
 import RcmHeader from '@/components/RcmHeader'
 import Authentication from '@/components/Authentication'
 import PlayList from '@/components/PlayList'
@@ -15,15 +15,15 @@ const DailySongs: React.FC = () => {
   const isLogin = useAppSelector(selectLoginState).data
   // 获取推荐歌单列表
   useEffect(() => {
-    isLogin &&
-      getRecommendsongs().then(res => {
+    isLogin
+      && getRecommendsongs().then((res) => {
         const result = res.data
         setRecommendPlaylist(result.dailySongs)
       })
   }, [isLogin])
   const toRedirect = useCallback(() => {
-    navigate(`/`, {
-      replace: false
+    navigate('/', {
+      replace: false,
     })
   }, [navigate])
   const showModal = useCallback(() => {
@@ -32,7 +32,10 @@ const DailySongs: React.FC = () => {
   return (
     <div className="wrap-v2" style={{ border: 'solid 1px #d3d3d3' }}>
       <Authentication flag={isLogin} to={toRedirect} showModal={showModal} />
-      <div className="DayRecommendContent daycontent" style={{ display: isLogin ? 'block' : 'none' }}>
+      <div
+        className="DayRecommendContent daycontent"
+        style={{ display: isLogin ? 'block' : 'none' }}
+      >
         <div className="recommend-cover-bg">
           <DateHeader />
         </div>

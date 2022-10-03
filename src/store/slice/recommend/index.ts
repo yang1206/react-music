@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-import { RootState } from '@/store'
-import { Recommend } from '@/store/interface/recommend'
-import { getBanner, getPersonalized, getNewAlbums, getTopLists } from './action'
+import { getBanner, getNewAlbums, getPersonalized, getTopLists } from './action'
+import type { RootState } from '@/store'
+import type { Recommend } from '@/store/interface/recommend'
 interface InitialState {
   BannersData: Array<Recommend.Banners>
   PersonalizedData: Array<Recommend.perSonalizeder>
@@ -16,15 +16,15 @@ const initialState: InitialState = {
   RankingData: {
     newList: {},
     riseList: {},
-    originalList: {}
-  }
+    originalList: {},
+  },
 }
 
 export const recommendSlice = createSlice({
   name: 'recommend',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     // 进行请求阶段的一些操作
     builder.addCase(getBanner.fulfilled, (state, action) => {
       state.BannersData = action.payload.banners
@@ -36,7 +36,7 @@ export const recommendSlice = createSlice({
       state.newAlbumData = action.payload.albums
     })
     builder.addCase(getTopLists.fulfilled, (state, action) => {
-      //根据id存入对应的榜单数据
+      // 根据id存入对应的榜单数据
       switch (action.meta.arg) {
         case 3779629:
           state.RankingData.newList = action.payload.playlist
@@ -49,13 +49,25 @@ export const recommendSlice = createSlice({
           break
       }
     })
-  }
+  },
 })
-//提前取出保存的数据并导出
-export const selectBanners = (state: RootState) => ({ data: state.recommend.BannersData, shallowEqual })
-export const selectPersonalized = (state: RootState) => ({ data: state.recommend.PersonalizedData, shallowEqual })
-export const selectNewAlbums = (state: RootState) => ({ data: state.recommend.newAlbumData, shallowEqual })
-export const selectTopList = (state: RootState) => ({ data: state.recommend.RankingData, shallowEqual })
+// 提前取出保存的数据并导出
+export const selectBanners = (state: RootState) => ({
+  data: state.recommend.BannersData,
+  shallowEqual,
+})
+export const selectPersonalized = (state: RootState) => ({
+  data: state.recommend.PersonalizedData,
+  shallowEqual,
+})
+export const selectNewAlbums = (state: RootState) => ({
+  data: state.recommend.newAlbumData,
+  shallowEqual,
+})
+export const selectTopList = (state: RootState) => ({
+  data: state.recommend.RankingData,
+  shallowEqual,
+})
 export default recommendSlice.reducer
-//统一导出异步action
+// 统一导出异步action
 export { getBanner, getPersonalized, getNewAlbums, getTopLists }

@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
+import CommentsHeaderStyle from './index.module.less'
 import { useAppSelector } from '@/hooks/useStore'
 import { selectCurrentTotal } from '@/store/slice/Player'
-import CommentsHeaderStyle from './index.module.less'
 interface Props {
   title: string
 }
@@ -18,7 +18,9 @@ const CommentsHeader: React.FC<Props> = (props: { title: any }) => {
             {title}
           </a>
         </h2>
-        <span style={{ marginLeft: '10px' }}>{commentTotal && <span>共{commentTotal}条评论</span>}</span>
+        <span style={{ marginLeft: '10px' }}>
+          {commentTotal && <span>共{commentTotal}条评论</span>}
+        </span>
       </div>
     </div>
   )

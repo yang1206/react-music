@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-import { getSongListDetailData, getCategory, getPlayList } from './action'
-import { RootState } from '@/store'
-type InitialState = {
+import { getCategory, getPlayList, getSongListDetailData } from './action'
+import type { RootState } from '@/store'
+interface InitialState {
   songListDetailInfo: {
     playList: {
       id: number
@@ -38,19 +38,19 @@ const initialState: InitialState = {
       createTime: 0,
       creator: {
         avatarUrl: '',
-        nickname: ''
+        nickname: '',
       },
       subscribed: null,
       tags: [],
       description: '',
       playCount: 0,
-      tracks: []
+      tracks: [],
     },
-    privileges: []
+    privileges: [],
   },
   category: [],
   currentCategory: '全部',
-  categorySongs: {}
+  categorySongs: {},
 }
 
 export const SongListSlice = createSlice({
@@ -59,9 +59,9 @@ export const SongListSlice = createSlice({
   reducers: {
     changeCurrentCategory: (state, { payload }: any) => {
       state.currentCategory = payload
-    }
+    },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     // 进行请求阶段的一些操作
     builder.addCase(getSongListDetailData.fulfilled, (state, action) => {
       state.songListDetailInfo.playList = action.payload.playlist
@@ -73,14 +73,26 @@ export const SongListSlice = createSlice({
     builder.addCase(getCategory.fulfilled, (state, action) => {
       state.category = action.payload
     })
-  }
+  },
 })
-//提前取出保存的数据并导出
-export const selectSongListDetailInfo = (state: RootState) => ({ data: state.songList.songListDetailInfo, shallowEqual })
-export const selectCategory = (state: RootState) => ({ data: state.songList.category, shallowEqual })
-export const selectCurrentCategory = (state: RootState) => ({ data: state.songList.currentCategory, shallowEqual })
-export const selectCategorySongs = (state: RootState) => ({ data: state.songList.categorySongs, shallowEqual })
+// 提前取出保存的数据并导出
+export const selectSongListDetailInfo = (state: RootState) => ({
+  data: state.songList.songListDetailInfo,
+  shallowEqual,
+})
+export const selectCategory = (state: RootState) => ({
+  data: state.songList.category,
+  shallowEqual,
+})
+export const selectCurrentCategory = (state: RootState) => ({
+  data: state.songList.currentCategory,
+  shallowEqual,
+})
+export const selectCategorySongs = (state: RootState) => ({
+  data: state.songList.categorySongs,
+  shallowEqual,
+})
 export default SongListSlice.reducer
 export const { changeCurrentCategory } = SongListSlice.actions
-//统一导出异步action
+// 统一导出异步action
 export { getSongListDetailData, getCategory, getPlayList }

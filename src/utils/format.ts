@@ -1,4 +1,4 @@
-import { RouteObject } from '@/routers/interface'
+import type { RouteObject } from '@/routers/interface'
 import { address } from '@/common/localData'
 /**
  * @description 播放量转发
@@ -6,14 +6,15 @@ import { address } from '@/common/localData'
  * @returns {string | number}
  */
 export function getCount(count: number): string | number {
-  if (count < 0) return
-  if (count < 10000) {
+  if (count < 0)
+    return
+
+  if (count < 10000)
     return count
-  } else if (Math.floor(count / 10000) < 10000) {
-    return Math.floor(count / 1000) / 10 + '万'
-  } else {
-    return Math.floor(count / 10000000) / 10 + '亿'
-  }
+  else if (Math.floor(count / 10000) < 10000)
+    return `${Math.floor(count / 1000) / 10}万`
+  else
+    return `${Math.floor(count / 10000000) / 10}亿`
 }
 
 /**
@@ -41,28 +42,28 @@ export function getPlayUrl(id: number): string {
  * @returns {string}
  */
 export function formatDate(time: string | number | Date, fmt: string): string {
-  let date = new Date(time)
+  const date = new Date(time)
 
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
-  }
-  let o: any = {
+  if (/(y+)/.test(fmt))
+    fmt = fmt.replace(RegExp.$1, `${date.getFullYear()}`.substr(4 - RegExp.$1.length))
+
+  const o: any = {
     'M+': date.getMonth() + 1,
     'd+': date.getDate(),
     'h+': date.getHours(),
     'm+': date.getMinutes(),
-    's+': date.getSeconds()
+    's+': date.getSeconds(),
   }
-  for (let k in o) {
+  for (const k in o) {
     if (new RegExp(`(${k})`).test(fmt)) {
-      let str = o[k] + ''
+      const str = `${o[k]}`
       fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? str : padLeftZero(str))
     }
   }
   return fmt
 }
 function padLeftZero(str: string | any[]) {
-  return ('00' + str).substr(str.length)
+  return `00${str}`.substr(str.length)
 }
 
 export function formatMonthDay(time: string | number | Date) {
@@ -114,13 +115,18 @@ export function getMatchReg(loginState: string) {
  * {y}-{m}-{d} {h}:{i}:{s}
  */
 export function parseTime(time: string | number | Date | any, cFormat: string): string {
-  if (!time || arguments.length === 0) return null
+  if (!time || arguments.length === 0)
+    return null
+
   const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
   let date: Date
   if (typeof time === 'object') {
     date = time
-  } else {
-    if (`${time}`.length === 10) time = parseInt(time, 10) * 1000
+  }
+  else {
+    if (`${time}`.length === 10)
+      time = parseInt(time, 10) * 1000
+
     date = new Date(time)
   }
   const formatObj = {
@@ -130,21 +136,21 @@ export function parseTime(time: string | number | Date | any, cFormat: string): 
     h: date.getHours(),
     i: date.getMinutes(),
     s: date.getSeconds(),
-    a: date.getDay()
+    a: date.getDay(),
   }
-  // eslint-disable-next-line camelcase
+
   const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') {
+    if (key === 'a')
       return ['日', '一', '二', '三', '四', '五', '六'][value]
-    }
-    if (result.length > 0 && value < 10) {
+
+    if (result.length > 0 && value < 10)
       value = `0${value}`
-    }
+
     return value || 0
   })
-  // eslint-disable-next-line camelcase
+
   return time_str
 }
 
@@ -156,11 +162,14 @@ export function parseTime(time: string | number | Date | any, cFormat: string): 
  */
 export const searchRoute = (path: string, routes: RouteObject[] = []): RouteObject => {
   let result: RouteObject = {}
-  for (let item of routes) {
-    if (item.path === path) return item
+  for (const item of routes) {
+    if (item.path === path)
+      return item
+
     if (item.children) {
       const res = searchRoute(path, item.children)
-      if (Object.keys(res).length) result = res
+      if (Object.keys(res).length)
+        result = res
     }
   }
   return result
@@ -173,7 +182,7 @@ export const searchRoute = (path: string, routes: RouteObject[] = []): RouteObje
  * @return array
  */
 export function handleRouter(routerList: Array<any>, newArr: string[] = []) {
-  routerList.forEach(item => {
+  routerList.forEach((item) => {
     typeof item === 'object' && item.path && newArr.push(item.path)
     item.children && item.children.length && handleRouter(item.children, newArr)
   })

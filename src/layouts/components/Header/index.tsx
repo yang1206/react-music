@@ -14,7 +14,8 @@ export default function Header() {
           <i className="sprite_01 icon"></i>
         </NavLink>
       )
-    } else {
+    }
+    else {
       return <a href={item.link}>{item.title}</a>
     }
   }

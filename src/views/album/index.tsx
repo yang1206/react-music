@@ -1,15 +1,15 @@
-import { useEffect, useState, memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import AlbumInfo from './components/AlbumInfo'
 import NavBar from '@/components/NavBar'
 import { getAlbumDetail } from '@/api/album'
-import AlbumInfo from './components/AlbumInfo'
 import './index.less'
 const Album: React.FC = () => {
   const [albumDetail, setAlbum] = useState()
   const [params] = useSearchParams()
   const id = params.get('id')
   useEffect(() => {
-    getAlbumDetail(id).then(res => {
+    getAlbumDetail(id).then((res) => {
       setAlbum(res)
     })
   }, [id, params])

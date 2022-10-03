@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getSizeImage, getCount } from '@/utils/format'
-import { Recommend } from '@/store/interface/recommend'
+import { getCount, getSizeImage } from '@/utils/format'
+import type { Recommend } from '@/store/interface/recommend'
 import './index.less'
 interface Props {
   info: Recommend.perSonalizeder
@@ -13,11 +13,11 @@ const SongCover: React.FC<Props> = (props: any) => {
   const navigate = useNavigate()
   const toDetail = (id: number) => {
     navigate(`/playlist?id=${id}`, {
-      replace: false
+      replace: false,
     })
   }
   return (
-    <div className="SongCoverWrapper" style={{ margin: margin }}>
+    <div className="SongCoverWrapper" style={{ margin }}>
       <div className="cover-top">
         <img src={getSizeImage(info.picUrl || info.coverImgUrl, 140)} alt="" />
         <div className="cover sprite_cover">

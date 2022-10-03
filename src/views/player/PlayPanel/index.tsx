@@ -1,17 +1,17 @@
 import React, { memo } from 'react'
 import { ClearOutlined, CloseOutlined, HeartOutlined } from '@ant-design/icons'
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import {
-  selectSong,
-  selectPlayList,
-  selectCurrentIndex,
-  getSong,
-  changePlayList,
-  changePlayListCount
-} from '@/store/slice/Player'
-import { removeAllSong } from '@/utils/storage'
 import PlayListItem from './components/PlayListItem'
 import LyricContent from './components/LyricContent'
+import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
+import {
+  changePlayList,
+  changePlayListCount,
+  getSong,
+  selectCurrentIndex,
+  selectPlayList,
+  selectSong,
+} from '@/store/slice/Player'
+import { removeAllSong } from '@/utils/storage'
 import './index.less'
 
 interface Props {
@@ -32,15 +32,17 @@ const PlayPanel: React.FC<Props> = (props: Props) => {
   const clearAllPlaylist = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
     removeAllSong()
-    let newArr = [...playList]
+    const newArr = [...playList]
     newArr.splice(0, playList.length)
     dispatch(changePlayList(newArr))
     dispatch(changePlayListCount(newArr.length))
   }
   // 点击item播放音乐
   const clickItem = (item: { id: number }) => {
-    //如果点击了当前播放的歌曲，则什么也不操作
-    if (item.id === currentSong.id) return
+    // 如果点击了当前播放的歌曲，则什么也不操作
+    if (item.id === currentSong.id)
+      return
+
     // 播放音乐 dispatch
     dispatch(getSong({ id: item.id, isPlay: true }))
     playMusic()
@@ -71,12 +73,12 @@ const PlayPanel: React.FC<Props> = (props: Props) => {
       </div>
       <div className="SliderPlaylistMain">
         <div className="main-playlist">
-          {playList &&
-            playList.map((item, index) => {
+          {playList
+            && playList.map((item, index) => {
               return (
                 <PlayListItem
                   key={index}
-                  isActive={(currentSongIndex ? currentSongIndex : 0) === index ? 'active' : ''}
+                  isActive={(currentSongIndex || 0) === index ? 'active' : ''}
                   songName={item.name}
                   singer={item.ar[0].name}
                   duration={item.dt}

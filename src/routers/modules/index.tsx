@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
-import { RouteObject } from '@/routers/interface'
+import type { RouteObject } from '@/routers/interface'
 import lazyLoad from '@/routers/utils/lazyLoad'
 import DiscoverRouter from '@/routers/modules/discover'
 import SearchRouter from '@/routers/modules/search'
@@ -15,27 +15,27 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <Navigate to="/discover" />
+        element: <Navigate to="/discover" />,
       },
       {
         path: '/discover',
         element: lazyLoad(lazy(() => import('@/views/discover'))),
-        children: [...DiscoverRouter]
+        children: [...DiscoverRouter],
       },
       {
         path: '/friend',
-        element: lazyLoad(lazy(() => import('@/views/friend')))
+        element: lazyLoad(lazy(() => import('@/views/friend'))),
       },
       {
         path: '/mine',
-        element: lazyLoad(lazy(() => import('@/views/mine')))
+        element: lazyLoad(lazy(() => import('@/views/mine'))),
       },
       ...SearchRouter,
       ...PlayRouter,
       ...UserRouter,
       ...AlbumRouter,
-      ...ArtistRouter
-    ]
-  }
+      ...ArtistRouter,
+    ],
+  },
 ]
 export default routes

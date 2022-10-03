@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Tabs } from 'antd'
 import { getArtists, getArtistsAlbum, getArtistsDesc } from '@/api/artist'
@@ -18,14 +18,14 @@ const Artist: React.FC = () => {
   const artistName = artistDetail && artistDetail.name
   const artistAlias = artistDetail && artistDetail.alias && artistDetail.alias[0]
   useEffect(() => {
-    getArtists(id).then(res => {
+    getArtists(id).then((res) => {
       setArtist(res.artist)
       setSongList(res.hotSongs)
     })
-    getArtistsAlbum(id).then(res => {
+    getArtistsAlbum(id).then((res) => {
       setAlbumList(res.hotAlbums)
     })
-    getArtistsDesc(id).then(res => {
+    getArtistsDesc(id).then((res) => {
       setArtistDesc(res.briefDesc)
       setDescIntroduction(res.introduction)
     })
@@ -33,7 +33,7 @@ const Artist: React.FC = () => {
   const CoverProps = {
     width: '150px',
     size: '130px',
-    bgp: '-845px'
+    bgp: '-845px',
   }
   const { TabPane } = Tabs
   return (
@@ -58,8 +58,8 @@ const Artist: React.FC = () => {
                 </TabPane>
                 <TabPane tab="所有专辑" key="2">
                   <div className="Album-list">
-                    {AlbumList &&
-                      AlbumList.map((item, index: number) => {
+                    {AlbumList
+                      && AlbumList.map((item, index: number) => {
                         return (
                           <div key={index} className="HotAlbum-item">
                             <AlbumCover info={item} {...CoverProps} />
@@ -79,8 +79,8 @@ const Artist: React.FC = () => {
                       <p>{artistName}简介</p>
                       <span>{artistDesc}</span>
                     </div>
-                    {descIntroduction &&
-                      descIntroduction.map((item, index) => {
+                    {descIntroduction
+                      && descIntroduction.map((item, index) => {
                         return (
                           <div key={index} className="item">
                             <h2>{item.ti}</h2>

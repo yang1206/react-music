@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { Collapse } from 'antd'
-import { selectSong, selectLyric } from '@/store/slice/Player'
+import { selectLyric, selectSong } from '@/store/slice/Player'
 import { useAppSelector } from '@/hooks/useStore'
-import { getSizeImage, getPlayUrl } from '@/utils/format'
+import { getPlayUrl, getSizeImage } from '@/utils/format'
 import './index.less'
 const SongInfo: React.FC = () => {
   const currentSong = useAppSelector(selectSong).data
@@ -55,20 +55,25 @@ const SongInfo: React.FC = () => {
               分享
             </i>
           </div>
-          <div className="sprite_button download pointer" onClick={() => window.open(getPlayUrl(currentSong.id))}>
+          <div
+            className="sprite_button download pointer"
+            onClick={() => window.open(getPlayUrl(currentSong.id))}
+          >
             <i className="sprite_button inner">
               <em className="sprite_button favorite-icon"></em>
               下载
             </i>
           </div>
           <div className="sprite_button comment">
-            <i className="sprite_button inner">{/* <em className="sprite_button favorite-icon"></em>({totalComment}) */}</i>
+            <i className="sprite_button inner">
+              {/* <em className="sprite_button favorite-icon"></em>({totalComment}) */}
+            </i>
           </div>
         </div>
         <Collapse>
-          <Panel header={`歌词展示`} key={''}>
-            {LyricList &&
-              LyricList.map((item, index) => {
+          <Panel header={'歌词展示'} key={''}>
+            {LyricList
+              && LyricList.map((item, index) => {
                 return (
                   <div key={index} className="lyric-item">
                     {item.content}

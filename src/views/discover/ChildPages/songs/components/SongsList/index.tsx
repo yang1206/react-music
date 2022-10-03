@@ -1,10 +1,10 @@
-import React, { useState, memo } from 'react'
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectCategorySongs, getPlayList } from '@/store/slice/SongList'
+import React, { memo, useState } from 'react'
 import { Skeleton } from 'antd'
+import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
+import { getPlayList, selectCategorySongs } from '@/store/slice/SongList'
 import SongsCover from '@/components/SongsCover'
 import Pagination from '@/components/Pagination'
-import { Recommend } from '@/store/interface/recommend'
+import type { Recommend } from '@/store/interface/recommend'
 import './index.less'
 const SongsList: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -20,16 +20,23 @@ const SongsList: React.FC = () => {
   }
   return (
     <div className="SongsListWrapper">
-      {!songsList.length ? (
+      {!songsList.length
+        ? (
         <Skeleton active />
-      ) : (
+          )
+        : (
         <div className="songs-list">
           {songsList.map((item: Recommend.perSonalizeder, index: number) => {
             return <SongsCover key={index} info={item} />
           })}
         </div>
-      )}
-      <Pagination currentPage={currentPage} total={total} pageSize={35} onPageChange={onPageChange} />
+          )}
+      <Pagination
+        currentPage={currentPage}
+        total={total}
+        pageSize={35}
+        onPageChange={onPageChange}
+      />
     </div>
   )
 }

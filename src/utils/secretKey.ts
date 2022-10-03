@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js'
-import { secretKey } from '@/config/token'
 import { message } from 'antd'
+import { secretKey } from '@/config/token'
 
 /**
  * 加密信息,本地存储
@@ -10,10 +10,11 @@ import { message } from 'antd'
 export async function setLoginInfo(key: string, info: any) {
   if (key.length && JSON.stringify(info) !== '{}') {
     // 1.要存储的值  2.加密的秘钥（解密的时候必须要根据秘钥才能解密）
-    let cipherText = CryptoJS.AES.encrypt(JSON.stringify(info), secretKey).toString()
-    localStorage.setItem(key, cipherText) //本地存储
+    const cipherText = CryptoJS.AES.encrypt(JSON.stringify(info), secretKey).toString()
+    localStorage.setItem(key, cipherText) // 本地存储
     return true
-  } else {
+  }
+  else {
     message.error('网络异常, 请稍后重试')
     return false
   }
@@ -26,9 +27,9 @@ export async function setLoginInfo(key: string, info: any) {
 export function getLoginInfo(key: string) {
   if (key.length) {
     /* 取出加密后的value */
-    let tk = localStorage.getItem(key) //把存储的值取出
-    let bytes = CryptoJS.AES.decrypt(tk, secretKey)
-    let originalText = bytes.toString(CryptoJS.enc.Utf8) //解密操作
+    const tk = localStorage.getItem(key) // 把存储的值取出
+    const bytes = CryptoJS.AES.decrypt(tk, secretKey)
+    const originalText = bytes.toString(CryptoJS.enc.Utf8) // 解密操作
     return JSON.parse(originalText)
   }
 }

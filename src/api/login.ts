@@ -1,31 +1,31 @@
 import request from '../service'
-import { Login } from './interface'
-//手机号登录
+import type { Login } from './interface'
+// 手机号登录
 export const gotoPhoneLogin = (data: Login.goPhoneLogin) => {
   return request({
     url: '/login/cellphone',
     method: 'GET',
-    data
+    data,
   })
 }
 
-//邮箱登录
+// 邮箱登录
 export const gotoEmailLogin = (data: Login.goEmailLogin) => {
   return request({
     url: '/login',
     method: 'GET',
-    data
+    data,
   })
 }
 
-//发送验证码
+// 发送验证码
 export const sendRegisterCode = (phone: number) => {
   return request({
     url: '/login',
     method: 'GET',
     params: {
-      phone
-    }
+      phone,
+    },
   })
 }
 
@@ -33,6 +33,6 @@ export const sendRegister = (data: Login.Register) => {
   return request({
     url: '/login',
     method: 'GET',
-    data
+    data,
   })
 }

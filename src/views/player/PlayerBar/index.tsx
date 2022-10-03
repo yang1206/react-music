@@ -1,29 +1,28 @@
-import React, { useState, useEffect, useRef, useCallback, memo } from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import { Slider, message, Tooltip } from 'antd'
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import { Slider, Tooltip, message } from 'antd'
 import { CSSTransition } from 'react-transition-group'
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons'
 import PlayPanel from '@/views/player/PlayPanel'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import {
-  selectSong,
-  selectLyric,
-  selectSequence,
-  selectPlayList,
-  selectCurrentLyricIndex,
-  selectIsShowLyrics,
-  selectFirstLoad,
-  // getSong,
+  changeCurrentLyricIndex,
+  changeFirstLoad,
   changePlaySong,
   changeSequence,
-  changeCurrentLyricIndex,
   changeShowLyrics,
-  changeFirstLoad
+  selectCurrentLyricIndex,
+  selectFirstLoad,
+  selectIsShowLyrics,
+  selectLyric,
+  selectPlayList,
+  selectSequence,
+  selectSong,
 } from '@/store/slice/Player'
-import { getSizeImage, formatMinuteSecond, getPlayUrl } from '@/utils/format'
-import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons'
+import { formatMinuteSecond, getPlayUrl, getSizeImage } from '@/utils/format'
 import './index.less'
 const PlayBar: React.FC = () => {
-  //从redux取出数据
+  // 从redux取出数据
   const currentSong = useAppSelector(selectSong).data
   const currentLyric = useAppSelector(selectLyric).data
   const playList = useAppSelector(selectPlayList).data
@@ -31,23 +30,23 @@ const PlayBar: React.FC = () => {
   const sequence = useAppSelector(selectSequence).data
   const isShowLyrics = useAppSelector(selectIsShowLyrics).data
   const isFirstLoad = useAppSelector(selectFirstLoad).data
-  //请求歌曲详细信息
+  // 请求歌曲详细信息
   const dispatch = useAppDispatch()
-  //歌曲时长
+  // 歌曲时长
   const [duration, setDuration] = useState(currentSong?.dt)
-  //是否正在播放
+  // 是否正在播放
   const [isPlaying, setIsPlaying] = useState(false)
-  //是否在改变进度条
+  // 是否在改变进度条
   const [isChanging, setIsChanging] = useState(false)
-  //进度条展示数据
+  // 进度条展示数据
   const [progress, setProgress] = useState(0)
-  //播放时间计时
+  // 播放时间计时
   const [currentTime, setCurrentTime] = useState(0)
-  //播放顺序按钮的展示
+  // 播放顺序按钮的展示
   const [loopClass, setLoopClass] = useState('sprite_playBar btn loop')
-  //播放暂停按钮的展示
+  // 播放暂停按钮的展示
   const [playClass, setPlayClass] = useState('sprite_playBar btn play')
-  //获取播放标签实例
+  // 获取播放标签实例
   const audioRef = useRef<HTMLAudioElement | null>(null)
   // 是否显示播放列表
   const [showPanel, setShowPanel] = useState(false)
@@ -56,7 +55,7 @@ const PlayBar: React.FC = () => {
   useEffect(() => {
     if (!isFirstLoad) {
       setDuration(currentSong?.dt)
-      //在hooks里设置歌曲src
+      // 在hooks里设置歌曲src
       audioRef.current!.src = getPlayUrl(currentSong?.id)
       audioRef
         .current!.play()
@@ -69,99 +68,103 @@ const PlayBar: React.FC = () => {
     }
     currentSong?.dt ? setDuration(currentSong.dt) : setDuration(currentSong?.dt)
   }, [currentSong, isFirstLoad])
-  //点击播放按钮方法
+  // 点击播放按钮方法
   const play = useCallback(() => {
-    //点击了播放，改变第一次播放的状态
+    // 点击了播放，改变第一次播放的状态
     dispatch(changeFirstLoad(false))
-    //类型断言 not null
+    // 类型断言 not null
     isPlaying ? audioRef.current!.pause() : audioRef.current!.play().catch()
-    //先判断在改变播放状态
+    // 先判断在改变播放状态
     setIsPlaying(!isPlaying)
     isPlaying ? setPlayClass('sprite_playBar btn play') : setPlayClass('sprite_playBar btn pause')
   }, [isPlaying])
-  //歌曲播放完毕
+  // 歌曲播放完毕
   const playEnded = useCallback(() => {
     if (sequence === 2) {
-      //单曲循环
+      // 单曲循环
       audioRef.current.currentTime = 0
       audioRef.current.play()
-    } else {
+    }
+    else {
       dispatch(changePlaySong(1))
-      //如果播放列表为空，继续播放当前这首歌
-      if (playList.length === 0) {
+      // 如果播放列表为空，继续播放当前这首歌
+      if (playList.length === 0)
         audioRef.current.play()
-      }
+
       setIsPlaying(true)
     }
   }, [])
   const timeUpdate = (e: any) => {
     const currentTime = e.target.currentTime * 1000
-    //如果进度条正在被拖动Progress，也就是当前进度条的位置就不随着歌曲进度改变
+    // 如果进度条正在被拖动Progress，也就是当前进度条的位置就不随着歌曲进度改变
     if (!isChanging) {
       setProgress((currentTime / duration) * 100)
       setCurrentTime(currentTime)
     }
 
-    //获取当前的歌词
+    // 获取当前的歌词
     let i = 0
     for (; i < currentLyric.length; i++) {
-      let lyricItem = currentLyric[i]
-      if (currentTime < lyricItem.time) {
+      const lyricItem = currentLyric[i]
+      if (currentTime < lyricItem.time)
         break
-      }
     }
     if (!(currentLyricIndex === i - 1)) {
       dispatch(changeCurrentLyricIndex(i - 1))
       const content = currentLyric[i - 1] && currentLyric[i - 1].content
-      if (content === '纯音乐，请欣赏') return
+      if (content === '纯音乐，请欣赏')
+        return
+
       if (isShowLyrics) {
         if (isPlaying) {
           message.open({
             key: 'lyric',
-            content: content,
-            duration: 0
+            content,
+            duration: 0,
           })
         }
         // 如果显示播放列表那么不展示歌词
         showPanel && message.destroy('lyric')
-      } else {
+      }
+      else {
         message.destroy('lyric')
       }
     }
   }
-  //根据是否播放展示不同按钮
+  // 根据是否播放展示不同按钮
   const playStyle = isPlaying ? '-165px' : '-204px'
-  //拖动进度条事件
+  // 拖动进度条事件
   const sliderChange = useCallback(
     (value: any) => {
-      //改变状态，让进度条拖动时进度条不赋值
+      // 改变状态，让进度条拖动时进度条不赋值
       setIsChanging(true)
       const time = (value / 100.0) * duration
-      //拖动的时候设置当前时间
+      // 拖动的时候设置当前时间
       setCurrentTime(time)
-      //改变进度条当前位置
+      // 改变进度条当前位置
       setProgress(value)
     },
-    [duration]
+    [duration],
   )
   const sliderAfterChange = useCallback(
     (value: any) => {
       const time = ((value / 100.0) * duration) / 1000
       audioRef.current!.currentTime = time
       setCurrentTime(time * 1000)
-      //鼠标抬起，恢复进度条改变状态
+      // 鼠标抬起，恢复进度条改变状态
       setIsChanging(false)
 
-      if (isPlaying) audioRef.current?.play()
+      if (isPlaying)
+        audioRef.current?.play()
     },
-    //这里必须依赖duration，否则会设置为0
-    [duration, isPlaying, play]
+    // 这里必须依赖duration，否则会设置为0
+    [duration, isPlaying, play],
   )
   const changeSequenceData = () => {
     let currentSequence = sequence + 1
-    if (currentSequence > 2) {
+    if (currentSequence > 2)
       currentSequence = 0
-    }
+
     switch (currentSequence) {
       case 1:
         setLoopClass('sprite_playBar btn shuffle')
@@ -178,12 +181,12 @@ const PlayBar: React.FC = () => {
     }
     dispatch(changeSequence(currentSequence))
   }
-  //上一首下一首
+  // 上一首下一首
   const changeMusic = (tag: number) => {
     // dispatch(changeFirstLoad(false))
     dispatch(changePlaySong(tag))
   }
-  //播放列表是否显示
+  // 播放列表是否显示
   const changeShowPanel = useCallback(() => {
     setShowPanel(!showPanel)
   }, [showPanel])
@@ -216,7 +219,7 @@ const PlayBar: React.FC = () => {
           </div>
           <div className="info">
             <div className="song">
-              <Link to={`/discover/song`} className="song-name">
+              <Link to={'/discover/song'} className="song-name">
                 {currentSong?.name}
               </Link>
               {currentSong?.ar[0] && (
@@ -289,7 +292,7 @@ const PlayBar: React.FC = () => {
               />
             </CSSTransition>
           </div>
-          {/*音量调节条 */}
+          {/* 音量调节条 */}
           <div className="sprite_player top-volume" style={{ display: isShowBar ? 'block' : 'none' }}>
             <Slider vertical defaultValue={30} onChange={changingVolume} />
           </div>

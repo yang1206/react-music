@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-import { RootState } from '@/store'
 import { getLoginProfileInfo } from './action'
-type InitialState = {
+import type { RootState } from '@/store'
+interface InitialState {
   isVisible: boolean
   isLogin: boolean
   profile: {
@@ -20,10 +20,10 @@ const initialState: InitialState = {
   profile: {
     nickname: '',
     avatarUrl: '',
-    gender: null
+    gender: null,
   },
   token: '',
-  cookie: ''
+  cookie: '',
 }
 
 export const LoginSlice = createSlice({
@@ -44,16 +44,17 @@ export const LoginSlice = createSlice({
     },
     changeCookie: (state, { payload }: any) => {
       state.cookie = payload
-    }
-  }
+    },
+  },
 })
-//提前取出保存的数据并导出
+// 提前取出保存的数据并导出
 export const selectIsVisible = (state: RootState) => ({ data: state.login.isVisible, shallowEqual })
 export const selectLoginState = (state: RootState) => ({ data: state.login.isLogin, shallowEqual })
 export const selectProfile = (state: RootState) => ({ data: state.login.profile, shallowEqual })
 export const selectToken = (state: RootState) => ({ data: state.login.token, shallowEqual })
 export const selectCookie = (state: RootState) => ({ data: state.login.cookie, shallowEqual })
-export const { changeIsVisible, changeProfileInfo, changeCookie, changeLoginState, changeToken } = LoginSlice.actions
+export const { changeIsVisible, changeProfileInfo, changeCookie, changeLoginState, changeToken }
+  = LoginSlice.actions
 export default LoginSlice.reducer
-//统一导出异步action
+// 统一导出异步action
 export { getLoginProfileInfo }

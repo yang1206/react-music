@@ -1,11 +1,11 @@
-import React, { useEffect, useState, memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { getArtistsList } from '@/api/artist'
 import ArtistCategory from './components/ArtistCategory'
+import { getArtistsList } from '@/api/artist'
 import ArtistCover from '@/components/ArtistCover'
 import Pagination from '@/components/Pagination'
 import './index.less'
-//TODO 完成歌手
+// TODO 完成歌手
 const ArtistList: React.FC = () => {
   const [params] = useSearchParams()
   const area = params.get('area')
@@ -14,7 +14,7 @@ const ArtistList: React.FC = () => {
   const [artistList, setArtistList] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   useEffect(() => {
-    getArtistsList(type, area, cat, currentPage).then(res => {
+    getArtistsList(type, area, cat, currentPage).then((res) => {
       setArtistList(res.artists)
     })
   }, [area, type, cat, currentPage])
@@ -32,12 +32,24 @@ const ArtistList: React.FC = () => {
         </div>
         <div className="ArtistListRight">
           <div className="artistList">
-            {artistList &&
-              artistList.map(item => {
-                return <ArtistCover key={item.id} id={item.id} coverPic={item.picUrl} singer={item.name} />
+            {artistList
+              && artistList.map((item) => {
+                return (
+                  <ArtistCover
+                    key={item.id}
+                    id={item.id}
+                    coverPic={item.picUrl}
+                    singer={item.name}
+                  />
+                )
               })}
           </div>
-          <Pagination currentPage={currentPage} total={200} pageSize={35} onPageChange={onPageChange} />
+          <Pagination
+            currentPage={currentPage}
+            total={200}
+            pageSize={35}
+            onPageChange={onPageChange}
+          />
         </div>
       </div>
     </div>

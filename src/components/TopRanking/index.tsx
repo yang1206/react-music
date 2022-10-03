@@ -1,15 +1,17 @@
 import React, { memo } from 'react'
 import { getSizeImage } from '@/utils/format'
-import { Recommend } from '@/store/interface/recommend'
-import { getSong /*changeCurrentSong, changePlayList, changeCurrentIndex*/ } from '@/store/slice/Player'
+import type { Recommend } from '@/store/interface/recommend'
+import {
+  getSong /* changeCurrentSong, changePlayList, changeCurrentIndex */,
+  selectPlayList,
+} from '@/store/slice/Player'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectPlayList } from '@/store/slice/Player'
 import { useAddPlaylist } from '@/hooks/useAddPlaylist'
 import './index.less'
 interface Props {
   info: Recommend.topItem
 }
-const TopRanking: React.FC<Props> = props => {
+const TopRanking: React.FC<Props> = (props) => {
   const { info } = props
   const dispatch = useAppDispatch()
   const playList = useAppSelector(selectPlayList).data
@@ -45,7 +47,10 @@ const TopRanking: React.FC<Props> = props => {
                 </a>
                 <div className="operate">
                   <button className="btn sprite_02 play" onClick={() => playMusic(item)}></button>
-                  <button className="btn sprite_icon2 addto" onClick={e => addPlaylist(e, item.id)}></button>
+                  <button
+                    className="btn sprite_icon2 addto"
+                    onClick={e => addPlaylist(e, item.id)}
+                  ></button>
                   <button className="btn sprite_02 favor"></button>
                 </div>
               </div>

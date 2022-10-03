@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="wrap-v2 content">
         <div className="left">
           <div className="link">
-            {footerLinks.map(item => {
+            {footerLinks.map((item) => {
               return (
                 <Fragment key={item.title}>
                   <a href={item.link} target="_blank" rel="noopener noreferrer">
@@ -42,7 +42,11 @@ export default function Footer() {
           </div>
           <div className="info">
             <span>粤B2-20090191-18</span>
-            <a href="http://www.beian.miit.gov.cn/publish/query/indexFirst.action" rel="noopener noreferrer" target="_blank">
+            <a
+              href="http://www.beian.miit.gov.cn/publish/query/indexFirst.action"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               工业和信息化部备案管理系统网站
             </a>
           </div>

@@ -1,10 +1,15 @@
-import React, { useEffect, memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { selectTopListInfo, selectCurrentTopListId, getTopListInfo, getTopListTitleInfo } from '@/store/slice/TopList'
 import TopListTitle from './components/Title'
 import TopListMain from './components/Main'
 import TopListInfo from './components/TopList'
+import {
+  getTopListInfo,
+  getTopListTitleInfo,
+  selectCurrentTopListId,
+  selectTopListInfo,
+} from '@/store/slice/TopList'
+import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import './index.less'
 const Ranking: React.FC = () => {
   const [params] = useSearchParams()
@@ -19,7 +24,7 @@ const Ranking: React.FC = () => {
   useEffect(() => {
     // 派发榜单标题信息Action
     let id: string | number = params.get('id')
-    id = id ? id : currentTopListId
+    id = id || currentTopListId
     dispatch(getTopListTitleInfo(id))
   }, [currentTopListId, dispatch])
   return (

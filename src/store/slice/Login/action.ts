@@ -1,12 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { changeIsVisible, changeProfileInfo, changeCookie, changeLoginState, changeToken } from '@/store/slice/Login'
+import md5 from 'js-md5'
+import { message } from 'antd'
+import {
+  changeCookie,
+  changeIsVisible,
+  changeLoginState,
+  changeProfileInfo,
+  changeToken,
+} from '@/store/slice/Login'
 import { gotoPhoneLogin } from '@/api/login'
 import loginInfo from '@/config/token'
 import { getLoginInfo, setLoginInfo } from '@/utils/secretKey'
-import md5 from 'js-md5'
-import { message } from 'antd'
 
-//请求歌曲详细信息
+// 请求歌曲详细信息
 interface LoginParam {
   username: string
   password: string
@@ -20,10 +26,11 @@ const getLoginProfileInfo = createAsyncThunk<
     state: any
   }
 >('login/getLoginProfileInfo', async ({ username, password, tip }: LoginParam, { dispatch }) => {
-  gotoPhoneLogin({ phone: username, md5_password: md5(password) }).then(res => {
+  gotoPhoneLogin({ phone: username, md5_password: md5(password) }).then((res) => {
     if (res.code !== 200) {
       message.error('账号或密码错误')
-    } else {
+    }
+    else {
       tip && message.success('登录成功')
       // 登录成功
       document.cookie = res.cookie
@@ -37,7 +44,7 @@ const getLoginProfileInfo = createAsyncThunk<
       loginInfo.username = username
       loginInfo.password = password
       loginInfo.state = true
-      let newLoginInfo = Object.assign(getLoginInfo('loginInfo'), loginInfo)
+      const newLoginInfo = Object.assign(getLoginInfo('loginInfo'), loginInfo)
       setLoginInfo('loginInfo', newLoginInfo)
       // 关闭模态框
       dispatch(changeIsVisible(false))
