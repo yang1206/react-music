@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 import { getSizeImage } from '@/utils/format'
 import type { Recommend } from '@/store/interface/recommend'
 import {
@@ -15,7 +16,7 @@ const TopRanking: React.FC<Props> = (props) => {
   const { info } = props
   const dispatch = useAppDispatch()
   const playList = useAppSelector(selectPlayList).data
-  const playMusic = (item: any) => {
+  const playMusic = (item: { id: number }) => {
     dispatch(getSong({ id: item.id, isPlay: true }))
   }
   const addPlaylist = useAddPlaylist(playList)
@@ -24,12 +25,12 @@ const TopRanking: React.FC<Props> = (props) => {
       <div className="header">
         <div className="image">
           <img src={getSizeImage(info?.coverImgUrl)} alt="" />
-          <a href="/todo" className="image_cover">
+          <Link to={`/discover/ranking?id=${info?.id}`} className="image_cover">
             ranking
-          </a>
+          </Link>
         </div>
         <div className="info">
-          <a href="/todo">{info?.name}</a>
+          <Link to={`/discover/ranking?id=${info?.id}`}>{info?.name}</Link>
           <div>
             <button className="btn play sprite_02"></button>
             <button className="btn favor sprite_02"></button>
@@ -59,7 +60,7 @@ const TopRanking: React.FC<Props> = (props) => {
         })}
       </div>
       <div className="footer">
-        <a href="/todo">查看全部 &gt;</a>
+        <Link to={`/discover/ranking?id=${info?.id}`}>查看全部 &gt;</Link>
       </div>
     </div>
   )
