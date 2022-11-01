@@ -3,6 +3,8 @@
   publish = "public"
 
 
-[[edge_functions]]
-  path = "/app"
-  function = "proxy"
+[[redirects]]
+  from = "/api/"
+  to = "/.netlify/functions/index"
+  force = true
+  status = 200
