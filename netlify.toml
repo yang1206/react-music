@@ -2,4 +2,10 @@
   command = "echo No build for this site, we are living on the edge"
   publish = "public"
 
-/api/  https://netease-cloud-music-api-yang1206.vercel.app/:splat  200
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://netease-cloud-music-api-yang1206.vercel.app/:splat"
+  force = true
+
+
