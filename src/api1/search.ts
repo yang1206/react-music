@@ -6,7 +6,7 @@ interface Param {
 }
 export const getSearch = (data: Param) => {
   return request({
-    url: '/api/search',
+    url: '/search',
     method: 'GET',
     data,
   })

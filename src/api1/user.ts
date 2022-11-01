@@ -4,7 +4,7 @@ import request from '../service'
 // 获取用户信息
 export const getUserInfo = () => {
   return request({
-    url: '/api/user/subcount',
+    url: '/user/subcount',
     method: 'GET',
   })
 }
@@ -12,14 +12,14 @@ export const getUserInfo = () => {
 // 获取用户等级信息
 export const getUserLevel = () => {
   return request({
-    url: '/api/user/level',
+    url: '/user/level',
     method: 'GET',
   })
 }
 // 获取用户歌单
 export const gotoUserSongList = (data: { uid: string }) => {
   return request({
-    url: '/api/user/playlist',
+    url: '/user/playlist',
     method: 'GET',
     data,
   })
@@ -28,7 +28,7 @@ export const gotoUserSongList = (data: { uid: string }) => {
 // 创建歌单
 export const CreateSongList = (data: { name: string }) => {
   return request({
-    url: '/api/playlist/create',
+    url: '/playlist/create',
     method: 'GET',
     data,
   })
@@ -36,7 +36,7 @@ export const CreateSongList = (data: { name: string }) => {
 // 订阅/取消订阅歌单
 export const subscribeSongList = (data: { id: string | number; t: number }) => {
   return request({
-    url: '/api/playlist/subscribe',
+    url: '/playlist/subscribe',
     method: 'GET',
     data,
   })
@@ -45,7 +45,7 @@ export const subscribeSongList = (data: { id: string | number; t: number }) => {
 // 删除歌单
 export const deleteSongList = (data: { id: string | number }) => {
   return request({
-    url: '/api/playlist/delete',
+    url: '/playlist/delete',
     method: 'GET',
     data,
   })
@@ -54,7 +54,7 @@ export const deleteSongList = (data: { id: string | number }) => {
 // 获取vip信息
 export const getVipInfo = () => {
   return request({
-    url: '/api/vip/info',
+    url: '/vip/info',
     method: 'GET',
   })
 }
@@ -62,7 +62,7 @@ export const getVipInfo = () => {
 // 喜欢歌曲
 export const likeSong = (data: { id: string | number; like?: boolean }) => {
   return request({
-    url: '/api/like',
+    url: '/like',
     method: 'GET',
     data,
   })
@@ -71,7 +71,7 @@ export const likeSong = (data: { id: string | number; like?: boolean }) => {
 // 日推歌曲
 export const getRecommendSongs = () => {
   return request({
-    url: '/api/recommend/songs',
+    url: '/recommend/songs',
     method: 'GET',
   })
 }
@@ -79,7 +79,7 @@ export const getRecommendSongs = () => {
 // 最近播放的歌曲
 export const getRecentdSong = () => {
   return request({
-    url: '/api/record/recent/song',
+    url: '/record/recent/song',
     method: 'GET',
   })
 }
