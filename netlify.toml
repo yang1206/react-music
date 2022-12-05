@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/api/*"
-  to = "https://netease-cloud-music-api-yang1206.vercel.app/:splat"
+  to = "https://halocn.top/:splat"
   force = true
 
 
