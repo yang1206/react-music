@@ -3,7 +3,10 @@ import { message } from 'antd'
 import Request from './request'
 import type { RequestConfig } from './request/types'
 import NProgress from '@/config/nprogress'
-import { showFullScreenLoading, tryHideFullScreenLoading } from '@/config/serviceLoading'
+import {
+  showFullScreenLoading,
+  tryHideFullScreenLoading,
+} from '@/config/serviceLoading'
 export interface IResponse<T> {
   [x: string]: any
   token: any
@@ -47,7 +50,9 @@ const request = new Request({
  * @param {HttpRequestConfig} config 不管是GET还是POST请求都使用data
  * @returns {Promise}
  */
-const HttpRequest = <D = any, T = any>(config: HttpRequestConfig<D, T>): Promise<any> => {
+const HttpRequest = <D = any, T = any>(
+  config: HttpRequestConfig<D, T>,
+): Promise<any> => {
   const { method = 'GET' } = config
   if (method === 'get' || method === 'GET')
     config.params = config.data

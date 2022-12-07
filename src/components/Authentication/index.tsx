@@ -1,7 +1,11 @@
 import { memo, useEffect } from 'react'
 import { Skeleton, message } from 'antd'
 
-const Auth = (props: { showModal: () => void; flag: boolean; to: () => void }) => {
+const Auth = (props: {
+  showModal: () => void
+  flag: boolean
+  to: () => void
+}) => {
   const { flag } = props
   useEffect(() => {
     // 没登录

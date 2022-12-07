@@ -1,11 +1,26 @@
-import React, { createElement, memo, useCallback, useEffect, useState } from 'react'
+import React, {
+  createElement,
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { LikeFilled, LikeOutlined } from '@ant-design/icons'
 import { Avatar, Comment, Tooltip, message } from 'antd'
 import CommentsHeader from './components/CommentsHeader'
 import SongCommentsStyle from './index.module.less'
-import { changeCurrentTotal, getHotComment, selectHotComments, selectSong } from '@/store/slice/Player'
+import {
+  changeCurrentTotal,
+  getHotComment,
+  selectHotComments,
+  selectSong,
+} from '@/store/slice/Player'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { changeIsVisible, selectLoginState, selectProfile } from '@/store/slice/Login'
+import {
+  changeIsVisible,
+  selectLoginState,
+  selectProfile,
+} from '@/store/slice/Login'
 import { getSongComment, sendLikeComment, sendSongComment } from '@/api/song'
 import { getCount } from '@/utils/format'
 import Pagination from '@/components/Pagination'
@@ -91,7 +106,10 @@ const SongComments: React.FC = () => {
 
   // template html action
   // 点赞HTML
-  const getLikeTemplateAction = (item: { liked: any; likedCount: any }, index: number) => {
+  const getLikeTemplateAction = (
+    item: { liked: any; likedCount: any },
+    index: number,
+  ) => {
     liked.push({
       liked: item.liked,
       count: item.likedCount,
@@ -99,7 +117,9 @@ const SongComments: React.FC = () => {
     return [
       <Tooltip key="comment-basic-like" title="Like" className="comment-like">
         <span onClick={() => likeComment(index, item)}>
-          {createElement(liked[index].liked === true ? LikeFilled : LikeOutlined)}
+          {createElement(
+            liked[index].liked === true ? LikeFilled : LikeOutlined,
+          )}
           <span className="comment-action">{getCount(liked[index].count)}</span>
         </span>
       </Tooltip>,
@@ -148,7 +168,10 @@ const SongComments: React.FC = () => {
                 content={<p>{item.content}</p>}
                 datetime={
                   <Tooltip title={formatDate(item.time)}>
-                    {formatDate(item.time).slice(0, Number(formatDate(item.time).indexOf(' ')))}
+                    {formatDate(item.time).slice(
+                      0,
+                      Number(formatDate(item.time).indexOf(' ')),
+                    )}
                   </Tooltip>
                 }
               />
@@ -168,14 +191,24 @@ const SongComments: React.FC = () => {
                 avatar={<Avatar src={item.user.avatarUrl} alt="Han Solo" />}
                 content={<p>{item.content}</p>}
                 datetime={
-                  <Tooltip title={formatDate(item.time)}>{formatDate(item.time).slice(0, Number(formatDate(item.time)))}</Tooltip>
+                  <Tooltip title={formatDate(item.time)}>
+                    {formatDate(item.time).slice(
+                      0,
+                      Number(formatDate(item.time)),
+                    )}
+                  </Tooltip>
                 }
               />
             )
           })}
       </div>
       {/* 分页 */}
-      <Pagination currentPage={currentPage} pageSize={20} total={total} onPageChange={currentPage => changePage(currentPage)} />
+      <Pagination
+        currentPage={currentPage}
+        pageSize={20}
+        total={total}
+        onPageChange={currentPage => changePage(currentPage)}
+      />
     </div>
   )
 }

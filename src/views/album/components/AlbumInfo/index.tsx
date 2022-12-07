@@ -11,7 +11,8 @@ const AlbumInfo: React.FC<Props> = (props: Props) => {
   const { albumDetail } = props
   const coverPicUrl = albumDetail && albumDetail.album.blurPicUrl
   const headerTitle = albumDetail && albumDetail.album.name
-  const artistName = albumDetail && albumDetail.album.artist && albumDetail.album.artist.name
+  const artistName
+    = albumDetail && albumDetail.album.artist && albumDetail.album.artist.name
   const ReleaseDate
     = albumDetail
     && albumDetail.album.publishTime
@@ -62,7 +63,8 @@ const AlbumInfo: React.FC<Props> = (props: Props) => {
             </div>
             <div className="sprite_button comment">
               <i className="sprite_button inner">
-                <em className="sprite_button favorite-icon"></em>({commentCount})
+                <em className="sprite_button favorite-icon"></em>({commentCount}
+                )
               </i>
             </div>
           </div>
@@ -77,7 +79,10 @@ const AlbumInfo: React.FC<Props> = (props: Props) => {
       </div>
       {/* 歌单详情音乐列表 */}
       <div className="MainDetail">
-        <RcmHeader title="包含歌曲列表" right={<span>{playlist && playlist.length}首歌</span>} />
+        <RcmHeader
+          title="包含歌曲列表"
+          right={<span>{playlist && playlist.length}首歌</span>}
+        />
         {playlist && <PlayList playlist={playlist} />}
       </div>
     </div>

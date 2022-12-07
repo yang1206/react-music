@@ -37,7 +37,10 @@ const PlayListItem: React.FC<Props> = (props: Props) => {
   } = props
   const playList = useAppSelector(selectPlayList).data
   const dispatch = useAppDispatch()
-  const playMusic = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, isTo = false) => {
+  const playMusic = (
+    e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
+    isTo = false,
+  ) => {
     // 如果不跳转,那么组织超链接的默认行为
     if (!isTo)
       e.preventDefault()
@@ -50,13 +53,20 @@ const PlayListItem: React.FC<Props> = (props: Props) => {
     <div className={`SongItemWrapper ${className}`}>
       <div className="song-item rank-count">{currentRanking}</div>
       {coverPic && (
-        <Link to="/discover/song" className="song-item" onClick={e => playMusic(e, true)}>
+        <Link
+          to="/discover/song"
+          className="song-item"
+          onClick={e => playMusic(e, true)}
+        >
           <img src={getSizeImage(coverPic, 50)} alt="" />
         </Link>
       )}
       <div className="song-item song-info" style={{ width }}>
         <div className="left-info">
-          <PlayCircleOutlined className="font-active" onClick={e => playMusic(e)} />
+          <PlayCircleOutlined
+            className="font-active"
+            onClick={e => playMusic(e)}
+          />
           <a href="/play" onClick={e => playMusic(e)} className="text-nowrap">
             {songName}
           </a>

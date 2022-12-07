@@ -15,7 +15,9 @@ const PlayList: React.FC<Props> = (props: Props) => {
         <div className="sprite_table header-item header-title">标题</div>
         <div className="sprite_table header-item header-time">时长</div>
         <div className="sprite_table header-item header-singer">歌手</div>
-        {!props.hideAl && <div className="sprite_table header-item header-album">专辑</div>}
+        {!props.hideAl && (
+          <div className="sprite_table header-item header-album">专辑</div>
+        )}
       </div>
       <div className="main-list">
         {playlist

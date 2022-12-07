@@ -18,8 +18,6 @@ import './index.less'
 const SearchContent: React.FC = () => {
   const [activeKey, setActive] = useState<string>()
   const [searchValue, setSearchValue] = useState<string>()
-  // antd组件
-  const { TabPane } = Tabs
   const { Search } = Input
   // redux
   const singleSongList = useAppSelector(selectSingleSongList).data
@@ -42,7 +40,7 @@ const SearchContent: React.FC = () => {
       dispatch(getSearchSingerList(song))
     if (song && type === '3')
       dispatch(getSearchAlbumList(song))
-  }, [dispatch, song, useSearchParams, params, type])
+  }, [dispatch, song, params, type])
   const redirect = (val: string, type: string | number) => {
     if (type !== undefined) {
       navigate(`/search?song=${val}&type=${type}`, {
@@ -73,6 +71,54 @@ const SearchContent: React.FC = () => {
     size: '100px',
     bgp: '-570px',
   }
+  const items = [
+    {
+      label: '单曲',
+      key: '1',
+      children: (
+        <div className="SingleSongWrapper">
+          {singleSongList
+            && singleSongList.map((item) => {
+              return (
+                <SingleSong
+                  key={item.id}
+                  songId={item.id}
+                  songName={item.name}
+                  singer={item?.ar[0]?.name}
+                  album={item.al.name}
+                  duration={formatMinuteSecond(item.dt)}
+                />
+              )
+            })}
+        </div>),
+    },
+    {
+      label: '歌手',
+      key: '2',
+      children: (
+        <div className="SingerWrapper">
+          {singerList
+            && singerList.map((item) => {
+              return <ArtistCover key={item.id} id={item.id} coverPic={item.picUrl} singer={item.name} />
+            })}
+        </div>),
+    },
+    {
+      label: '专辑',
+      key: '3',
+      children: (
+        <div className="SearchAlbum">
+          {albumList
+            && albumList.map((info) => {
+              return (
+                <div key={info.id} className="albumItem">
+                  <AlbumCover info={info} {...CoverProps} />
+                </div>
+              )
+            })}
+        </div>),
+    },
+  ]
   return (
     <div className="SearchWrapper ">
       <div className="wrap-v2 content">
@@ -93,51 +139,7 @@ const SearchContent: React.FC = () => {
             {activeKey === '3' && '专辑'}
           </div>
           <div className="card-container">
-            <Tabs destroyInactiveTabPane={true} onChange={onChange} type="card">
-              <TabPane tab="单曲" key="1">
-                <div className="SingleSongWrapper">
-                  {singleSongList
-                    && singleSongList.map((item) => {
-                      return (
-                        <SingleSong
-                          key={item.id}
-                          songId={item.id}
-                          songName={item.name}
-                          singer={item.artists[0].name}
-                          album={item.album.name}
-                          duration={formatMinuteSecond(item.duration)}
-                        />
-                      )
-                    })}
-                </div>
-              </TabPane>
-              <TabPane tab="歌手" key="2">
-                <div className="SingerWrapper">
-                  {singerList
-                    && singerList.map((item) => {
-                      return (
-                        <ArtistCover
-                          key={item.id}
-                          id={item.id}
-                          coverPic={item.picUrl}
-                          singer={item.name}
-                        />
-                      )
-                    })}
-                </div>
-              </TabPane>
-              <TabPane tab="专辑" key="3">
-                <div className="SearchAlbum">
-                  {albumList
-                    && albumList.map((info) => {
-                      return (
-                        <div key={info.id} className="albumItem">
-                          <AlbumCover info={info} {...CoverProps} />
-                        </div>
-                      )
-                    })}
-                </div>
-              </TabPane>
+            <Tabs items={items} destroyInactiveTabPane={true} onChange={onChange} type="card">
             </Tabs>
           </div>
         </div>

@@ -1,22 +1,45 @@
 import React, { memo } from 'react'
-import { DeleteOutlined, DownloadOutlined, LikeOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  DownloadOutlined,
+  LikeOutlined,
+} from '@ant-design/icons'
 import { formatDate, getPlayUrl } from '@/utils/format'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { changeCurrentSong, changePlayList, changePlayListCount, selectPlayList, selectSong } from '@/store/slice/Player'
+import {
+  changeCurrentSong,
+  changePlayList,
+  changePlayListCount,
+  selectPlayList,
+  selectSong,
+} from '@/store/slice/Player'
 import { removeSongId } from '@/utils/storage'
 import './index.less'
 const PlayListItem: React.FC<any> = (props) => {
-  const { songName, singer, duration, isActive, clickItem, songId, nextMusic, playMusic } = props
+  const {
+    songName,
+    singer,
+    duration,
+    isActive,
+    clickItem,
+    songId,
+    nextMusic,
+    playMusic,
+  } = props
   const dispatch = useAppDispatch()
   const playList = useAppSelector(selectPlayList).data
   const currentSong = useAppSelector(selectSong).data
   // 清除当前播放音乐
-  const clearCurrentSong = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  const clearCurrentSong = (
+    e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
+  ) => {
     // 从当前播放列表删除此音乐,然后派发action
     e.stopPropagation()
     // 移除歌曲
     removeSongId(songId)
-    const currentSongIndex = playList.findIndex((song: { id: number }) => song.id === songId)
+    const currentSongIndex = playList.findIndex(
+      (song: { id: number }) => song.id === songId,
+    )
     if (playList.length > 1 && currentSong.id === songId)
       return
 

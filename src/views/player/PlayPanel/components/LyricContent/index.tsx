@@ -19,7 +19,12 @@ const LyricContent: React.FC<any> = () => {
         {currentLyric
           && currentLyric.map((item, index) => {
             return (
-              <div key={index} className={`lyric-item ${currentLyricIndex === index ? 'active' : ''}`}>
+              <div
+                key={index}
+                className={`lyric-item ${
+                  currentLyricIndex === index ? 'active' : ''
+                }`}
+              >
                 {item.content}
               </div>
             )

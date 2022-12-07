@@ -10,13 +10,15 @@ const ArtistCategory: React.FC = () => {
           <div key={index} className="category">
             <p className="label">{item.title}</p>
             <div className="info artist">
-              {item.artists.map((j: { name: string; url: string }, k: number) => {
-                return (
-                  <NavLink to={j.url} className="categoryItem" key={k}>
-                    {j.name}
-                  </NavLink>
-                )
-              })}
+              {item.artists.map(
+                (j: { name: string; url: string }, k: number) => {
+                  return (
+                    <NavLink to={j.url} className="categoryItem" key={k}>
+                      {j.name}
+                    </NavLink>
+                  )
+                },
+              )}
             </div>
           </div>
         )

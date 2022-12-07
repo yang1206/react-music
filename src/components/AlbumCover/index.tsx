@@ -27,7 +27,10 @@ const AlbumCover: React.FC<Props> = (props: any) => {
           style={{ width: size, height: size }}
           alt=""
         ></img>
-        <a className="cover sprite_cover" style={{ backgroundPosition: `0  ${bgp}` }}>
+        <a
+          className="cover sprite_cover"
+          style={{ backgroundPosition: `0  ${bgp}` }}
+        >
           {info.name}
         </a>
       </div>

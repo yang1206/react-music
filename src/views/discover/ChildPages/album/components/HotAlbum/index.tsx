@@ -10,7 +10,7 @@ const HotAlbum: React.FC = () => {
   const hotNewAlbums = useAppSelector(selectNewAlbums).data.slice(0, 10)
   useEffect(() => {
     dispatch(getNewAlbums())
-  }, [])
+  }, [dispatch])
   const CoverProps = {
     width: '150px',
     size: '130px',

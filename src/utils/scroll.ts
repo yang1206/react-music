@@ -4,7 +4,11 @@
  * @param {} to
  * @param {Number} duration 总时长
  */
-export function scrollTo(element: { scrollTop: number }, to: number, duration: number) {
+export function scrollTo(
+  element: { scrollTop: number },
+  to: number,
+  duration: number,
+) {
   // 当前播放时间
   if (duration <= 0)
     return

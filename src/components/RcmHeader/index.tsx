@@ -19,7 +19,10 @@ const RcmHeader: React.FC<Headers> = (props) => {
             && keywords.map((item, index) => {
               return (
                 <div className="item" key={item}>
-                  <span className="link" onClick={() => keywordClick(item, index)}>
+                  <span
+                    className="link"
+                    onClick={() => keywordClick(item, index)}
+                  >
                     {item}
                   </span>
                   <span className="divider">|</span>

@@ -2,7 +2,7 @@ import type { Song } from './interface'
 import request from '@/service'
 export const getSongDetail = (data: Song.SongDetail) => {
   return request({
-    url: '/api/song/detail',
+    url: '/song/detail',
     method: 'GET',
     data,
   })
@@ -10,7 +10,7 @@ export const getSongDetail = (data: Song.SongDetail) => {
 
 export const getLyricData = (data: { id: number }) => {
   return request({
-    url: '/api/lyric',
+    url: '/lyric',
     method: 'GET',
     data,
   })
@@ -19,7 +19,7 @@ export const getLyricData = (data: { id: number }) => {
 // 相似歌曲
 export const getSongSimi = (data: { id: number }) => {
   return request({
-    url: '/api/simi/song',
+    url: '/simi/song',
     method: 'GET',
     data,
   })
@@ -28,7 +28,7 @@ export const getSongSimi = (data: { id: number }) => {
 // 检查音乐是否可用
 export const checkMusic = (data: { id: number }) => {
   return request({
-    url: '/api/check/music',
+    url: '/check/music',
     method: 'GET',
     data,
   })
@@ -37,7 +37,7 @@ export const checkMusic = (data: { id: number }) => {
 // 获取热门评论
 export const getHotCommentData = (data: { id: number; type: number }) => {
   return request({
-    url: '/api/comment/hot',
+    url: '/comment/hot',
     method: 'GET',
     data,
   })
@@ -46,7 +46,7 @@ export const getHotCommentData = (data: { id: number; type: number }) => {
 // 获取歌曲评论
 export const getSongComment = (id: number, limit = 20, offset: number) => {
   return request({
-    url: '/api/comment/music',
+    url: '/comment/music',
     method: 'GET',
     data: { id, limit, offset, timestamp: new Date().getTime() },
   })
@@ -56,7 +56,7 @@ export const getSongComment = (id: number, limit = 20, offset: number) => {
 t : 是否点赞 ,1 为点赞 ,0 为取消点赞 */
 export function sendLikeComment(id: number, cid: number, t: number) {
   return request({
-    url: '/api/comment/like',
+    url: '/comment/like',
     data: {
       id,
       cid,
@@ -69,7 +69,7 @@ export function sendLikeComment(id: number, cid: number, t: number) {
 // 评论歌曲
 export function sendSongComment(id: any, content: any) {
   return request({
-    url: '/api/comment',
+    url: '/comment',
     data: {
       t: 1, // 发送
       type: 0, // 歌曲类型

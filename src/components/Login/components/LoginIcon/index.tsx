@@ -8,7 +8,12 @@ const LoginIcon: React.FC<Params> = (props: Params) => {
   const { position, description, onClick } = props
   return (
     <a
-      style={{ display: 'flex', width: '149px', marginTop: '19px', lineHeight: '38px' }}
+      style={{
+        display: 'flex',
+        width: '149px',
+        marginTop: '19px',
+        lineHeight: '38px',
+      }}
       onClick={onClick}
     >
       <i

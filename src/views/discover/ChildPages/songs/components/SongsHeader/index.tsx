@@ -10,7 +10,10 @@ const SongsHeader: React.FC = () => {
     <div className="SongsHeaderWrapper">
       <div className="SongsHeaderLeft">
         <span className="title">{currentCategory || '全部'}</span>
-        <button className="select" onClick={() => setShowCategory(!showCategory)}>
+        <button
+          className="select"
+          onClick={() => setShowCategory(!showCategory)}
+        >
           <span>选择分类</span>
           <i className="sprite_icon2"></i>
         </button>

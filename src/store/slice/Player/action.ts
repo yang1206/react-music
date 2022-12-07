@@ -8,7 +8,12 @@ import {
   changePlayList,
   changePlayListCount,
 } from '@/store/slice/Player'
-import { checkMusic, getHotCommentData, getLyricData, getSongDetail } from '@/api/song'
+import {
+  checkMusic,
+  getHotCommentData,
+  getLyricData,
+  getSongDetail,
+} from '@/api/song'
 import { parseLyric } from '@/utils/parseLyric'
 import { getRandom } from '@/utils/math'
 import { addPlaylistId } from '@/utils/storage'
@@ -46,7 +51,9 @@ const getSong = createAsyncThunk<
     const playList = getState().player.playList
     const isLogin = getState().login.isLogin
     const vipType = getState().login.profile?.vipType
-    const songIndex = playList.findIndex((song: { id: number }) => song.id === params.id)
+    const songIndex = playList.findIndex(
+      (song: { id: number }) => song.id === params.id,
+    )
     let song = null
     if (songIndex !== -1) {
       // 找到数据
@@ -124,50 +131,53 @@ const getSongDetailArray = createAsyncThunk<
     dispatch: any
     state: any
   }
->('player/getSongDetailArray', async (params: IGetSongDetailArray, { getState, dispatch }) => {
-  const playList = getState().player.playList
-  let newArr = [...playList]
-  const { listId, index } = params
-  let i = 0
-  let timer = null
-  let executedRun = true
-  timer = setInterval(() => {
-    const idx = listId[i]
-    new Promise((resolve) => {
-      executedRun
-        && getSongDetail({ ids: idx }).then((res) => {
-          executedRun = false
-          // (0)歌曲ID添加到本地存储
-          addPlaylistId(idx)
-          const song = res.songs && res.songs[0]
-          if (!song)
-            return
+>(
+  'player/getSongDetailArray',
+  async (params: IGetSongDetailArray, { getState, dispatch }) => {
+    const playList = getState().player.playList
+    let newArr = [...playList]
+    const { listId, index } = params
+    let i = 0
+    let timer = null
+    let executedRun = true
+    timer = setInterval(() => {
+      const idx = listId[i]
+      new Promise((resolve) => {
+        executedRun
+          && getSongDetail({ ids: idx }).then((res) => {
+            executedRun = false
+            // (0)歌曲ID添加到本地存储
+            addPlaylistId(idx)
+            const song = res.songs && res.songs[0]
+            if (!song)
+              return
 
-          // (1)添加到播放列表中
-          newArr = [...newArr, song]
-          dispatch(changePlayList(newArr))
-          // (2)更改当前播放的索引
-          const songIndex = index ?? newArr.length - 1
-          dispatch(changeCurrentIndex(songIndex))
-          // (3)更改当前播放歌曲
-          const currentIndexSong = newArr[songIndex] || song
-          dispatch(changeCurrentSong(currentIndexSong))
-          // (4)请求歌曲的歌词
-          if (currentIndexSong.id === idx)
-            dispatch(getLyric(idx))
+            // (1)添加到播放列表中
+            newArr = [...newArr, song]
+            dispatch(changePlayList(newArr))
+            // (2)更改当前播放的索引
+            const songIndex = index ?? newArr.length - 1
+            dispatch(changeCurrentIndex(songIndex))
+            // (3)更改当前播放歌曲
+            const currentIndexSong = newArr[songIndex] || song
+            dispatch(changeCurrentSong(currentIndexSong))
+            // (4)请求歌曲的歌词
+            if (currentIndexSong.id === idx)
+              dispatch(getLyric(idx))
 
-          // (5)更新歌曲数量
-          dispatch(changePlayListCount(newArr.length))
-          resolve(i)
-        })
-    }).then(() => {
-      executedRun = true
+            // (5)更新歌曲数量
+            dispatch(changePlayListCount(newArr.length))
+            resolve(i)
+          })
+      }).then(() => {
+        executedRun = true
+      })
+      i++
+      if (i >= listId.length)
+        clearInterval(timer)
     })
-    i++
-    if (i >= listId.length)
-      clearInterval(timer)
-  })
-})
+  },
+)
 
 // 改变当前播放歌曲
 // 因为要拿到dispatch，所有使用异步action
@@ -214,11 +224,14 @@ const changePlaySong = createAsyncThunk<
 })
 
 // 获取歌曲热评
-const getHotComment = createAsyncThunk('player/getHotComment', async (id: number) => {
-  const data = await getHotCommentData({ id, type: 0 }).then((res) => {
-    return res.hotComments
-  })
-  return data
-})
+const getHotComment = createAsyncThunk(
+  'player/getHotComment',
+  async (id: number) => {
+    const data = await getHotCommentData({ id, type: 0 }).then((res) => {
+      return res.hotComments
+    })
+    return data
+  },
+)
 
 export { getSong, changePlaySong, getLyric, getSongDetailArray, getHotComment }

@@ -1,11 +1,24 @@
 import React, { memo, useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Modal from 'antd/lib/modal/Modal'
-import { ManOutlined, PlayCircleOutlined, WomanOutlined } from '@ant-design/icons'
+import {
+  ManOutlined,
+  PlayCircleOutlined,
+  WomanOutlined,
+} from '@ant-design/icons'
 import { Input, message } from 'antd'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { changeIsVisible, selectLoginState, selectProfile } from '@/store/slice/Login'
-import { CreateSongList, getRecentdSong, getUserLevel, gotoUserSongList } from '@/api/user'
+import {
+  changeIsVisible,
+  selectLoginState,
+  selectProfile,
+} from '@/store/slice/Login'
+import {
+  CreateSongList,
+  getRecentdSong,
+  getUserLevel,
+  gotoUserSongList,
+} from '@/api/user'
 import { getCity, getSizeImage } from '@/utils/format'
 import Authentication from '@/components/Authentication'
 import RcmHeader from '@/components/RcmHeader'
@@ -22,7 +35,8 @@ const User: React.FC = () => {
   const isLogin = useAppSelector(selectLoginState).data
   const userinfo = useAppSelector(selectProfile).data
 
-  const userPic = userinfo && userinfo.avatarUrl && getSizeImage(userinfo.avatarUrl, 180)
+  const userPic
+    = userinfo && userinfo.avatarUrl && getSizeImage(userinfo.avatarUrl, 180)
   const nickname = userinfo && userinfo.nickname
   const gender = userinfo && userinfo.gender === 1 ? 'man' : 'woman'
   const dynamic = [
@@ -51,8 +65,7 @@ const User: React.FC = () => {
       res.playlist.forEach((item: { subscribed: boolean }) => {
         if (item.subscribed)
           sub.push(item)
-        else
-          my.push(item)
+        else my.push(item)
       })
       setMyPlaylist(my)
       setSubPlaylist(sub)
@@ -111,8 +124,12 @@ const User: React.FC = () => {
             <span className="lev">lv:{level}</span>
             <div className="gender-icon">
               {gender === 'man'
-                ? (<ManOutlined className="gender-icon man" />)
-                : (<WomanOutlined className="gender-icon" color="#e60026" />)}
+                ? (
+                <ManOutlined className="gender-icon man" />
+                  )
+                : (
+                <WomanOutlined className="gender-icon" color="#e60026" />
+                  )}
             </div>
           </div>
           <div className="dynamic-wrap flex">{renderDynamicList()}</div>
@@ -121,7 +138,10 @@ const User: React.FC = () => {
         </div>
       </div>
       <div className="song-list">
-        <RcmHeader title={`我的歌单(${myPlaylist.length})`} right={renderCreatePlaylist()} />
+        <RcmHeader
+          title={`我的歌单(${myPlaylist.length})`}
+          right={renderCreatePlaylist()}
+        />
         <div className="playlist flex">
           {myPlaylist
             && myPlaylist.map
@@ -131,7 +151,10 @@ const User: React.FC = () => {
         </div>
       </div>
       <div className="song-list">
-        <RcmHeader title={`我收藏的歌单(${subPlaylist.length})`} right={renderCreatePlaylist()} />
+        <RcmHeader
+          title={`我收藏的歌单(${subPlaylist.length})`}
+          right={renderCreatePlaylist()}
+        />
         <div className="playlist flex">
           {subPlaylist
             && subPlaylist.map

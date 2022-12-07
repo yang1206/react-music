@@ -4,7 +4,11 @@ import { DeleteOutlined, HeartTwoTone } from '@ant-design/icons'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { getSizeImage, parseTime } from '@/utils/format'
 import { selectSongListDetailInfo } from '@/store/slice/SongList'
-import { changeIsVisible, selectLoginState, selectProfile } from '@/store/slice/Login'
+import {
+  changeIsVisible,
+  selectLoginState,
+  selectProfile,
+} from '@/store/slice/Login'
 import { deleteSongList, subscribeSongList } from '@/api/user'
 import RcmHeader from '@/components/RcmHeader'
 import PlayList from '@/components/PlayList'
@@ -22,7 +26,8 @@ const SongListInfo: React.FC = () => {
     && SongListDetail.creator
     && SongListDetail.creator.avatarUrl
     && getSizeImage(SongListDetail.creator.avatarUrl, 35)
-  const avatarName = SongListDetail && SongListDetail.creator && SongListDetail.creator.nickname
+  const avatarName
+    = SongListDetail && SongListDetail.creator && SongListDetail.creator.nickname
   const avatarDatetime
     = SongListDetail
     && SongListDetail.createTime
@@ -53,7 +58,7 @@ const SongListInfo: React.FC = () => {
     else {
       dispatch(changeIsVisible(true))
     }
-  }, [isLogin, dispatch, playlist])
+  }, [isLogin, dispatch, SongListDetail.id, subscribed])
   // 删除歌单
   const deleteList = useCallback(() => {
     if (isLogin) {
@@ -65,7 +70,7 @@ const SongListInfo: React.FC = () => {
     else {
       dispatch(changeIsVisible(true))
     }
-  }, [isLogin, dispatch, userID, SongListUser])
+  }, [isLogin, dispatch, SongListDetail.id])
   const renderTags = () => {
     return (
       labelsArr
@@ -108,9 +113,15 @@ const SongListInfo: React.FC = () => {
           <div className="label-warpper flex gap">
             {labelsArr.length > 0 && <span>标签: </span>}
             {renderTags()}
-            <div className="sprite_button favorite pointer" style={{ marginBottom: '5px' }}>
+            <div
+              className="sprite_button favorite pointer"
+              style={{ marginBottom: '5px' }}
+            >
               {!subscribed && (
-                <HeartTwoTone onClick={() => collectSongList()} style={{ fontSize: '30px' }} />
+                <HeartTwoTone
+                  onClick={() => collectSongList()}
+                  style={{ fontSize: '30px' }}
+                />
               )}
               {subscribed && (
                 <HeartTwoTone
@@ -129,7 +140,10 @@ const SongListInfo: React.FC = () => {
                   marginLeft: '10px',
                 }} /* onClick={() => collectSonglist()} */
               >
-                <DeleteOutlined onClick={() => deleteList()} style={{ fontSize: '30px' }} />
+                <DeleteOutlined
+                  onClick={() => deleteList()}
+                  style={{ fontSize: '30px' }}
+                />
               </div>
             )}
           </div>

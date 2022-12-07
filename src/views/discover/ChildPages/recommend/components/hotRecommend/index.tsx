@@ -22,7 +22,7 @@ const HotRecommend: React.FC = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(getPersonalized())
-  }, [])
+  }, [dispatch])
   const PersonalizedData = useAppSelector(selectPersonalized)
   if (!PersonalizedData)
     return null

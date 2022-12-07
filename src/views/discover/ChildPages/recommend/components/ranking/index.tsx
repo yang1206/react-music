@@ -21,8 +21,9 @@ const NewAlbum: React.FC = () => {
     dispatch(getTopLists(3779629))
     // 原创榜
     dispatch(getTopLists(2884035))
-  }, [])
-  const { newList, riseList, originalList } = useAppSelector(selectTopList).data
+  }, [dispatch])
+  const { newList, riseList, originalList }
+    = useAppSelector(selectTopList).data
   return (
     <div className="RankingWrapper">
       <RcmHeader {...props} />

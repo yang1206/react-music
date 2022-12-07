@@ -24,11 +24,11 @@ export const TopListSlice = createSlice({
   initialState,
   reducers: {
     // 改变当前索引
-    changeCurrentIndex: (state, { payload }: any) => {
+    changeCurrentIndex: (state, { payload }) => {
       state.currentIndex = payload
     },
     // 改变当前歌单的ID
-    changeCurrentTopListId: (state, { payload }: any) => {
+    changeCurrentTopListId: (state, { payload }) => {
       state.currentTopListId = payload
     },
   },
@@ -67,6 +67,7 @@ export const selectCurrentTopList = (state: RootState) => ({
   shallowEqual,
 })
 export default TopListSlice.reducer
-export const { changeCurrentIndex, changeCurrentTopListId } = TopListSlice.actions
+export const { changeCurrentIndex, changeCurrentTopListId }
+  = TopListSlice.actions
 // 统一导出异步action
 export { getTopListInfo, getTopListTitleInfo, getTopListItem }

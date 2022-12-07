@@ -37,7 +37,10 @@ const SongInfo: React.FC = () => {
           <Link to={`/album?id=${albumId}`}>{album}</Link>
         </div>
         <div className="controls">
-          <div className="sprite_button play pointer" onClick={() => playMusic()}>
+          <div
+            className="sprite_button play pointer"
+            onClick={() => playMusic()}
+          >
             <i className="sprite_button inner">
               <em className="sprite_button play-icon"></em>
               播放

@@ -1,6 +1,6 @@
 {
   "extends": [
-    "@antfu"
+    "@antfu/eslint-config-react"
     // "plugin:prettier/recommended"
   ]
   // "rules": {

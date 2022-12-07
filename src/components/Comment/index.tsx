@@ -10,13 +10,29 @@ interface EditorProps {
   value: string
   onFocus: (value: any) => void
 }
-const Editor: React.FC<EditorProps> = ({ onChange, onSubmit, submitting, value, onFocus }) => (
+const Editor: React.FC<EditorProps> = ({
+  onChange,
+  onSubmit,
+  submitting,
+  value,
+  onFocus,
+}) => (
   <>
     <Form.Item>
-      <TextArea rows={4} onChange={onChange} value={value} onFocus={e => onFocus(e)} />
+      <TextArea
+        rows={4}
+        onChange={onChange}
+        value={value}
+        onFocus={e => onFocus(e)}
+      />
     </Form.Item>
     <Form.Item>
-      <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
+      <Button
+        htmlType="submit"
+        loading={submitting}
+        onClick={onSubmit}
+        type="primary"
+      >
         评论
       </Button>
     </Form.Item>
@@ -40,7 +56,9 @@ const CurComment: React.FC<Props> = (props) => {
     props.callbackOk(value)
   }
 
-  const handleChange = (e: { target: { value: React.SetStateAction<string> } }) => {
+  const handleChange = (e: {
+    target: { value: React.SetStateAction<string> }
+  }) => {
     setValue(e.target.value)
   }
 

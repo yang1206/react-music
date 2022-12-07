@@ -1,6 +1,10 @@
 import React, { memo } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { changeCurrentCategory, getPlayList, selectCategory } from '@/store/slice/SongList'
+import {
+  changeCurrentCategory,
+  getPlayList,
+  selectCategory,
+} from '@/store/slice/SongList'
 import './index.less'
 const SongsCategory: React.FC = () => {
   const category = useAppSelector(selectCategory).data
@@ -29,7 +33,10 @@ const SongsCategory: React.FC = () => {
                 {item.subs.map((sItem) => {
                   return (
                     <div className="item" key={sItem.name}>
-                      <span className="link" onClick={() => changeCategory(sItem.name)}>
+                      <span
+                        className="link"
+                        onClick={() => changeCategory(sItem.name)}
+                      >
                         {sItem.name}
                       </span>
                       <span className="divider">|</span>

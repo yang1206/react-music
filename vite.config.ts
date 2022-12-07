@@ -11,14 +11,14 @@ export default defineConfig({
     cors: true, // 跨域设置允许
     strictPort: true, // 如果端口已占用直接退出
     // 接口代理
-    // proxy: {
-    //   '/api': {
-    //     // 本地 8000 前端代码的接口 代理到 8888 的服务端口
-    //     target: 'http://123.207.32.32:9001/',
-    //     changeOrigin: true, // 允许跨域
-    //     rewrite: (path) => path.replace('/api/', '/'),
-    //   },
-    // },
+    proxy: {
+      '/api': {
+        // 本地 8000 前端代码的接口 代理到 8888 的服务端口
+        target: 'https://halocn.top/',
+        changeOrigin: true, // 允许跨域
+        rewrite: path => path.replace('/api/', '/'),
+      },
+    },
   },
   css: {
     preprocessorOptions: {

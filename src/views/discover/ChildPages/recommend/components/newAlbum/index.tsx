@@ -25,7 +25,7 @@ const NewAlbum: React.FC = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(getNewAlbums())
-  }, [])
+  }, [dispatch])
   // 从store取出banners
   const newAlbums = useAppSelector(selectNewAlbums)
   const pageRef = useRef<CarouselRef>(null)
@@ -36,21 +36,31 @@ const NewAlbum: React.FC = () => {
     <div className="AlbumWrapper">
       <RcmHeader {...headerProps} />
       <div className="albumContent">
-        <button onClick={() => pageRef.current?.prev()} className="arrow arrow-left sprite_02"></button>
+        <button
+          onClick={() => pageRef.current?.prev()}
+          className="arrow arrow-left sprite_02"
+        ></button>
         <div className="album">
           <Carousel dots={false} ref={pageRef}>
             {[0, 1].map((item) => {
               return (
                 <div key={item} className="page">
-                  {newAlbums?.data.slice(item * 5, (item + 1) * 5).map((info) => {
-                    return <AlbumCover key={info.id} info={info} {...CoverProps} />
-                  })}
+                  {newAlbums?.data
+                    .slice(item * 5, (item + 1) * 5)
+                    .map((info) => {
+                      return (
+                        <AlbumCover key={info.id} info={info} {...CoverProps} />
+                      )
+                    })}
                 </div>
               )
             })}
           </Carousel>
         </div>
-        <button onClick={() => pageRef.current?.next()} className="arrow arrow-right sprite_02"></button>
+        <button
+          onClick={() => pageRef.current?.next()}
+          className="arrow arrow-right sprite_02"
+        ></button>
       </div>
     </div>
   )

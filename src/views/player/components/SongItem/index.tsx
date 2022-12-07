@@ -21,7 +21,10 @@ const SongItem: React.FC<any> = (props) => {
   const dispatch = useAppDispatch()
   const playList = useAppSelector(selectPlayList).data
   // other function
-  const playMusic = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, isTo = false) => {
+  const playMusic = (
+    e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
+    isTo = false,
+  ) => {
     if (!isTo)
       e.preventDefault()
     dispatch(getSong({ id: songId, isPlay: true }))
@@ -31,9 +34,16 @@ const SongItem: React.FC<any> = (props) => {
   const addPlaylist = useAddPlaylist(playList)
 
   return (
-    <div className={`${className} SongItemWrapper`} style={{ margin: '20px 0' }}>
+    <div
+      className={`${className} SongItemWrapper`}
+      style={{ margin: '20px 0' }}
+    >
       {coverPic && (
-        <NavLink to="/discover/song" className="song-item" onClick={e => playMusic(e, true)}>
+        <NavLink
+          to="/discover/song"
+          className="song-item"
+          onClick={e => playMusic(e, true)}
+        >
           <img src={getSizeImage(coverPic, 50)} alt="" />
         </NavLink>
       )}
@@ -54,7 +64,10 @@ const SongItem: React.FC<any> = (props) => {
           </div>
         </div>
         <div className="right-operator">
-          <PlayCircleOutlined className="font-active" onClick={e => playMusic(e)} />
+          <PlayCircleOutlined
+            className="font-active"
+            onClick={e => playMusic(e)}
+          />
           <button
             className="sprite_icon2 btn addto"
             onClick={e => addPlaylist(e, songId)}

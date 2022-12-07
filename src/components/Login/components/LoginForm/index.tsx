@@ -13,7 +13,9 @@ const tailLayout = {
   wrapperCol: { span: 30 },
 }
 
-const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string }) => {
+const LoginForm: React.FC<{ loginState: string }> = (props: {
+  loginState: string
+}) => {
   const dispatch = useAppDispatch()
   // 拿到"登录的方式"
   const { loginState } = props
@@ -110,7 +112,13 @@ const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string
           <span className={loginFormStyle.forgetPwd}>忘记密码?</span>
         </div>
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit" size="middle" block shape="round">
+          <Button
+            type="primary"
+            htmlType="submit"
+            size="middle"
+            block
+            shape="round"
+          >
             登录
           </Button>
         </Form.Item>
@@ -154,7 +162,10 @@ const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string
           <Input.Password />
         </Form.Item>
         <Form.Item>
-          <div className={loginFormStyle.register} onClick={() => handleSendCode()}>
+          <div
+            className={loginFormStyle.register}
+            onClick={() => handleSendCode()}
+          >
             {isSendState ? `${second}s` : '发送验证码'}
           </div>
         </Form.Item>
@@ -180,7 +191,13 @@ const LoginForm: React.FC<{ loginState: string }> = (props: { loginState: string
           <Input disabled={!isSendState} />
         </Form.Item>
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit" size="middle" block shape="round">
+          <Button
+            type="primary"
+            htmlType="submit"
+            size="middle"
+            block
+            shape="round"
+          >
             提交
           </Button>
         </Form.Item>

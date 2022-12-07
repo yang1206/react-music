@@ -33,7 +33,8 @@ const TopListTitle = () => {
           </div>
           <div className="sprite_button favorite">
             <i className="sprite_button inner">
-              <em className="sprite_button favorite-icon"></em>({subscribedCount})
+              <em className="sprite_button favorite-icon"></em>(
+              {subscribedCount})
             </i>
           </div>
           <div className="sprite_button share">

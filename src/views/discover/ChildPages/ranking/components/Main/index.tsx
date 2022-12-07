@@ -10,7 +10,8 @@ import {
 } from '@/store/slice/TopList'
 import './index.less'
 const TopListMain: React.FC = () => {
-  const playCount = useAppSelector(selectCurrentTopListTitleInfo).data.playCount
+  const playCount = useAppSelector(selectCurrentTopListTitleInfo).data
+    .playCount
   const currentTopListId = useAppSelector(selectCurrentTopListId).data
   const currentTopList = useAppSelector(selectCurrentTopList).data
 

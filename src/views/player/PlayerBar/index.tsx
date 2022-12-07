@@ -66,7 +66,9 @@ const PlayBar: React.FC = () => {
           setIsPlaying(false)
         })
     }
-    currentSong?.dt ? setDuration(currentSong.dt) : setDuration(currentSong?.dt)
+    currentSong?.dt
+      ? setDuration(currentSong.dt)
+      : setDuration(currentSong?.dt)
   }, [currentSong, isFirstLoad])
   // 点击播放按钮方法
   const play = useCallback(() => {
@@ -76,8 +78,10 @@ const PlayBar: React.FC = () => {
     isPlaying ? audioRef.current!.pause() : audioRef.current!.play().catch()
     // 先判断在改变播放状态
     setIsPlaying(!isPlaying)
-    isPlaying ? setPlayClass('sprite_playBar btn play') : setPlayClass('sprite_playBar btn pause')
-  }, [isPlaying])
+    isPlaying
+      ? setPlayClass('sprite_playBar btn play')
+      : setPlayClass('sprite_playBar btn pause')
+  }, [isPlaying, dispatch])
   // 歌曲播放完毕
   const playEnded = useCallback(() => {
     if (sequence === 2) {
@@ -93,7 +97,7 @@ const PlayBar: React.FC = () => {
 
       setIsPlaying(true)
     }
-  }, [])
+  }, [dispatch, sequence, playList.length])
   const timeUpdate = (e: any) => {
     const currentTime = e.target.currentTime * 1000
     // 如果进度条正在被拖动Progress，也就是当前进度条的位置就不随着歌曲进度改变
@@ -158,7 +162,7 @@ const PlayBar: React.FC = () => {
         audioRef.current?.play()
     },
     // 这里必须依赖duration，否则会设置为0
-    [duration, isPlaying, play],
+    [duration, isPlaying],
   )
   const changeSequenceData = () => {
     let currentSequence = sequence + 1
@@ -205,7 +209,11 @@ const PlayBar: React.FC = () => {
               changeMusic(-1)
             }}
           ></button>
-          <button className={playClass} onClick={() => play()} style={{ backgroundPosition: `0 ${playStyle}` }}></button>
+          <button
+            className={playClass}
+            onClick={() => play()}
+            style={{ backgroundPosition: `0 ${playStyle}` }}
+          ></button>
           <button
             className="sprite_playBar btn next"
             onClick={() => {
@@ -215,7 +223,11 @@ const PlayBar: React.FC = () => {
         </div>
         <div className="PlayInfo">
           <div className="image">
-            <NavLink to="/discover/song">{currentSong && <img src={getSizeImage(currentSong?.al.picUrl, 35)} alt="" />}</NavLink>
+            <NavLink to="/discover/song">
+              {currentSong && (
+                <img src={getSizeImage(currentSong?.al.picUrl, 35)} alt="" />
+              )}
+            </NavLink>
           </div>
           <div className="info">
             <div className="song">
@@ -223,17 +235,28 @@ const PlayBar: React.FC = () => {
                 {currentSong?.name}
               </Link>
               {currentSong?.ar[0] && (
-                <Link to={`/artist?id=${currentSong?.ar[0].id}`} className="singer-name">
+                <Link
+                  to={`/artist?id=${currentSong?.ar[0].id}`}
+                  className="singer-name"
+                >
                   {currentSong?.ar[0].name}
                 </Link>
               )}
             </div>
             <div className="progress">
-              <Slider value={progress} onChange={sliderChange} onAfterChange={sliderAfterChange} />
+              <Slider
+                value={progress}
+                onChange={sliderChange}
+                onAfterChange={sliderAfterChange}
+              />
               <div className="time">
-                <span className="now-time">{formatMinuteSecond(currentTime)}</span>
+                <span className="now-time">
+                  {formatMinuteSecond(currentTime)}
+                </span>
                 <span className="divider">/</span>
-                <span className="total-time">{formatMinuteSecond(duration)}</span>
+                <span className="total-time">
+                  {formatMinuteSecond(duration)}
+                </span>
               </div>
             </div>
           </div>
@@ -264,7 +287,10 @@ const PlayBar: React.FC = () => {
           </div>
           <div className="right sprite_playBar">
             <Tooltip title="调节音量">
-              <button className="sprite_playBar btn volume" onClick={() => setIsShowBar(!isShowBar)}></button>
+              <button
+                className="sprite_playBar btn volume"
+                onClick={() => setIsShowBar(!isShowBar)}
+              ></button>
             </Tooltip>
             <button
               className={loopClass}
@@ -293,12 +319,21 @@ const PlayBar: React.FC = () => {
             </CSSTransition>
           </div>
           {/* 音量调节条 */}
-          <div className="sprite_player top-volume" style={{ display: isShowBar ? 'block' : 'none' }}>
+          <div
+            className="sprite_player top-volume"
+            style={{ display: isShowBar ? 'block' : 'none' }}
+          >
             <Slider vertical defaultValue={30} onChange={changingVolume} />
           </div>
         </div>
       </div>
-      <audio id="audio" preload="none" ref={audioRef} onTimeUpdate={timeUpdate} onEnded={playEnded} />
+      <audio
+        id="audio"
+        preload="none"
+        ref={audioRef}
+        onTimeUpdate={timeUpdate}
+        onEnded={playEnded}
+      />
     </div>
   )
 }

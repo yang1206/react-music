@@ -26,7 +26,7 @@ const Ranking: React.FC = () => {
     let id: string | number = params.get('id')
     id = id || currentTopListId
     dispatch(getTopListTitleInfo(id))
-  }, [currentTopListId, dispatch])
+  }, [currentTopListId, dispatch, params])
   return (
     <div className="TopListWrapper wrap-bg2">
       <div className="top-list-content wrap-v2">

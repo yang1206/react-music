@@ -60,7 +60,10 @@ export default function Avatar() {
         </>
           )
         : (
-        <div className="login" onClick={() => !isLogin && dispatch(changeIsVisible(true))}>
+        <div
+          className="login"
+          onClick={() => !isLogin && dispatch(changeIsVisible(true))}
+        >
           <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
             登录
           </a>

@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-import { getSearchAlbumList, getSearchSingerList, getSearchSong, getSearchSongList } from './action'
+import {
+  getSearchAlbumList,
+  getSearchSingerList,
+  getSearchSong,
+  getSearchSongList,
+} from './action'
 import type { RootState } from '@/store'
 interface InitialState {
   searchSongList: Array<any>
@@ -21,7 +26,7 @@ export const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    changeFocusState: (state, { payload }: any) => {
+    changeFocusState: (state, { payload }) => {
       state.focusState = payload
     },
   },
@@ -65,4 +70,9 @@ export const selectAlbumList = (state: RootState) => ({
 export default searchSlice.reducer
 export const { changeFocusState } = searchSlice.actions
 // 统一导出异步action
-export { getSearchSong, getSearchSongList, getSearchSingerList, getSearchAlbumList }
+export {
+  getSearchSong,
+  getSearchSongList,
+  getSearchSingerList,
+  getSearchAlbumList,
+}

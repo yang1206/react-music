@@ -40,7 +40,6 @@ const Search: React.FC = () => {
     // 获取焦点
     if (focusState)
       inputRef.current.focus()
-
     // 失去焦点
     else inputRef.current.blur()
   }, [focusState])
@@ -79,24 +78,29 @@ const Search: React.FC = () => {
       let activeNumber = recordActive
       if (even.keyCode === 38) {
         activeNumber--
-        activeNumber = activeNumber < 0 ? searchSongList?.length - 1 : activeNumber
+        activeNumber
+          = activeNumber < 0 ? searchSongList?.length - 1 : activeNumber
         setRecordActive(activeNumber)
       }
       else if (even.keyCode === 40) {
         activeNumber++
-        activeNumber = activeNumber >= searchSongList?.length ? 0 : activeNumber
+        activeNumber
+          = activeNumber >= searchSongList?.length ? 0 : activeNumber
         setRecordActive(activeNumber)
       }
       else if (even.keyCode === 27) {
         dispatch(changeFocusState(false))
       }
     },
-    [recordActive, setRecordActive, searchSongList],
+    [recordActive, dispatch, setRecordActive, searchSongList],
   )
   // 点击当前item歌曲项
-  const changeCurrentSong = (id: number, item: { name: string; artists: { name: string }[] }) => {
+  const changeCurrentSong = (
+    id: number,
+    item: { name: string; ar: { name: string }[] },
+  ) => {
     // 放到搜索文本框
-    setValue(`${item.name}-${item.artists[0].name}`)
+    setValue(`${item.name}-${item.ar[0].name}`)
     // 派发action
     dispatch(getSong({ id, isPlay: true }))
     dispatch(changeFocusState(false))
@@ -139,7 +143,10 @@ const Search: React.FC = () => {
         onKeyDown={watchKeyboard}
         suffix={icons}
       />
-      <div className="down-slider" style={{ display: focusState ? 'block' : 'none' }}>
+      <div
+        className="down-slider"
+        style={{ display: focusState ? 'block' : 'none' }}
+      >
         <div className="search-header">
           <span className="discover">搜歌曲</span>
         </div>
@@ -157,7 +164,7 @@ const Search: React.FC = () => {
                     key={item.id}
                     onClick={() => changeCurrentSong(item.id, item)}
                   >
-                    <span>{item.name}</span>-{item.artists[0].name}
+                    <span>{item.name}</span>-{item.ar[0].name}
                   </div>
                 )
               })}

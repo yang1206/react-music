@@ -13,8 +13,7 @@ export function getCount(count: number): string | number {
     return count
   else if (Math.floor(count / 10000) < 10000)
     return `${Math.floor(count / 1000) / 10}万`
-  else
-    return `${Math.floor(count / 10000000) / 10}亿`
+  else return `${Math.floor(count / 10000000) / 10}亿`
 }
 
 /**
@@ -23,7 +22,10 @@ export function getCount(count: number): string | number {
  * @param {number} size 大小
  * @returns {string} 指定size大小的图片链接
  */
-export function getSizeImage(imgUrl: string | undefined, size?: number): string {
+export function getSizeImage(
+  imgUrl: string | undefined,
+  size?: number,
+): string {
   return `${imgUrl}?param=${size}x${size}`
 }
 
@@ -44,8 +46,12 @@ export function getPlayUrl(id: number): string {
 export function formatDate(time: string | number | Date, fmt: string): string {
   const date = new Date(time)
 
-  if (/(y+)/.test(fmt))
-    fmt = fmt.replace(RegExp.$1, `${date.getFullYear()}`.substr(4 - RegExp.$1.length))
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(
+      RegExp.$1,
+      `${date.getFullYear()}`.substr(4 - RegExp.$1.length),
+    )
+  }
 
   const o: any = {
     'M+': date.getMonth() + 1,
@@ -57,7 +63,10 @@ export function formatDate(time: string | number | Date, fmt: string): string {
   for (const k in o) {
     if (new RegExp(`(${k})`).test(fmt)) {
       const str = `${o[k]}`
-      fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? str : padLeftZero(str))
+      fmt = fmt.replace(
+        RegExp.$1,
+        RegExp.$1.length === 1 ? str : padLeftZero(str),
+      )
     }
   }
   return fmt
@@ -114,7 +123,10 @@ export function getMatchReg(loginState: string) {
  * @returns {string}
  * {y}-{m}-{d} {h}:{i}:{s}
  */
-export function parseTime(time: string | number | Date | any, cFormat: string): string {
+export function parseTime(
+  time: string | number | Date | any,
+  cFormat: string,
+): string {
   if (!time || arguments.length === 0)
     return null
 
@@ -160,7 +172,10 @@ export function parseTime(time: string | number | Date | any, cFormat: string): 
  * @param {Array} routes 路由列表
  * @returns array
  */
-export const searchRoute = (path: string, routes: RouteObject[] = []): RouteObject => {
+export const searchRoute = (
+  path: string,
+  routes: RouteObject[] = [],
+): RouteObject => {
   let result: RouteObject = {}
   for (const item of routes) {
     if (item.path === path)
@@ -184,7 +199,9 @@ export const searchRoute = (path: string, routes: RouteObject[] = []): RouteObje
 export function handleRouter(routerList: Array<any>, newArr: string[] = []) {
   routerList.forEach((item) => {
     typeof item === 'object' && item.path && newArr.push(item.path)
-    item.children && item.children.length && handleRouter(item.children, newArr)
+    item.children
+      && item.children.length
+      && handleRouter(item.children, newArr)
   })
   return newArr
 }

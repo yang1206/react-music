@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-import { getBanner, getNewAlbums, getPersonalized, getTopLists } from './action'
+import {
+  getBanner,
+  getNewAlbums,
+  getPersonalized,
+  getTopLists,
+} from './action'
 import type { RootState } from '@/store'
 import type { Recommend } from '@/store/interface/recommend'
 interface InitialState {

@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { shallowEqual } from 'react-redux'
-import { changePlaySong, getHotComment, getLyric, getSong, getSongDetailArray } from './action'
+import {
+  changePlaySong,
+  getHotComment,
+  getLyric,
+  getSong,
+  getSongDetailArray,
+} from './action'
 import type { RootState } from '@/store'
 import type { Player } from '@/store/interface/player'
 import { setCurrentSongIndex } from '@/utils/storage'
@@ -42,26 +48,26 @@ export const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    changeCurrentSong: (state, { payload }: any) => {
+    changeCurrentSong: (state, { payload }) => {
       state.currentSongData = payload
     },
-    changeCurrentIndex: (state, { payload }: any) => {
+    changeCurrentIndex: (state, { payload }) => {
       setCurrentSongIndex(payload)
       state.currentSongIndex = payload
     },
-    changePlayList: (state, { payload }: any) => {
+    changePlayList: (state, { payload }) => {
       state.playList = payload
     },
-    changeSequence: (state, { payload }: any) => {
+    changeSequence: (state, { payload }) => {
       state.sequence = payload
     },
-    changeCurrentLyricIndex: (state, { payload }: any) => {
+    changeCurrentLyricIndex: (state, { payload }) => {
       state.currentLyricIndex = payload
     },
-    changeCurrentLyricList: (state, { payload }: any) => {
+    changeCurrentLyricList: (state, { payload }) => {
       state.lyricList = payload
     },
-    changePlayListCount: (state, { payload }: any) => {
+    changePlayListCount: (state, { payload }) => {
       state.playListCount = payload
     },
     changeShowLyrics: (state, { payload }) => {
@@ -93,13 +99,22 @@ export const selectCurrentIndex = (state: RootState) => ({
   data: state.player.currentSongIndex,
   shallowEqual,
 })
-export const selectSequence = (state: RootState) => ({ data: state.player.sequence, shallowEqual })
-export const selectLyric = (state: RootState) => ({ data: state.player.lyricList, shallowEqual })
+export const selectSequence = (state: RootState) => ({
+  data: state.player.sequence,
+  shallowEqual,
+})
+export const selectLyric = (state: RootState) => ({
+  data: state.player.lyricList,
+  shallowEqual,
+})
 export const selectCurrentLyricIndex = (state: RootState) => ({
   data: state.player.currentLyricIndex,
   shallowEqual,
 })
-export const selectPlayList = (state: RootState) => ({ data: state.player.playList, shallowEqual })
+export const selectPlayList = (state: RootState) => ({
+  data: state.player.playList,
+  shallowEqual,
+})
 export const selectIsShowLyrics = (state: RootState) => ({
   data: state.player.showLyrics,
   shallowEqual,

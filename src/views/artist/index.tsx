@@ -16,7 +16,8 @@ const Artist: React.FC = () => {
   const [descIntroduction, setDescIntroduction] = useState<any[]>([])
   const artistImg = artistDetail && artistDetail.picUrl
   const artistName = artistDetail && artistDetail.name
-  const artistAlias = artistDetail && artistDetail.alias && artistDetail.alias[0]
+  const artistAlias
+    = artistDetail && artistDetail.alias && artistDetail.alias[0]
   useEffect(() => {
     getArtists(id).then((res) => {
       setArtist(res.artist)
@@ -35,7 +36,64 @@ const Artist: React.FC = () => {
     size: '130px',
     bgp: '-845px',
   }
-  const { TabPane } = Tabs
+  const items = [
+    {
+      label: '热门作品',
+      key: '1',
+      children: (
+        <div style={{ marginTop: '20px' }}>
+          <PlayList playlist={SongList} />
+        </div>),
+
+    },
+    {
+      label: '所有专辑',
+      key: '2',
+      children: (<div className="Album-list">
+        {AlbumList
+          && AlbumList.map((item, index: number) => {
+            return (
+              <div key={index} className="HotAlbum-item">
+                <AlbumCover info={item} {...CoverProps} />
+              </div>
+            )
+          })}
+      </div>),
+
+    },
+    {
+      label: '相关MV',
+      key: '3',
+      children: (
+        <div className="mv">
+          <h1>暂无MV</h1>
+        </div>
+      ),
+
+    },
+    {
+      label: '艺人介绍',
+      key: '4',
+      children:
+        (<div className="desc">
+          <div className="item">
+            <p>{artistName}简介</p>
+            <span>{artistDesc}</span>
+          </div>
+          {descIntroduction
+            && descIntroduction.map((item, index) => {
+              return (
+                <div key={index} className="item">
+                  <h2>{item.ti}</h2>
+                  <span>{item.txt}</span>
+                </div>
+              )
+            })}
+        </div>
+        ),
+    },
+
+  ]
   return (
     <>
       <NavBar />
@@ -50,46 +108,7 @@ const Artist: React.FC = () => {
           </div>
           <div className="main">
             <div className="card-container">
-              <Tabs destroyInactiveTabPane={true} type="card">
-                <TabPane tab="热门作品" key="1">
-                  <div style={{ marginTop: '20px' }}>
-                    <PlayList playlist={SongList} />
-                  </div>
-                </TabPane>
-                <TabPane tab="所有专辑" key="2">
-                  <div className="Album-list">
-                    {AlbumList
-                      && AlbumList.map((item, index: number) => {
-                        return (
-                          <div key={index} className="HotAlbum-item">
-                            <AlbumCover info={item} {...CoverProps} />
-                          </div>
-                        )
-                      })}
-                  </div>
-                </TabPane>
-                <TabPane tab="相关MV" key="3">
-                  <div className="mv">
-                    <h1>暂无MV</h1>
-                  </div>
-                </TabPane>
-                <TabPane tab="艺人介绍" key="4">
-                  <div className="desc">
-                    <div className="item">
-                      <p>{artistName}简介</p>
-                      <span>{artistDesc}</span>
-                    </div>
-                    {descIntroduction
-                      && descIntroduction.map((item, index) => {
-                        return (
-                          <div key={index} className="item">
-                            <h2>{item.ti}</h2>
-                            <span>{item.txt}</span>
-                          </div>
-                        )
-                      })}
-                  </div>
-                </TabPane>
+              <Tabs items={items} destroyInactiveTabPane={true} type="card">
               </Tabs>
             </div>
           </div>

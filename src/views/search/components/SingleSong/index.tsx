@@ -14,7 +14,13 @@ interface Props {
   duration: string
 }
 
-const SingleSong: React.FC<Props> = ({ songId, songName, singer, album, duration }: Props) => {
+const SingleSong: React.FC<Props> = ({
+  songId,
+  songName,
+  singer,
+  album,
+  duration,
+}: Props) => {
   const dispatch = useAppDispatch()
   const playList = useAppSelector(selectPlayList).data
   // 播放音乐
@@ -28,9 +34,16 @@ const SingleSong: React.FC<Props> = ({ songId, songName, singer, album, duration
       <div className="song-name">
         <PlayCircleOutlined onClick={() => playMusic()} />
         <em onClick={() => playMusic()}>{songName}</em>
-        <button className="sprite_icon2 btn addto" onClick={e => addPlaylist(e, songId)}></button>
+        <button
+          className="sprite_icon2 btn addto"
+          onClick={e => addPlaylist(e, songId)}
+        ></button>
       </div>
-      <NavLink to="/discover/song" className="singer" onClick={() => playMusic()}>
+      <NavLink
+        to="/discover/song"
+        className="singer"
+        onClick={() => playMusic()}
+      >
         {singer}
       </NavLink>
       <div className="text-nowrap album">《{album}》</div>

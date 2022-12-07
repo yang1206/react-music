@@ -57,7 +57,7 @@ export const SongListSlice = createSlice({
   name: 'songList',
   initialState,
   reducers: {
-    changeCurrentCategory: (state, { payload }: any) => {
+    changeCurrentCategory: (state, { payload }) => {
       state.currentCategory = payload
     },
   },

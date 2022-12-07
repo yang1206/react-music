@@ -23,7 +23,9 @@ const HomeRouter: Array<RouteObject> = [
   },
   {
     path: '/discover/ranking',
-    element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/ranking'))),
+    element: lazyLoad(
+      lazy(() => import('@/views/discover/ChildPages/ranking')),
+    ),
   },
   {
     path: '/discover/artist',
@@ -31,7 +33,9 @@ const HomeRouter: Array<RouteObject> = [
   },
   {
     path: '/discover/dailysongs',
-    element: lazyLoad(lazy(() => import('@/views/discover/ChildPages/dailysongs'))),
+    element: lazyLoad(
+      lazy(() => import('@/views/discover/ChildPages/dailysongs')),
+    ),
   },
   {
     path: '/discover/song',

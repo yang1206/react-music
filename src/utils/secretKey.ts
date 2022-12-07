@@ -10,7 +10,10 @@ import { secretKey } from '@/config/token'
 export async function setLoginInfo(key: string, info: any) {
   if (key.length && JSON.stringify(info) !== '{}') {
     // 1.要存储的值  2.加密的秘钥（解密的时候必须要根据秘钥才能解密）
-    const cipherText = CryptoJS.AES.encrypt(JSON.stringify(info), secretKey).toString()
+    const cipherText = CryptoJS.AES.encrypt(
+      JSON.stringify(info),
+      secretKey,
+    ).toString()
     localStorage.setItem(key, cipherText) // 本地存储
     return true
   }

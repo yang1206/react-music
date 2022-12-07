@@ -47,7 +47,10 @@ const TopRanking: React.FC<Props> = (props) => {
                   {item.name}
                 </a>
                 <div className="operate">
-                  <button className="btn sprite_02 play" onClick={() => playMusic(item)}></button>
+                  <button
+                    className="btn sprite_02 play"
+                    onClick={() => playMusic(item)}
+                  ></button>
                   <button
                     className="btn sprite_icon2 addto"
                     onClick={e => addPlaylist(e, item.id)}

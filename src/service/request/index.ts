@@ -1,6 +1,10 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-import type { CancelRequestSource, RequestConfig, RequestInterceptors } from './types'
+import type {
+  CancelRequestSource,
+  RequestConfig,
+  RequestInterceptors,
+} from './types'
 
 class Request {
   // axios 实例
@@ -59,9 +63,11 @@ class Request {
    * @returns {number} 索引位置
    */
   private getSourceIndex(url: string): number {
-    return this.cancelRequestSourceList?.findIndex((item: CancelRequestSource) => {
-      return Object.keys(item)[0] === url
-    }) as number
+    return this.cancelRequestSourceList?.findIndex(
+      (item: CancelRequestSource) => {
+        return Object.keys(item)[0] === url
+      },
+    ) as number
   }
 
   /**
@@ -74,7 +80,8 @@ class Request {
     const sourceIndex = this.getSourceIndex(url)
     // 删除url和cancel方法
     urlIndex !== -1 && this.requestUrlList?.splice(urlIndex as number, 1)
-    sourceIndex !== -1 && this.cancelRequestSourceList?.splice(sourceIndex as number, 1)
+    sourceIndex !== -1
+      && this.cancelRequestSourceList?.splice(sourceIndex as number, 1)
   }
 
   request<T>(config: RequestConfig<T>): Promise<T> {

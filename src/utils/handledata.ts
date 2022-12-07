@@ -11,8 +11,7 @@ export function handleSongsCategory(data) {
   })
 
   // 3.将subs添加到对应的类别中
-  for (const item of data.sub)
-    categoryData[item.category].subs.push(item)
+  for (const item of data.sub) categoryData[item.category].subs.push(item)
 
   return categoryData
 }
@@ -22,8 +21,7 @@ export function generateSingerAlpha() {
   const alphabets = ['-1']
   const start = 'A'.charCodeAt(0)
   const last = 'Z'.charCodeAt(0)
-  for (let i = start; i <= last; ++i)
-    alphabets.push(String.fromCharCode(i))
+  for (let i = start; i <= last; ++i) alphabets.push(String.fromCharCode(i))
 
   alphabets.push('0')
 

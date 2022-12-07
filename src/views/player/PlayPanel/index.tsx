@@ -22,14 +22,17 @@ interface Props {
   changeSong: any
 }
 const PlayPanel: React.FC<Props> = (props: Props) => {
-  const { showPanel, playlistCount, closeWindow, playMusic, changeSong } = props
+  const { showPanel, playlistCount, closeWindow, playMusic, changeSong }
+    = props
   const dispatch = useAppDispatch()
   const currentSong = useAppSelector(selectSong).data
   const currentSongIndex = useAppSelector(selectCurrentIndex).data
   const playList = useAppSelector(selectPlayList).data
 
   // 清除全部歌曲
-  const clearAllPlaylist = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const clearAllPlaylist = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
     e.preventDefault()
     removeAllSong()
     const newArr = [...playList]
@@ -49,16 +52,27 @@ const PlayPanel: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <div className="PanelWrapper" style={{ visibility: showPanel ? 'visible' : 'hidden' }}>
+    <div
+      className="PanelWrapper"
+      style={{ visibility: showPanel ? 'visible' : 'hidden' }}
+    >
       <div className="SliderPlaylistHeader">
         <div className="playlist-header-left">
           <h3 className="header-title">播放列表({playlistCount})</h3>
           <div>
-            <a href="/favorite" className="header-icon" onClick={e => e.preventDefault()}>
+            <a
+              href="/favorite"
+              className="header-icon"
+              onClick={e => e.preventDefault()}
+            >
               <HeartOutlined />
               <span>收藏一下</span>
             </a>
-            <a href="/clear" onClick={e => clearAllPlaylist(e)} className="header-icon">
+            <a
+              href="/clear"
+              onClick={e => clearAllPlaylist(e)}
+              className="header-icon"
+            >
               <ClearOutlined />
               <span>清除播放列表</span>
             </a>
