@@ -1,4 +1,3 @@
-import React, { memo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { singerCategories } from '@/common/localData'
 import './index.less'
@@ -26,4 +25,4 @@ const ArtistCategory: React.FC = () => {
     </div>
   )
 }
-export default memo(ArtistCategory)
+export default ArtistCategory

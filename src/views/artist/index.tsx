@@ -1,5 +1,3 @@
-import React, { memo, useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import { Tabs } from 'antd'
 import { getArtists, getArtistsAlbum, getArtistsDesc } from '@/api/artist'
 import NavBar from '@/components/NavBar'
@@ -117,4 +115,4 @@ const Artist: React.FC = () => {
     </>
   )
 }
-export default memo(Artist)
+export default Artist

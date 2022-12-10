@@ -1,6 +1,4 @@
-import React, { memo, useState } from 'react'
 import { Skeleton } from 'antd'
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { getPlayList, selectCategorySongs } from '@/store/slice/SongList'
 import SongsCover from '@/components/SongsCover'
 import Pagination from '@/components/Pagination'
@@ -40,4 +38,4 @@ const SongsList: React.FC = () => {
     </div>
   )
 }
-export default memo(SongsList)
+export default SongsList

@@ -1,4 +1,3 @@
-import React, { memo } from 'react'
 import { Outlet } from 'react-router-dom'
 import NavBar from '@/components/NavBar'
 const Discover: React.FC = () => {
@@ -9,4 +8,4 @@ const Discover: React.FC = () => {
     </div>
   )
 }
-export default memo(Discover)
+export default Discover

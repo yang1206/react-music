@@ -1,4 +1,3 @@
-import React, { memo } from 'react'
 import Banner from './components/banner'
 import HotRecommend from './components/hotRecommend'
 import NewAlbum from './components/newAlbum'
@@ -18,4 +17,4 @@ const Recommend: React.FC = () => {
     </div>
   )
 }
-export default memo(Recommend)
+export default Recommend

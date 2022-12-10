@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from 'react'
+import React, { Fragment } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import {
@@ -60,4 +60,4 @@ const TopListInfo: React.FC<Props> = (props) => {
     </div>
   )
 }
-export default memo(TopListInfo)
+export default TopListInfo

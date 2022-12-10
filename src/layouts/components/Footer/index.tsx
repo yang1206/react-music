@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import { footerLinks } from '@/common/localData'
 import './index.less'
-export default function Footer() {
+const Footer = () => {
   return (
     <div className="AppFooterWrapper">
       <div className="wrap-v2 content">
@@ -59,3 +59,4 @@ export default function Footer() {
     </div>
   )
 }
+export default memo(Footer)

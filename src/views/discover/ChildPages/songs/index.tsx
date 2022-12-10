@@ -1,9 +1,5 @@
-import React, { memo, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
-// import { getQueryObject } from '@/utils/format'
 import SongsHeader from './components/SongsHeader'
 import SongsList from './components/SongsList'
-import { useAppDispatch } from '@/hooks/useStore'
 import {
   changeCurrentCategory,
   getCategory,
@@ -29,4 +25,4 @@ const Songs: React.FC = () => {
     </div>
   )
 }
-export default memo(Songs)
+export default Songs

@@ -1,6 +1,4 @@
-import React, { memo, useEffect } from 'react'
 import { Skeleton } from 'antd'
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { getNewAlbums, selectNewAlbums } from '@/store/slice/recommend'
 import AlbumCover from '@/components/AlbumCover'
 import RcmHeader from '@/components/RcmHeader'
@@ -37,4 +35,4 @@ const HotAlbum: React.FC = () => {
     </div>
   )
 }
-export default memo(HotAlbum)
+export default HotAlbum

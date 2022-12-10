@@ -1,4 +1,3 @@
-import React from 'react'
 import { parseTime } from '@/utils/format'
 import './index.less'
 const DateHeader: React.FC = () => {

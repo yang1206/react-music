@@ -1,5 +1,3 @@
-import React, { memo, useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import ArtistCategory from './components/ArtistCategory'
 import { getArtistsList } from '@/api/artist'
 import ArtistCover from '@/components/ArtistCover'
@@ -55,4 +53,4 @@ const ArtistList: React.FC = () => {
     </div>
   )
 }
-export default memo(ArtistList)
+export default ArtistList

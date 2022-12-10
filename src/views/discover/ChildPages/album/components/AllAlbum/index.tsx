@@ -1,4 +1,3 @@
-import React, { memo, useEffect, useState } from 'react'
 import { getNewAlbums } from '@/api/recommend'
 import AlbumCover from '@/components/AlbumCover'
 import RcmHeader from '@/components/RcmHeader'
@@ -59,4 +58,4 @@ const AllAlbum: React.FC = () => {
     </div>
   )
 }
-export default memo(AllAlbum)
+export default AllAlbum

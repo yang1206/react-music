@@ -1,6 +1,4 @@
-import React, { memo, useState } from 'react'
 import SongsCategory from '../SongsCategory'
-import { useAppSelector } from '@/hooks/useStore'
 import { selectCurrentCategory } from '@/store/slice/SongList'
 import './index.less'
 const SongsHeader: React.FC = () => {
@@ -25,4 +23,4 @@ const SongsHeader: React.FC = () => {
     </div>
   )
 }
-export default memo(SongsHeader)
+export default SongsHeader

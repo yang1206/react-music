@@ -1,4 +1,3 @@
-import React, { memo } from 'react'
 import HotAlbum from './components/HotAlbum'
 import AllAlbum from './components/AllAlbum'
 import './index.less'
@@ -10,4 +9,4 @@ const Songs: React.FC = () => {
     </div>
   )
 }
-export default memo(Songs)
+export default Songs

@@ -1,6 +1,5 @@
-import { memo } from 'react'
 import { Skeleton } from 'antd'
-import { getSizeImage, parseTime } from '@/utils/format'
+import { getSizeImage, parseTime } from '@/utils'
 import RcmHeader from '@/components/RcmHeader'
 import PlayList from '@/components/PlayList'
 import './index.less'
@@ -88,4 +87,4 @@ const AlbumInfo: React.FC<Props> = (props: Props) => {
     </div>
   )
 }
-export default memo(AlbumInfo)
+export default AlbumInfo

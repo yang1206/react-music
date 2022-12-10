@@ -1,10 +1,7 @@
-import React, { memo, useEffect, useState } from 'react'
 import SongInfo from './components/SongInfo'
 import SongItem from './components/SongItem'
 import SongComments from './components/SongComments'
 import { getHotComment, selectSong } from '@/store/slice/Player'
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
-import { formatMinuteSecond } from '@/utils/format'
 import { getSongSimi } from '@/api/song'
 import './index.less'
 const Player: React.FC = () => {
@@ -46,4 +43,4 @@ const Player: React.FC = () => {
     </div>
   )
 }
-export default memo(Player)
+export default Player

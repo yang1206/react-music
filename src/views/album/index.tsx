@@ -1,5 +1,3 @@
-import { memo, useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import AlbumInfo from './components/AlbumInfo'
 import NavBar from '@/components/NavBar'
 import { getAlbumDetail } from '@/api/album'
@@ -24,4 +22,4 @@ const Album: React.FC = () => {
     </>
   )
 }
-export default memo(Album)
+export default Album

@@ -1,5 +1,3 @@
-import React, { memo, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import TopListTitle from './components/Title'
 import TopListMain from './components/Main'
 import TopListInfo from './components/TopList'
@@ -9,7 +7,6 @@ import {
   selectCurrentTopListId,
   selectTopListInfo,
 } from '@/store/slice/TopList'
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import './index.less'
 const Ranking: React.FC = () => {
   const [params] = useSearchParams()
@@ -43,4 +40,4 @@ const Ranking: React.FC = () => {
     </div>
   )
 }
-export default memo(Ranking)
+export default Ranking

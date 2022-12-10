@@ -1,5 +1,3 @@
-import React, { memo } from 'react'
-import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import {
   changeCurrentCategory,
   getPlayList,
@@ -51,4 +49,4 @@ const SongsCategory: React.FC = () => {
     </div>
   )
 }
-export default memo(SongsCategory)
+export default SongsCategory

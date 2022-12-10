@@ -1,5 +1,3 @@
-import React, { memo, useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import DateHeader from './components/Date'
 import { useAppDispatch, useAppSelector } from '@/hooks/useStore'
 import { changeIsVisible, selectLoginState } from '@/store/slice/Login'
@@ -47,4 +45,4 @@ const DailySongs: React.FC = () => {
     </div>
   )
 }
-export default memo(DailySongs)
+export default DailySongs

@@ -1,4 +1,3 @@
-import React, { memo } from 'react'
 import { FieldTimeOutlined } from '@ant-design/icons'
 import { useAppSelector } from '@/hooks/useStore'
 import { selectCurrentTopListTitleInfo } from '@/store/slice/TopList'
