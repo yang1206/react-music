@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/api/*"
-  to = "https://halocn.top/:splat"
+  to = "https://nextapi-git-master-yang1206.vercel.app/:splat"
   force = true
 
 
